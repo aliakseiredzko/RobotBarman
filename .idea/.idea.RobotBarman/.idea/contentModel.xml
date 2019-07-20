@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Program Files (x86)\Android\android-sdk\platforms\android-28\Data\res" t="IncludeRecursive" />
+    <e p="C:\Users\aleks\.Rider2019.1\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\aleks\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\aleks\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_RobotBarman.1294433857.00" t="ExcludeRecursive" />
+    <e p="C:\Users\aleks\YandexDisk\Work\Projects\Projects .NET\RobotBarman" t="IncludeFlat">
+      <e p="ConsoleApp" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ConsoleApp.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="ConsoleApp.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+      </e>
+      <e p="Droid" t="IncludeRecursive">
+        <e p="Assets" t="Include">
+          <e p="AboutAssets.txt" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="MainActivity.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AndroidManifest.xml" t="Include" />
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="AboutResources.txt" t="Include" />
+          <e p="drawable" t="Include">
+            <e p="Axes.png" t="Include" />
+            <e p="BrestLit.png" t="Include" />
+            <e p="cup.png" t="Include" />
+            <e p="icon.png" t="Include" />
+            <e p="logo.png" t="Include" />
+            <e p="robot_industrial.png" t="Include" />
+            <e p="rozum.png" t="Include" />
+            <e p="savushkin.png" t="Include" />
+            <e p="settings.png" t="Include" />
+            <e p="star.png" t="Include" />
+            <e p="tank.png" t="Include" />
+            <e p="tractor.png" t="Include" />
+            <e p="tree_cup.png" t="Include" />
+            <e p="wine1.png" t="Include" />
+            <e p="years25.png" t="Include" />
+          </e>
+          <e p="drawable-hdpi" t="Include">
+            <e p="icon.png" t="Include" />
+          </e>
+          <e p="drawable-xhdpi" t="Include">
+            <e p="icon.png" t="Include" />
+          </e>
+          <e p="drawable-xxhdpi" t="Include">
+            <e p="icon.png" t="Include" />
+          </e>
+          <e p="layout" t="Include">
+            <e p="Tabbar.axml" t="Include" />
+            <e p="Toolbar.axml" t="Include" />
+          </e>
+          <e p="Resource.designer.cs" t="Include" />
+          <e p="values" t="Include">
+            <e p="colors.xml" t="Include" />
+            <e p="styles.xml" t="Include" />
+          </e>
+        </e>
+        <e p="RobotBarman.Android.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="RobotBarman" t="IncludeRecursive">
+        <e p="Annotations.cs" t="Include" />
+        <e p="App.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Data" t="Include">
+          <e p="availableDrinks.json" t="Include" />
+          <e p="drinks.json" t="Include" />
+          <e p="poses.json" t="Include" />
+          <e p="positions.json" t="Include" />
+          <e p="tools.json" t="Include" />
+        </e>
+        <e p="Images" t="Include">
+          <e p="LL" t="Include">
+            <e p="ananas_LL.png" t="Include" />
+            <e p="cherry_LL.png" t="Include" />
+            <e p="persic_LL.png" t="Include" />
+            <e p="strawberry_LL.png" t="Include" />
+          </e>
+          <e p="opt" t="Include">
+            <e p="blueberry_opt.png" t="Include" />
+            <e p="classic_opt.png" t="Include" />
+            <e p="figsCerealsFlax_opt.png" t="Include" />
+            <e p="kiwiCereals_opt.png" t="Include" />
+            <e p="persic_opt.png" t="Include" />
+            <e p="pruneCereals_opt.png" t="Include" />
+            <e p="strawberryGrape_opt.png" t="Include" />
+            <e p="strawberryMalina_opt.png" t="Include" />
+          </e>
+          <e p="sav" t="Include">
+            <e p="ananas_sav.png" t="Include" />
+            <e p="berries_sav.png" t="Include" />
+            <e p="strawberry_sav.png" t="Include" />
+          </e>
+          <e p="teos" t="Include">
+            <e p="blueberry_teos.png" t="Include" />
+            <e p="cherryGranat_teos.png" t="Include" />
+            <e p="classic_teos.png" t="Include" />
+            <e p="kinoa_teos.png" t="Include" />
+            <e p="mango_teos.png" t="Include" />
+          </e>
+        </e>
+        <e p="Models" t="Include">
+          <e p="Agv.cs" t="Include" />
+          <e p="DrinksPageItem.cs" t="Include" />
+          <e p="MasterDetailNavigation.cs" t="Include" />
+          <e p="Sound.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="RobotBarman.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PageModels" t="Include">
+          <e p="AgvPageModel.cs" t="Include" />
+          <e p="BarPageModel.cs" t="Include" />
+          <e p="DrinksPageModel.cs" t="Include" />
+          <e p="FirstPageModel.cs" t="Include" />
+          <e p="SettingsPageModel.cs" t="Include" />
+        </e>
+        <e p="Pages" t="Include">
+          <e p="AgvPage.xaml" t="Include" />
+          <e p="AgvPage.xaml.cs" t="Include" />
+          <e p="BarPage.xaml" t="Include" />
+          <e p="BarPage.xaml.cs" t="Include" />
+          <e p="DrinksPage.xaml" t="Include" />
+          <e p="DrinksPage.xaml.cs" t="Include" />
+          <e p="FirstPage.xaml" t="Include" />
+          <e p="FirstPage.xaml.cs" t="Include" />
+          <e p="SettingsPage.xaml" t="Include" />
+          <e p="SettingsPage.xaml.cs" t="Include" />
+        </e>
+        <e p="Properties" t="Include" />
+        <e p="RobotBarman.csproj" t="IncludeRecursive" />
+        <e p="Services" t="Include">
+          <e p="AgvService.cs" t="Include" />
+          <e p="BarmanService.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="IAgvService.cs" t="Include" />
+            <e p="IBarmanService.cs" t="Include" />
+            <e p="IJsonDatabaseService.cs" t="Include" />
+            <e p="IRobotService.cs" t="Include" />
+            <e p="ISoundService.cs" t="Include" />
+          </e>
+          <e p="JsonDatabaseService.cs" t="Include" />
+          <e p="LocalDataHandler.cs" t="Include" />
+          <e p="RobotService.cs" t="Include" />
+          <e p="SoundService.cs" t="Include" />
+        </e>
+        <e p="Sounds" t="Include">
+          <e p="AfterSpill" t="Include">
+            <e p="after.mp3" t="Include" />
+            <e p="afterSpill.mp3" t="Include" />
+            <e p="enjoy.mp3" t="Include" />
+            <e p="giveYgostchy.mp3" t="Include" />
+          </e>
+          <e p="BeforeSpill" t="Include">
+            <e p="couple_sec.mp3" t="Include" />
+            <e p="now_now.mp3" t="Include" />
+            <e p="thanks.mp3" t="Include" />
+            <e p="thx.mp3" t="Include" />
+          </e>
+          <e p="ChangeBottle" t="Include">
+            <e p="Bottle1.mp3" t="Include" />
+            <e p="Bottle2.mp3" t="Include" />
+            <e p="Bottle3.mp3" t="Include" />
+          </e>
+          <e p="napitok.mp3" t="Include" />
+          <e p="Opening" t="Include">
+            <e p="privet.mp3" t="Include" />
+            <e p="select.mp3" t="Include" />
+            <e p="speech.mp3" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="RobotBarman.sln" t="IncludeFlat" />
+    </e>
+    <e p="C:\Users\aleks\YandexDisk\Work\Projects\Projects .NET\RozumPlugin\RozumConnectionLib" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="CapsuleObstacle.cs" t="Include" />
+      <e p="Gripper.cs" t="Include" />
+      <e p="MotorStatus.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="net461" t="Include">
+            <e p="RozumConnectionLib.AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="netstandard2.0" t="Include">
+            <e p="RozumConnectionLib.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Point.cs" t="Include" />
+      <e p="Pose.cs" t="Include" />
+      <e p="Position.cs" t="Include" />
+      <e p="RealRobot.cs" t="Include" />
+      <e p="Robot.cs" t="Include" />
+      <e p="Rotation.cs" t="Include" />
+      <e p="RozumConnection.cs" t="Include" />
+      <e p="RozumConnectionLib.csproj" t="IncludeRecursive" />
+    </e>
+  </component>
+</project>

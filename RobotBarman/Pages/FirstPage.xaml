@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RobotBarman.FirstPage"
+             xmlns:local="clr-namespace:RobotBarman"
+             Title="Приветствие"
+             BackgroundColor="#87E0FF">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Spacing="250">
+            <StackLayout Spacing="120" Padding="10,20">
+                <Image Source="savushkin.png" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                <Label Text="Вас приветствует Робот-Бармен Александра :-)" HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Center"
+                       TextColor="#1D97C1" FontAttributes="Italic,Bold" FontSize="36" FontFamily="Swift" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Spacing="50">
+                <Label Text="Чем я могу Вас удивить?" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       TextColor="#1D97C1" FontAttributes="Italic" FontSize="28" FontFamily="Swift" />
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Налей-ка мне выпить" Command="{Binding OpenDrinksPage}" FontSize="30"
+                            BorderWidth="15" TextColor="#1D97C1" BackgroundColor="#FFFFE3"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" />
+                    <!--<Button Text = "Давай порисуем" Command="{Binding OpenImagesPage}" FontSize="30" BorderWidth="15" TextColor="#1D97C1" BackgroundColor="#FFFFE3"
+                            HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20"/>-->
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

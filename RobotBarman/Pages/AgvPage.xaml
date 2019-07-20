@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RobotBarman.AgvPage"
+              Title="НАСТРОЙКА ТЕЛЕЖКИ">
+    <ContentPage.Content>
+        <TableView HasUnevenRows="True">
+            <TableRoot>
+                <TableSection Title="ПОДКЛЮЧЕНИЕ К ТЕЛЕЖКЕ">
+                            <EntryCell Label="IP ТЕЛЕЖКИ:" 
+                                       Keyboard="Default"
+                                       Placeholder="ххх.ххх.ххх.ххх" 
+                                       Text="{Binding AgvIp, Mode=TwoWay}" />
+                            
+                            <EntryCell Label="ПОРТ:" 
+                                       Text="{Binding AgvPort, Mode=TwoWay}" 
+                                       Keyboard="Numeric" />
+                            
+                            <EntryCell Label="ПАРОЛЬ:" 
+                                       Text="{Binding AgvPassword, Mode=TwoWay}" 
+                                       Keyboard="Default" />
+                            
+                            <ViewCell>
+                                <StackLayout 
+                                    Spacing="20" 
+                                    Margin="20,2,20,2" 
+                                    Orientation="Horizontal">
+                                    <Button Text="Проверка подключения" 
+                                            Command="{Binding ConnectToAgv}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1"
+                                            CornerRadius="20"
+                                        VerticalOptions="Center" />
+                                    <Button Text="ПОСТАВИТЬ НАПИТКИ НА ТЕЛЕЖКУ"
+                                            IsEnabled="{Binding IsRobotReady}"
+                                            Command="{Binding PutCups}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            HorizontalOptions="EndAndExpand" 
+                                            VerticalOptions="Center" />
+                                    <Button Text="ОТМЕНИТЬ"
+                                            IsEnabled="{Binding IsRobotReady}"
+                                            Command="{Binding CancelSpill}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            HorizontalOptions="EndAndExpand" 
+                                            VerticalOptions="Center" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                        </TableSection>                                          
+                <TableSection Title="НАСТРОЙКА ПОВЕДЕНИЯ">
+                            <TextCell Text="ПОЗИЦИЯ ДЛЯ УСТАНОВКИ СТАКАНОВ"
+                                      Detail="Позиция для тележки, где происходит установка стаканов" />
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Picker ItemsSource="{Binding Goals}"
+                                            SelectedItem="{Binding PutCupsGoal}"
+                                            Margin="10,0,10,0"
+                                            Grid.Column="0"/>
+                                    <Button Text="ПОЕХАЛИ" 
+                                            IsEnabled="{Binding IsAgvReady}"
+                                            Command="{Binding GoToCupGoal}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+
+                            <TextCell Text="ПРОМЕЖУТОЧНАЯ ПОЗИЦИЯ" 
+                                      Detail="Позиция для тележки, через которую тележека подъезжает к стаканам. Можно не устанавливать" />
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Picker ItemsSource="{Binding Goals}"
+                                            SelectedItem="{Binding IntermediatePutCupsGoal}"
+                                            Margin="10,0,10,0"
+                                            Grid.Column="0"/>
+                                    <Button Text="ПОЕХАЛИ" 
+                                            IsEnabled="{Binding IsAgvReady}"
+                                            Command="{Binding GoToIntermediateGoal}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+
+                            <TextCell Text="СЛЕДУЮЩАЯ МИССИЯ" 
+                                      Detail= "Миссия для тележки, которая запускается после установки стаканов. Можно не устанавливать" />
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Picker ItemsSource="{Binding Routes}"
+                                            SelectedItem="{Binding RouteToPatrol}"
+                                            Margin="10,0,10,0"
+                                            Grid.Column="0"/>
+                                    <Button Text="ПОЕХАЛИ" 
+                                            IsEnabled="{Binding IsAgvReady}"
+                                            Command="{Binding PatrolRoute}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+                            <SwitchCell Text="ВЫПОЛНЯТЬ ПОСТОЯННО"
+                                        On="{Binding PatrolRouteForever}"/>
+                            
+                            <TextCell Text="ГОЛОС" 
+                                      Detail= "Напиши, и тележка это скажет" />
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Entry Text="{Binding TextToSay}"
+                                           Margin="10,0,10,0"
+                                           Grid.Column="0"/>
+                                    <Button Text="ГОВОРИ" 
+                                            IsEnabled="{Binding IsAgvConnected}"
+                                            Command="{Binding Say}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+                            
+                            <TextCell Text="ПОЗИЦИЯ" 
+                                      Detail="Отправить тележку в любую позицию" />
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.7*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Picker ItemsSource="{Binding Goals}"
+                                            SelectedItem="{Binding CustomGoal}"
+                                            Margin="10,0,10,0"
+                                            Grid.Column="0"/>
+                                    <Button Text="ПОЕХАЛИ" 
+                                            IsEnabled="{Binding IsAgvReady}"
+                                            Command="{Binding GoToCustomGoal}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+
+
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Text="ОБНОВИТЬ" 
+                                            IsEnabled="{Binding IsAgvConnected}"
+                                            Command="{Binding Update}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="0"/>
+                                    <Button Text="ОТМЕНА" 
+                                            IsEnabled="{Binding IsAgvConnected}"
+                                            Command="{Binding Reset}" 
+                                            FontSize="18"
+                                            BorderWidth="1" 
+                                            TextColor="#1D97C1" 
+                                            BackgroundColor="#FFFFE1" 
+                                            CornerRadius="20"
+                                            VerticalOptions="Center"
+                                            Margin="10"
+                                            Grid.Column="1"/>
+                                </Grid>
+                            </ViewCell>
+
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                        </TableSection>
+                <TableSection Title="УСТАНОВКА СТАКАНОВ">                           
+                            <TextCell Text="ПОЗИЦИЯ ДЛЯ УСТАНОВКИ СТАКАНОВ" 
+                                      Detail= "Позиция для первого стакана" />                                                        
+                            
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.1*"/>
+                                        <ColumnDefinition Width="0.3*"/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="0.4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Label Grid.Column="0" Grid.Row="0" Margin="20" Text="X"/>
+                                    <Label Grid.Column="0" Grid.Row="1" Margin="20" Text="Y"/>
+                                    <Label Grid.Column="0" Grid.Row="2" Margin="20" Text="Z"/>
+
+                                    <Entry Grid.Column="1" Grid.Row="0" Text="{Binding X}" VerticalOptions="End"/>
+                                    <Entry Grid.Column="1" Grid.Row="1" Text="{Binding Y}" VerticalOptions="End"/>
+                                    <Entry Grid.Column="1" Grid.Row="2" Text="{Binding Z}" VerticalOptions="End"/>
+
+                                    <Label Grid.Column="2" Grid.Row="0" Margin="20" Text="mm"/>
+                                    <Label Grid.Column="2" Grid.Row="1" Margin="20" Text="mm"/>
+                                    <Label Grid.Column="2" Grid.Row="2" Margin="20" Text="mm"/>
+                                    
+                                    <Image Source="Axes.png" 
+                                           Grid.Column="3" 
+                                           Grid.RowSpan="3" 
+                                           HorizontalOptions="Start"
+                                           Margin="20"/>
+                                </Grid>
+                            </ViewCell>
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                            
+                        </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

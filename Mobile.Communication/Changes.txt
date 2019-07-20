@@ -1,0 +1,177 @@
+Mobile C# Library Version 5.1.0.0
+2019, Mar 25
+
+Mobile.Communication v5.1.0.0
+* Add ShallowCopy and DeepCopy methods to QueuingInfo.
+* Add IsDefaultPriority property to QueuingInfo.
+* Make QueuingInfo XML serializable.
+* Fix NullReferenceException if id passed to QueuingManager's QueueXXX methods is null.
+* Removed limitation of 10 segments per job. Aram has increased the limit and this might happen again in the future. So this limit is being removed.
+* Adjust RefreshJob(JobData) method to RefreshJob(string) method to return an array of JobData.
+
+Mobile.Networking v5.0.1.0
+* Replace Clone method in Heartbeat and HeartbeatInformation by ShallowCopy and DeepCopy as IClonable behavior is not described in detail. 
+
+Mobile.Logger v5.1.0.0
+* Fix log file rotation. Rotation was broken in terms of handling old (gzipped) files.
+
+Mobile.Core v5.1.0.0
+* Add possibility to specify the block size of the en-/de-crypting algorithm. The default is set to 192. So this parameter is optional.
+
+
+
+Mobile C# Library Version 5.0.1.2
+2019, Feb 20
+
+Mobile.Communication v5.0.1.2
+* EnterpriseManagerClient and RobotClient use additional 'log' parameter of the client's SendText method to add ********** to the log file instead of the ARCL password in plain text.
+
+Mobile.Networking v5.0.1.0
+* Add ability to overwrite text message added to log in case SendText is called. In case anything is specified (not null) it will log this string instead of the text that is being sent. This is used by EnterpriseManagerClient and RobotClient to hide the ARCL password in the log.
+
+
+
+Mobile C# Library Version 5.0.1.1
+2018, Dec 19
+
+Mobile.Communication v5.0.1.1
+* Limit EventQueue to 100 messages by default. This is now limited by default to prevent memory leaks in case application code is not setting this or clearing the Responses from time to time.
+* Initialize MaxFinishedJobs with 100. This is now limited by default to prevent memory leaks in case application code is not setting this or clearing the QM from time to time.
+
+Mobile.Networking v5.0.0.1
+* Initialize AutoReConnect with false. This is done as most applications require no automatic reconnection to make sure that messages don't get lost. Setting this to true means that the client will automatically reconnect w/out raising a ConnectionLost and ConnectionEstablished event.
+
+
+
+Mobile C# Library Version 5.0.1.0
+2018, Dec 03
+
+Mobile.Communication v5.0.1.0
+* Move GoalType enum from Segment class to Mobile.Communication.Common.Queuing namespace and rename it to JobType.
+* Expose IP-Address property "Address" of IClientBase as IPAddress instead of string.
+* QueuingInfo implements INotifyPropertyChanged.
+* Added ability to log a message to the Aram log file. The function is called 'Log' and is part of IArclBase.
+
+Mobile.Core v5.0.0.1
+* Unhandled Exceptions in ThreadPool threads will now throw the unhandled Exception. This results in UnhandledException event of current AppDomain to be raised and most likely crash the application. Before this change the application might hang up silently.
+* ThreadPool.QueueWorkItem will now start a new thread if a new work item gets queued and no threads are active.
+* ThreadPool.QueueWorkItem will now throw ArgumentNullException if callback parameter is null.
+
+
+
+Mobile C# Library Version 5.0.0.0
+2018, Oct 31
+
+Mobile.Core v5.0.0.0
+* Based on .Net Standard 2.0 instead of .Net Framework to support multiple platforms.
+* No more RemotableObject class as Remoting is not supported by .Net Standard. The RemotableObject class is replaced by DisposableMarshalByRefObject which has the same functionality but does not close the remoting channel for the instance on disposing.
+* Removed UI elements as they require .Net Framework because of Windows.Forms funcionality.
+
+Mobile.Core.Forms v5.0.0.0
+* Based on .Net Framework v4.7.2.
+* Includes the UI elements that have been removed from Mobile.Core.
+
+Mobile.Logger v5.0.0.0
+* Based on .Net Standard 2.0 instead of .Net Framework to support multiple platforms.
+
+Mobile.Networking v5.0.0.0
+* Replaces Mobile.TcpLayer library.
+* Based on .Net Standard 2.0 instead of .Net Framework to support multiple platforms.
+
+Mobile.Communication v5.0.0.0
+* Based on .Net Standard 2.0 instead of .Net Framework to support multiple platforms.
+* All classes deriving from RemotableObject derive from DisposableMarshalByRefObject now.
+
+
+
+Mobile C# Library Version 4.4.3.0
+2018, Oct 29 (Internal ONLY)
+
+Mobile.Communication v4.4.3.0
+* Added static methods for parsing QueuingInfo objects.
+* Moved enums related to Queuing to Mobile.Communication.Common.Queuing namespace. Affected enums are: SegmentStatus, SegmentSubStatus, CancelType, ModificationType.
+* Added DoPingOnConnect flag to IClientBase that determines whether the client pings the remote server before connecting. This has been done as some platforms (e.g. UWP) don't support pinging yet.
+* Use RobotStatusOnEnterprisemanager in IRobot instead of StatusOnEnterprisemanager. This makes it easier to access the name of the robot.
+
+Mobile.TcpLayer v4.0.1.0
+* Added DoPingOnConnect flag to TelnetClient that determines whether the client pings the remote server before connecting. This has been done as some platforms (e.g. UWP) don't support pinging yet.
+
+
+
+Mobile C# Library Version 4.4.2.0
+2018, Oct 19
+
+Mobile.Communication v4.4.2.0
+* Error message of failed functions contains error description if it has been an ARCL command error now. Previously it has just been the 'CommandError: ...' message.
+* Fix an error that prevented Map Objects from being parsed correctly.
+* Map.TryGetObject method now searches BaseType as well. Before it has just searched sub classes of BaseType. Now BaseType is included.
+
+
+
+Mobile C# Library Version 4.4.1.0
+2018, Oct 12
+
+Mobile.Communication v4.4.1.0
+* Added method to robot class to localize a robot at a specified goal.
+* Better use of SoftSignals. Added methods for bit- or byte-wise manipulation. Added event to ArclBase named SoftSignalChanged. This is raised whenever a SoftSignal is changed because of any robot toggling an output that is a part of it.
+
+
+
+Mobile C# Library Version 4.4.0.0
+2018, July 27
+
+Mobile.Communication v4.4.0.0
+* Added ability to remove only finished jobs in QueuingManager. The method ClearFinishedJobs has been added for that purpose.
+* Segment's Queued and Finished property is nullable now. This means Finished property for example will be null instead of DateTime.MinValue if the job is not finished yet.
+
+
+
+Mobile C# Library Version 4.3.0.0
+2018, July 23
+
+Mobile.Communication v4.3.0.0
+* Move QueuingInfo class to out of Segment class. QueuingInfo class is now part of Mobile.Communication.Common.Queuing namespace.
+* QueuingInfo implements IEquatable<QueuingInfo>. QueuingInfo now overrides Equals and GetHashCode method as well.
+
+
+
+Mobile C# Library Version 4.2.0.0-A
+2018, July 23
+
+Mobile.Core v4.0.2.0
+* Added FileSelectorEditor and ExistingFileSelectorEditor to Mobile.Core.Design namespace. Moved it over from Mobile.GUI.Editors namespace.
+
+
+
+Mobile C# Library Version 4.2.0.0
+2018, July 20
+
+Mobile.Communication v4.2.0.0
+* Removed NewJobQueued event from ArclBase class. The same can be achieved by registering to ArclBase.QM.Jobs.CollectionChanged event and checking whether a job has been added.
+
+
+
+Mobile C# Library Version 4.1.0.0
+2018, July 19
+
+Mobile.Communication v4.1.0.0
+* Removed CommandsComplete event from ArclBase class. The same can be achieved by registering to ArclBase.Commands.CollectionChanged event and checking whether a job has been added.
+* Removed GoalsComplete event from ArclBase class. The same can be achieved by registering to ArclBase.Goals.CollectionChanged event and checking whether a job has been added.
+* Removed RoutesComplete event from Robot class. The same can be achieved by registering to Robot.Routes.CollectionChanged event and checking whether a job has been added.
+* Removed MacrosComplete event from Robot class. The same can be achieved by registering to Robot.Macros.CollectionChanged event and checking whether a job has been added.
+
+Mobile.Core v4.0.1.0
+* Added EnterPassword dialog to Mobile.Core.Forms namespace.
+* Added ChangePassword dialog to Mobile.Core.Forms namespace.
+
+
+
+Mobile C# Library Version 4.0.0.0
+2018, July 18
+
+* Start of Changes.log
+
+Mobile.Communication v4.0.0.0
+Mobile.Core v4.0.0.0
+Mobile.Logger v4.0.0.0
+Mobile.TcpLayer v4.0.0.0

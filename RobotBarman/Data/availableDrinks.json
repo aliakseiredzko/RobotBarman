@@ -1,0 +1,26 @@
+[
+	{
+		"Title": "Питьевой йогурт \"Оптималь\" Классический",
+		"SubTitle": "",
+		"IconSource": "RobotBarman.Images.opt.classic_opt.png",
+		"DrinkPosition": 0,
+		"DrinkType": 0,
+		"SpillsLeft": 0
+	},
+	{
+		"Title": "Питьевой йогурт \"Оптималь\" Черника",
+		"SubTitle": "",
+		"IconSource": "RobotBarman.Images.opt.blueberry_opt.png",
+		"DrinkPosition": 1,
+		"DrinkType": 0,
+		"SpillsLeft": 0
+	},
+	{
+		"Title": "Питьевой йогурт \"Оптималь\" Персик-абрикос",
+		"SubTitle": "",
+		"IconSource": "RobotBarman.Images.opt.persic_opt.png",
+		"DrinkPosition": 2,
+		"DrinkType": 0,
+		"SpillsLeft": 0
+	}
+]

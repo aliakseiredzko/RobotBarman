@@ -1,0 +1,219 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\availableDrinks.json" />
+    <None Remove="Data\drinks.json" />
+    <None Remove="Data\poses.json" />
+    <None Remove="Data\positions.json" />
+    <None Remove="Data\tools.json" />
+    <None Remove="drinks1.json" />
+    <None Remove="Images\LL\ananas_LL.png" />
+    <None Remove="Images\LL\cherry_LL.png" />
+    <None Remove="Images\LL\persic_LL.png" />
+    <None Remove="Images\LL\strawberry_LL.png" />
+    <None Remove="Images\opt\blueberry_opt.png" />
+    <None Remove="Images\opt\classic_opt.png" />
+    <None Remove="Images\opt\figsCerealsFlax_opt.png" />
+    <None Remove="Images\opt\kiwiCereals_opt.png" />
+    <None Remove="Images\opt\persic_opt.png" />
+    <None Remove="Images\opt\pruneCereals_opt.png" />
+    <None Remove="Images\opt\strawberryGrape_opt.png" />
+    <None Remove="Images\opt\strawberryMalina_opt.png" />
+    <None Remove="Images\sav\ananas_sav.png" />
+    <None Remove="Images\sav\berries_sav.png" />
+    <None Remove="Images\sav\strawberry_sav.png" />
+    <None Remove="Images\teos\blueberry_teos.png" />
+    <None Remove="Images\teos\cherryGranat_teos.png" />
+    <None Remove="Images\teos\classic_teos.png" />
+    <None Remove="Images\teos\kinoa_teos.png" />
+    <None Remove="Images\teos\mango_teos.png" />
+    <None Remove="poses1.json" />
+    <None Remove="positions1.json" />
+    <None Remove="Sounds\AfterSpill\after.mp3" />
+    <None Remove="Sounds\AfterSpill\afterSpill.mp3" />
+    <None Remove="Sounds\AfterSpill\giveYgostchy.mp3" />
+    <None Remove="Sounds\bd1.wav" />
+    <None Remove="Sounds\BeforeSpill\thanks.mp3" />
+    <None Remove="Sounds\BeforeSpill\thx.mp3" />
+    <None Remove="Sounds\ChangeBottle\Bottle1.mp3" />
+    <None Remove="Sounds\ChangeBottle\Bottle2.mp3" />
+    <None Remove="Sounds\ChangeBottle\Bottle3.mp3" />
+    <None Remove="Sounds\couple_sec.mp3" />
+    <None Remove="Sounds\couple_sec.wav" />
+    <None Remove="Sounds\enjoy.mp3" />
+    <None Remove="Sounds\enjoy.wav" />
+    <None Remove="Sounds\napitok.mp3" />
+    <None Remove="Sounds\now_now.mp3" />
+    <None Remove="Sounds\now_now.wav" />
+    <None Remove="Sounds\Opening\select.mp3" />
+    <None Remove="Sounds\privet.mp3" />
+    <None Remove="Sounds\privet.wav" />
+    <None Remove="Sounds\select.wav" />
+    <None Remove="Sounds\speech.mp3" />
+    <None Remove="Sounds\speech.wav" />
+    <None Remove="tools1.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\availableDrinks.json" />
+    <EmbeddedResource Include="Data\drinks.json" />
+    <EmbeddedResource Include="Data\poses.json" />
+    <EmbeddedResource Include="Data\positions.json" />
+    <EmbeddedResource Include="Data\tools.json" />
+    <EmbeddedResource Include="Images\teos\blueberry_teos.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\LL\ananas_LL.png" />
+    <EmbeddedResource Include="Images\LL\cherry_LL.png" />
+    <EmbeddedResource Include="Images\LL\persic_LL.png" />
+    <EmbeddedResource Include="Images\LL\strawberry_LL.png" />
+    <EmbeddedResource Include="Images\opt\blueberry_opt.png" />
+    <EmbeddedResource Include="Images\opt\classic_opt.png" />
+    <EmbeddedResource Include="Images\opt\figsCerealsFlax_opt.png" />
+    <EmbeddedResource Include="Images\opt\kiwiCereals_opt.png" />
+    <EmbeddedResource Include="Images\opt\persic_opt.png" />
+    <EmbeddedResource Include="Images\opt\pruneCereals_opt.png" />
+    <EmbeddedResource Include="Images\opt\strawberryGrape_opt.png" />
+    <EmbeddedResource Include="Images\opt\strawberryMalina_opt.png" />
+    <EmbeddedResource Include="Images\sav\ananas_sav.png" />
+    <EmbeddedResource Include="Images\sav\berries_sav.png" />
+    <EmbeddedResource Include="Images\sav\strawberry_sav.png" />
+    <EmbeddedResource Include="Images\teos\cherryGranat_teos.png" />
+    <EmbeddedResource Include="Images\teos\classic_teos.png" />
+    <EmbeddedResource Include="Images\teos\kinoa_teos.png" />
+    <EmbeddedResource Include="Images\teos\mango_teos.png" />
+    <EmbeddedResource Include="Sounds\AfterSpill\after.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\AfterSpill\afterSpill.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\AfterSpill\giveYgostchy.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\BeforeSpill\couple_sec.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\AfterSpill\enjoy.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\BeforeSpill\now_now.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\BeforeSpill\thanks.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\BeforeSpill\thx.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\ChangeBottle\Bottle1.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\ChangeBottle\Bottle2.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\ChangeBottle\Bottle3.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\napitok.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\Opening\privet.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\Opening\select.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sounds\Opening\speech.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FreshMvvm" Version="3.0.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.3.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.497661" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RozumPlugin\RozumConnectionLib\RozumConnectionLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\FirstPage.xaml.cs">
+      <DependentUpon>FirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\DrinksPage.xaml.cs">
+      <DependentUpon>DrinksPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\AgvPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\BarPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\FirstPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\DrinksPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="View\ContactsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\MasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\ReminderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="View\TodoListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mobile.Communication">
+      <HintPath>..\Mobile.Communication\Mobile.Communication.dll</HintPath>
+    </Reference>
+    <Reference Include="Mobile.Core">
+      <HintPath>..\Mobile.Communication\Mobile.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mobile.Logger">
+      <HintPath>..\Mobile.Communication\Mobile.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Mobile.Networking">
+      <HintPath>..\Mobile.Communication\Mobile.Networking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties Data_4positions_1json__JSONSchema="http://json.schemastore.org/avro-avsc" /></VisualStudio></ProjectExtensions>
+
+</Project>

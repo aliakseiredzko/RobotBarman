@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:robotBarman="clr-namespace:RobotBarman;assembly=RobotBarman"
+             xmlns:local="clr-namespace:RobotBarman"
+             x:Class="RobotBarman.DrinksPage"
+             Title="Бармен с йогуртиками"
+             BackgroundColor="#87E0FF">
+    <ContentPage.Content>
+        <Grid IsEnabled="{Binding IsRobotAvailable}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.15*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Выберите приятный напиток:" 
+                   TextColor="#1D97C1" 
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="32" 
+                   Margin="10,15,10,0" 
+                   Grid.Row="0"/>
+            <ListView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"                      
+                      HasUnevenRows="True" 
+                      BackgroundColor="#53c7f0" 
+                      SeparatorColor="#FFFFE3"
+                      Margin="10,0"
+                      Grid.Row="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">                                    
+                                    <Label Text="{Binding Title}" 
+                                           TextColor="#FFFFE1" 
+                                           FontSize="40"
+                                           FontAttributes="Bold" 
+                                           Margin="30,5,5,5"
+                                           HorizontalOptions="CenterAndExpand" 
+                                           VerticalOptions="Center" />
+                                    
+                                    <StackLayout Orientation="Vertical" 
+                                                 Padding="20,10,0,0" 
+                                                 Spacing="30"/>
+
+                                    <Image Source="{Binding ImageSource}" 
+                                           HeightRequest="310" 
+                                           WidthRequest="300"
+                                           HorizontalOptions="EndAndExpand" 
+                                           Margin="10,5,30,5" />                                    
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <Grid Margin="10"
+                  Grid.Row="2">                
+                <Grid.RowDefinitions>                    
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.6*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.5*"/>                    
+                </Grid.ColumnDefinitions>                
+
+                <Label Text="Количество стаканов:"
+                       TextColor="#1D97C1"                        
+                       VerticalOptions="Center"
+                       FontSize="28"                        
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"/>
+
+                <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                                              
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       FontSize="30"
+                       VerticalOptions="End"/>
+
+                <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
+                         Minimum="1" 
+                         Maximum="100" 
+                         Increment="1"                                                                    
+                         x:Name="NumberOfCups"                                                      
+                         Grid.Row="1"
+                         Grid.Column="1" 
+                         HeightRequest="200"
+                         WidthRequest="200"
+                         MinimumWidthRequest="200"
+                         HorizontalOptions="CenterAndExpand"                         
+                         Visual="Material"/>
+
+                <Button IsEnabled="{Binding IsRobotAvailable}" 
+                        Command="{Binding SpillDrink}"                         
+                        Text="ХОЧУ"                     
+                        FontSize="40"
+                        HeightRequest="150"
+                        WidthRequest="300"
+                        BorderWidth="30" 
+                        CornerRadius="20" 
+                        TextColor="#1D97C1" 
+                        BackgroundColor="#FFFFE3"                        
+                        HorizontalOptions="EndAndExpand"     
+                        VerticalOptions="Center"
+                        Grid.RowSpan="2"
+                        Grid.Column="2" 
+                        Visual="Material"/>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

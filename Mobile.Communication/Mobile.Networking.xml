@@ -1,0 +1,1338 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mobile.Networking</name>
+    </assembly>
+    <members>
+        <member name="T:Mobile.Networking.Common.ConnectionEventArgs">
+            <summary>
+            A class for <see cref="T:System.EventArgs"/> related to a connection.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionEventArgs.#ctor(Mobile.Networking.Common.IPConnection)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.ConnectionEventArgs"/>.
+            </summary>
+            <param name="connection">The connection causing the event.</param>
+        </member>
+        <member name="P:Mobile.Networking.Common.ConnectionEventArgs.Connection">
+            <summary>
+            The <see cref="T:Mobile.Networking.Common.IPConnection"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.ConnectionEventArgs.Local">
+            <summary>
+            Gets a copy of the local <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.ConnectionEventArgs.Remote">
+            <summary>
+            Gets a copy of the remote <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.ConnectionProblemException">
+            <summary>
+            An Exception containing data about a connection problem.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionProblemException.#ctor(Mobile.Networking.Common.IPConnection)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.ConnectionProblemException"/>.
+            </summary>
+            <param name="connection">The connection that caused the problem.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionProblemException.#ctor(Mobile.Networking.Common.IPConnection,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.ConnectionProblemException"/>.
+            </summary>
+            <param name="connection">The connection that caused the problem.</param>
+            <param name="message">The error message replacing the standard message.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionProblemException.#ctor(Mobile.Networking.Common.IPConnection,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.ConnectionProblemException"/>.
+            </summary>
+            <param name="connection">The connection that caused the problem.</param>
+            <param name="message">The error message replacing the standard message.</param>
+            <param name="innerException">The inner Exception.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionProblemException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the System.Exception class with serialized data.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.ConnectionProblemException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized
+            object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual
+            information about the source or destination.</param>
+        </member>
+        <member name="P:Mobile.Networking.Common.ConnectionProblemException.Connection">
+            <summary>
+            Gets information about the connection.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.HeartbeatInformation">
+            <summary>
+            A class containing information about a heartbeat.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.HeartbeatInformation.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/> specifying values
+            for the timeout and the text.
+            </summary>
+            <param name="timeout">The timeout when to send or receive the <paramref name="text"/> (in ms); -1 disables the functionality (default).</param>
+            <param name="text">The text to send or reveive as a heartbeat.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.HeartbeatInformation.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/> using default values.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.HeartbeatInformation.ShallowCopy">
+            <summary>
+            Creates a shallow copy of this instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/>.
+            </summary>
+            <returns>A shallow copy of this instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.HeartbeatInformation.DeepCopy">
+            <summary>
+            Creates a deep copy of this instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/>.
+            </summary>
+            <returns>A deep copy of this instance of <see cref="T:Mobile.Networking.Common.HeartbeatInformation"/>.</returns>
+        </member>
+        <member name="P:Mobile.Networking.Common.HeartbeatInformation.Timeout">
+            <summary>
+            Gets the timeout when to send or receive the <see cref="P:Mobile.Networking.Common.HeartbeatInformation.Text"/> (in ms).
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.HeartbeatInformation.Text">
+            <summary>
+            Gets the text to send or receive as a heartbeat.
+            Received text matching this will be filtered out and not passec on.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.Heartbeat">
+            <summary>
+            A class representing a bi-directional heartbeat.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.Heartbeat.#ctor(Mobile.Networking.Common.HeartbeatInformation,Mobile.Networking.Common.HeartbeatInformation)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/> providing
+            information about incoming and outgoing heartbeat information.
+            </summary>
+            <param name="outgoing">Information of which text to send and its frequency.</param>
+            <param name="incoming">Information about the text to receive and recognize as a heartbeat and the expected frequency of it.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.Heartbeat.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/> using default values.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.Heartbeat.ShallowCopy">
+            <summary>
+            Creates a shallow copy of this instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/>.
+            </summary>
+            <returns>A shallow copy of this instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.Heartbeat.DeepCopy">
+            <summary>
+            Creates a deep copy of this instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/>.
+            </summary>
+            <returns>A deep copy of this instance of <see cref="T:Mobile.Networking.Common.Heartbeat"/>.</returns>
+        </member>
+        <member name="P:Mobile.Networking.Common.Heartbeat.Outgoing">
+            <summary>
+            Gets or sets information of which text to send and its frequency (in ms); Timeout of -1 disables the functionality (default).
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.Heartbeat.Incoming">
+            <summary>
+            Gets or sets information about the text to receive and recognize as a heartbeat and the expected frequency of it (in ms); Timeout of -1 disables the functionality (default).
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.IPConnectionEventHandler`1">
+            <summary>
+            Represents a method that will handle an event fired by an object
+            that posses an <see cref="T:Mobile.Networking.Common.IPConnection"/> which does have a specified type of arguments.
+            </summary>
+            <typeparam name="TArguments">The <see cref="T:System.Type"/> of the event data generated
+            by the firing event.</typeparam>
+            <param name="sender">The <see cref="T:Mobile.Networking.Common.IPConnection"/> related to this event.</param>
+            <param name="args">The argument that contains the data the event is fired with.</param>
+        </member>
+        <member name="T:Mobile.Networking.Common.IPConnection">
+            <summary>
+            A class representing a connection via IP.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.IPConnection.local">
+            <summary>
+            The local <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.IPConnection.remote">
+            <summary>
+            The remote <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.IPConnection.NoConnection">
+            <summary>
+            No connection/Not connected.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.#cctor">
+            <summary>
+            Static constructor setting <see cref="F:Mobile.Networking.Common.IPConnection.NoConnection"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.#ctor(System.Net.IPEndPoint,System.Net.IPEndPoint)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.IPConnection"/> class
+            containing a local and a remote <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+            <param name="local">The local <see cref="T:System.Net.IPEndPoint"/>.</param>
+            <param name="remote">The remote <see cref="T:System.Net.IPEndPoint"/>.</param>
+        </member>
+        <member name="P:Mobile.Networking.Common.IPConnection.Local">
+            <summary>
+            Gets the local <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.IPConnection.Remote">
+            <summary>
+            Gets the remote <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.LocalToString">
+            <summary>
+            Gets the string representation of the local <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+            <returns>The string representation of the local <see cref="T:System.Net.IPEndPoint"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.RemoteToString">
+            <summary>
+            Gets the string representation of the remote <see cref="T:System.Net.IPEndPoint"/>.
+            </summary>
+            <returns>The string representation of the remote <see cref="T:System.Net.IPEndPoint"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.ToString">
+            <summary>
+            Returns the <see cref="T:System.String"/> representation of this <see cref="T:Mobile.Networking.Common.IPConnection"/>.
+            </summary>
+            <returns>The <see cref="T:System.String"/> representation of this <see cref="T:Mobile.Networking.Common.IPConnection"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.Equals(Mobile.Networking.Common.IPConnection)">
+            <summary>
+            Determines whether <paramref name="other"/> is equal to this <see cref="T:Mobile.Networking.Common.IPConnection"/>.
+            </summary>
+            <param name="other">The <see cref="T:Mobile.Networking.Common.IPConnection"/> to compare this one with.</param>
+            <returns><see langword="true"/> if source (local) and destination (remote) of
+            <c>this</c> and <paramref name="other"/> are the same; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.Equals(System.Object)">
+            <summary>
+            Determines this <see cref="T:Mobile.Networking.Common.IPConnection"/> matches the <paramref name="obj"/> object.
+            </summary>
+            <param name="obj">The comparand.</param>
+            <returns><see langword="true"/> if <paramref name="obj"/> is an <see cref="T:Mobile.Networking.Common.IPConnection"/> and source (local) and destination (remote) of
+            this and <paramref name="obj"/> are the same; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.IPConnection.GetHashCode">
+            <summary>
+            Gets the hash code for this <see cref="T:Mobile.Networking.Common.IPConnection"/>.
+            </summary>
+            <returns>The hash code of this <see cref="T:Mobile.Networking.Common.IPConnection"/>.</returns>
+        </member>
+        <member name="T:Mobile.Networking.Common.NamespaceDoc">
+            <summary>
+            The <see cref="N:Mobile.Networking.Common"/> namespace contains objects for TCP connection handling used by clients and servers.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.ResponseEventArgs">
+            <summary>
+            EventArgs containing a response (string) from a TCP-server.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.ResponseEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.Common.ResponseEventArgs"/> class.
+            </summary>
+            <param name="response">The response.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.ResponseEventArgs.ToString">
+            <summary>
+            Overridden method inherited from <see cref="T:System.Object"/>.
+            Returns the response.
+            </summary>
+            <returns>The response.</returns>
+        </member>
+        <member name="P:Mobile.Networking.Common.ResponseEventArgs.Response">
+            <summary>
+            The string response.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.TelnetBase">
+            <summary>
+            A base class for a Telnet connection.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.Common.TelnetBase.ConnectionData">
+            <summary>
+            A class containing data of a TCP connection.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.#ctor(System.String,System.Net.Sockets.TcpClient,Mobile.Logger.TextFileLogger)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/>.
+            </summary>
+            <param name="name">The name of this connection.</param>
+            <param name="client">The <see cref="T:System.Net.Sockets.TcpClient"/> that holds the connection.</param>
+            <param name="logger">The <see cref="T:Mobile.Logger.TextFileLogger"/> to log information for this connection.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="client"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if <paramref name="client"/> is not connected.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.Finalize">
+            <summary>
+            The finalizer of <see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.Dispose(System.Boolean)">
+            <summary>
+            Disposes the object.
+            </summary>
+            <param name="isDisposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.Close">
+            <summary>
+            Closes the <see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/> and releases all resources.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.ToString">
+            <summary>
+            Overridden <see cref="M:System.Object.ToString"/>.
+            </summary>
+            <returns>The name of the file/connection.</returns>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.IsBeingDisposed">
+            <summary>
+            Gets whether the object is in the process of being disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.IsDisposed">
+            <summary>
+            Gets whether the object is disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.Name">
+            <summary>
+            Gets the name of the connection.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.LastLine">
+            <summary>
+            The beginning of the last line that was received.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.Connected">
+            <summary>
+            Determines whether the <see cref="T:System.Net.Sockets.TcpClient"/> is connected.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.Stream">
+            <summary>
+            The <see cref="T:System.Net.Sockets.NetworkStream"/> to send and receive data.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.Logger">
+            <summary>
+            The <see cref="T:Mobile.Logger.TextFileLogger"/> to log information for this connection.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.HearbeatSentTimeStamp">
+            <summary>
+            Gets or sets the last time the heartbeat has been sent.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ConnectionData.HeartbeatReceivedTimeStamp">
+            <summary>
+            Gets or sets the last time the heartbeat has been received.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ConnectionData.op_Implicit(Mobile.Networking.Common.TelnetBase.ConnectionData)~Mobile.Networking.Common.IPConnection">
+            <summary>
+            Casts <see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/> to <see cref="T:Mobile.Networking.Common.IPConnection"/> implicitly.
+            </summary>
+            <param name="data"><see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/> object to cast.</param>
+            <returns>The <see cref="T:Mobile.Networking.Common.IPConnection"/> corresponding to this <see cref="T:Mobile.Networking.Common.TelnetBase.ConnectionData"/> object.</returns>
+        </member>
+        <member name="T:Mobile.Networking.Common.TelnetBase.ReceivingMode">
+            <summary>
+            An enumeration specifying how to notify using object if a new line was received.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Both">
+            <summary>
+            Both mechanisms are used. <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Poll"/> as well as <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Event"/>.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Event">
+            <summary>
+            Fires the <see cref="E:Mobile.Networking.Common.TelnetBase.NewLineReceived"/> event.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Poll">
+            <summary>
+            Uses a <see cref="T:Mobile.Core.DataStructure.SynchronizedQueue`1"/> of <see cref="T:System.String"/> to store lines until
+            they are read by <see cref="M:Mobile.Networking.Common.TelnetBase.GetReceivedLines(Mobile.Networking.Common.IPConnection)"/>.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._serialization_version">
+            <summary>
+            Version identifier for serialization.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._version_1_0_0_0">
+            <summary>
+            Version 1.0.0.0
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._version_1_1_0_0">
+            <summary>
+            Version 1.1.0.0
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._version">
+            <summary>
+            The version of serialization code.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._syncEventRaising">
+            <summary>
+            A <see cref="T:System.Object"/> to synchronize events.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase.eventPool">
+            <summary>
+            A thread pool to raise events.
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase.receivedDictionary">
+            <summary>
+            The FIFO of received lines dependant on the connection
+            </summary>
+        </member>
+        <member name="F:Mobile.Networking.Common.TelnetBase._syncLogger">
+            <summary>
+            <see cref="T:System.Object"/> to sync logger.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.logger">
+            <summary>
+            gets or sets the logger to log received and sent text to.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.#ctor(System.String)">
+            <summary>
+            Default Constructor setting name.
+            Initializes a new <see cref="T:Mobile.Networking.Common.TelnetBase"/> object.
+            Uses (default) UTF8 for text encoding.
+            </summary>
+            <param name="name">The name of the object.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            Initializes a new <see cref="T:Mobile.Networking.Common.TelnetBase"/> object.
+            Sets the Encoding used to convert outgoing text to bytes and incoming bytes to text.
+            Default is UTF8.
+            </summary>
+            <param name="name">The name of the object.</param>
+            <param name="textEncoding">The Encoding used to convert outgoing text to bytes
+            and incoming bytes to text. Default is UTF8.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.Common.TelnetBase"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to serialize or deserialize an object.</param>
+            <param name="context">Describes the source and destination of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.Finalize">
+            <summary>
+            The finalizer of <see cref="T:Mobile.Networking.Common.TelnetBase"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.SendText(Mobile.Networking.Common.TelnetBase.ConnectionData,System.String,System.String)">
+            <summary>
+            Sends a string out over the given <paramref name="connection"/>.
+            </summary>
+            <param name="connection">The connection to send the <paramref name="text"/> over.</param>
+            <param name="text">The text to send out.</param>
+            <param name="log">The message to write to the log file instead of <paramref name="text"/>. <see langword="null"/> will log <paramref name="text"/>.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="connection"/> or <paramref name="text"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="T:Mobile.Networking.Common.TelnetBase"/>
+            has been disposed or is currently disposing.</exception>
+            <exception cref="T:Mobile.Networking.Common.ConnectionProblemException">Thrown if a problem concerning
+            the NetworkStream occurred.</exception>
+            <exception cref="T:System.Text.EncoderFallbackException">See <see cref="M:System.Text.Encoding.GetBytes(System.String)"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.SignalNextRun(System.Object)">
+            <summary>
+            Sets <see cref="F:Mobile.Networking.Common.TelnetBase.run"/> to start next receiving cycle.
+            </summary>
+            <param name="obj">Unused.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.RunThreadMethod">
+            <summary>
+            Runs the receiving Thread.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ReceivingMethod">
+            <summary>
+            The method called by the receiving thread.
+            It should check if the connection is established and read from the underlying Stream.
+            Anything that is needed to check for incoming messages should be placed inside this method.
+            Easy way:
+            This method should handle the connection and call <see cref="M:Mobile.Networking.Common.TelnetBase.ListenForResponse(Mobile.Networking.Common.TelnetBase.ConnectionData)"/>
+            to receive and signal lines.
+            It is called frequently to secure reading from stream within time needed.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.InitializeThread">
+            <summary>
+            Initializes the receiving thread.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.StartThread">
+            <summary>
+            Starts the receiving thread.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Thrown if object is disposed.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.StopThread">
+            <summary>
+            Stops the receiving thread.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ListenForResponse(Mobile.Networking.Common.TelnetBase.ConnectionData)">
+            <summary>
+            This methods reads text from the given <paramref name="connection"/> if it's connected.
+            Before that it checks the heartbeat (if configured).
+            </summary>
+            <param name="connection">The connection on which to listen for a response.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="connection"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.CheckHearbeat(Mobile.Networking.Common.TelnetBase.ConnectionData)">
+            <summary>
+            Checks if the connection is open and heartbeat is received.
+            </summary>
+            <param name="connection">The connection to check.</param>
+            <returns><see langword="true"/> if the heartbeat is okay; otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.ReadLines(Mobile.Networking.Common.TelnetBase.ConnectionData,System.Collections.Generic.IList{System.String}@)">
+            <summary>
+            Reads all bytes available from the NetworkStream.
+            </summary>
+            <param name="connection">The connection on which to listen for a response.</param>
+            <param name="lines">The lines read from the stream (without NewLine chars).
+             -or- An empty array of strings if an error occurred.</param>
+            <returns><see langword="true"/> if at least one line was received correctly; otherwise, false.</returns>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.SignalLines(Mobile.Networking.Common.TelnetBase.ConnectionData,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Signals that new lines were received.
+            </summary>
+            <param name="connection">The connection that received the new lines.</param>
+            <param name="lines">The lines to expose.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.EnqueueLine(Mobile.Networking.Common.IPConnection,System.String)">
+            <summary>
+            Enqueues a line to the received-lines-queue of the given connection.
+            </summary>
+            <param name="connection">The connection on which to enqueue the line.</param>
+            <param name="line">The line to enqueue.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.GetReceivedLines(Mobile.Networking.Common.IPConnection)">
+            <summary>
+            Gets all received lines to the corresponding connection.
+            Adds a new <see cref="T:Mobile.Core.DataStructure.SynchronizedQueue`1"/> for this connection if it doesn't exist.
+            They are only filled if <see cref="T:Mobile.Networking.Common.TelnetBase.ReceivingMode"/> is <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Both"/> or <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Poll"/>.
+            </summary>
+            <param name="connection">The connection over which the lines are received.</param>
+            <returns>All lines received over this connection.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="connection"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.SetReceivedLines(Mobile.Networking.Common.IPConnection,System.Collections.Concurrent.ConcurrentQueue{System.String})">
+            <summary>
+            Sets the queue of received lines for this connection.
+            They are only filled if <see cref="T:Mobile.Networking.Common.TelnetBase.ReceivingMode"/> is <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Both"/> or <see cref="F:Mobile.Networking.Common.TelnetBase.ReceivingMode.Poll"/>.
+            </summary>
+            <param name="connection">The connection over which the lines are received.</param>
+            <param name="queue">The queue.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="connection"/> or <paramref name="queue"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.Close">
+            <summary>
+            Closes the <see cref="T:Mobile.Networking.Common.TelnetBase"/> and releases all resources.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.Dispose(System.Boolean)">
+            <summary>
+            Disposes the object by terminating the receiving <see cref="T:System.Threading.Thread"/>.
+            </summary>
+            <param name="isDisposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data
+            needed to serialize the target object.</summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="E:Mobile.Networking.Common.TelnetBase.UnhandledException">
+            <summary>
+            This event is raised by a <see cref="T:System.Exception"/> that has not been handled.
+            Methods registered to this event MUST NOT THROW any <see cref="T:System.Exception"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.OnUnhandledException(System.Exception)">
+            <summary>
+            Logs the <see cref="T:System.Exception"/> if <see cref="P:Mobile.Networking.Common.TelnetBase.Logger"/> is set
+            and raises <see cref="E:Mobile.Networking.Common.TelnetBase.UnhandledException"/>.
+            </summary>
+            <param name="ex">The <see cref="T:System.Exception"/> that has not been handled.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.OnUnhandledException(System.Exception,System.Boolean)">
+            <summary>
+            Logs the <see cref="T:System.Exception"/> if <see cref="P:Mobile.Networking.Common.TelnetBase.Logger"/> is set
+            and raises <see cref="E:Mobile.Networking.Common.TelnetBase.UnhandledException"/>.
+            </summary>
+            <param name="ex">The <see cref="T:System.Exception"/> that has not been handled.</param>
+            <param name="terminating">Determines whether a <see cref="T:System.Threading.Thread"/> is terminating.</param>
+        </member>
+        <member name="E:Mobile.Networking.Common.TelnetBase.NewLineReceived">
+            <summary>
+            Signals that a new line has been received.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.OnNewLineReceived(Mobile.Networking.Common.IPConnection,System.String)">
+            <summary>
+            Fires a NewLineReceived event.
+            </summary>
+            <param name="connection">The connection that received a new line.</param>
+            <param name="line">The line that has been received.</param>
+        </member>
+        <member name="M:Mobile.Networking.Common.TelnetBase.RaiseNewLineReceived(System.Object)">
+            <summary>
+            Invokes <see cref="E:Mobile.Networking.Common.TelnetBase.NewLineReceived"/>.
+            </summary>
+            <param name="obj">The sender and argument of the event.</param>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.IsBeingDisposed">
+            <summary>
+            Gets whether the object is in the process of being disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.IsDisposed">
+            <summary>
+            Gets whether the object is disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.IsAlive">
+            <summary>
+            When overridden in a derived class gets the status of the telnet connection.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.ThreadActive">
+            <summary>
+            Gets whether the receiving thread is running.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.Name">
+            <summary>
+            Gets or sets name of the Telnet object.
+            </summary>
+            <value>The name of the Telnet object.</value>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.Mode">
+            <summary>
+            Gets or sets which mode is used to signal that a new line is received.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.TextEncoding">
+            <summary>
+            The Encoding used to convert outgoing text to bytes
+            and incoming bytes to text.
+            Default is UTF8.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.PollingInterval">
+            <summary>
+            The frequency to check for incomming data (in milliseconds).
+            The default is 10ms.
+            </summary>
+            <exception cref="T:System.ArgumentException">The value is less than zero.</exception>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.Heartbeat">
+            <summary>
+            Gets the (modifiable) <see cref="P:Mobile.Networking.Common.TelnetBase.Heartbeat"/> used by this <see cref="T:Mobile.Networking.Common.TelnetBase"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.IsCommunicationLogging">
+            <summary>
+            Gets if messages sent and received via the connection are logged.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.Common.TelnetBase.Logger">
+            <summary>
+            Gets or sets the <see cref="T:Mobile.Logger.TextFileLogger"/> used to log messages.
+            Set this to <see langword="null"/> to disable logging.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.ErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.CannotSetAddress">
+            <summary>
+              Looks up a localized string similar to The destination Address cannot be set..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.CannotSetPort">
+            <summary>
+              Looks up a localized string similar to The destination Port cannot be set..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ClientAlreadyConnected">
+            <summary>
+              Looks up a localized string similar to The client is already connected..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ClientNotConnected">
+            <summary>
+              Looks up a localized string similar to The client is not connected..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ConnectFirst">
+            <summary>
+              Looks up a localized string similar to Please connect first..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ConnectingFailed">
+            <summary>
+              Looks up a localized string similar to Connecting failed..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ConnectionProblem">
+            <summary>
+              Looks up a localized string similar to There was a problem with your connection..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.DisconnectFirst">
+            <summary>
+              Looks up a localized string similar to Please disconnect first..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.LessThan">
+            <summary>
+              Looks up a localized string similar to {0} is less than {1}..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ListenToAllMethod">
+            <summary>
+              Looks up a localized string similar to To listen to all available IP-Addresses use any of &apos;Start(int,...)&apos;-methods..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.NoAddressForListening">
+            <summary>
+              Looks up a localized string similar to No addresses entered to listen to..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.NoClientConnected">
+            <summary>
+              Looks up a localized string similar to No client is connected..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.NoClientMatched">
+            <summary>
+              Looks up a localized string similar to No client matched the given connection (local -&gt; remote).
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.NoEndPointSet">
+            <summary>
+              Looks up a localized string similar to No EndPoint is set to connect to. Please use Connect(IPEndPoint) or Connect(IPAddress, int). -or- Set Address-Property..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.NotConnected">
+            <summary>
+              Looks up a localized string similar to {0} is not connected..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.PingFailedWithStatus">
+            <summary>
+              Looks up a localized string similar to Ping FAILED on IP: [{0}] with status [{1}]..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ReferenceEqual">
+            <summary>
+              Looks up a localized string similar to {0} references the same {2} object as {1}..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.SendingCommandFailedBecauseOf">
+            <summary>
+              Looks up a localized string similar to Sending command failed beacuse of &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.ErrorMessages.ServerAlreadyRunning">
+            <summary>
+              Looks up a localized string similar to Server already running..
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.NamespaceDoc">
+            <summary>
+            The <see cref="N:Mobile.Networking"/> namespace contains client and server objects for TCP connection handling.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.TelnetClient">
+            <summary>
+            A Class for sending and receiving strings (separated by lines)
+            via a TCP-Connection.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetClient"/> class.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetClient"/> class.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.#ctor(System.String,System.Net.IPEndPoint)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetClient"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="ip">The address to connect to.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.#ctor(System.String,System.Net.IPEndPoint,System.Text.Encoding)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetClient"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="ip">The address to connect to.</param>
+            <param name="textEncoding">The Encoding used to convert outgoing text to bytes
+            and incoming bytes to text. Default is UTF8.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetClient"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to serialize or deserialize an object.</param>
+            <param name="context">Describes the source and destination of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.TelnetClient_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            EventHandler for <see cref="E:Mobile.Networking.Common.TelnetBase.UnhandledException"/> event.
+            Disconnects the client if it is terminating.
+            </summary>
+            <param name="sender">The sender (base class).</param>
+            <param name="e">The argument containing the Exception.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.ReceivingMethod">
+            <summary>
+            The method to poll the <see cref="T:System.Net.Sockets.NetworkStream"/> and signal new responses.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.CheckConnection">
+            <summary>
+            Checks if the connection is still open.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Ping(System.Net.NetworkInformation.PingReply@)">
+            <summary>
+            Pings the host 4 times or less if succeeded.
+            </summary>
+            <param name="reply">The reply from the latest ping attempt.</param>
+            <returns><see langword="true"/> if pinging the remote address was successfull; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.DisconnectClient">
+            <summary>
+            Disconnects the TCP-Client.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Disconnect(System.Boolean)">
+            <summary>
+            Stops the receiving thread, disconnects the client and fires <see cref="E:Mobile.Networking.TelnetClient.ConnectionLost"/> event.
+            </summary>
+            <param name="logDisconnection">Log disconnection progress?</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Disconnect">
+            <summary>
+            Closes the connection to the Telnet-Server.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.ConnectClient">
+            <summary>
+            Connects the TCP-Client to the given server.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Connect">
+            <summary>
+            Connect to the Telnet-Server to the previously set EndPoint.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="T:Mobile.Networking.TelnetClient"/>
+            has been disposed or is currently disposing.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if no IP-Address has been set.
+             -or- A connection is already open (<see cref="P:Mobile.Networking.TelnetClient.IsAlive"/> == true).</exception>
+            <exception cref="T:Mobile.Networking.Common.ConnectionProblemException">Thrown if it is unable to connect to Telnet-Server.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Connect(System.Net.IPEndPoint)">
+            <summary>
+            Connect to the Telnet-Server.
+            </summary>
+            <param name="ep">The remote EndPoint to connect to.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="ep"/> is null.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="T:Mobile.Networking.TelnetClient"/>
+            has been disposed or is currently disposing.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if no IP-Address has been set.
+             -or- A connection is already open (<see cref="P:Mobile.Networking.TelnetClient.IsAlive"/> == true).</exception>
+            <exception cref="T:Mobile.Networking.Common.ConnectionProblemException">Thrown if it is unable to connect to Telnet-Server.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Connect(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Connect to the Telnet-Server.
+            </summary>
+            <param name="address">The IP-Address to connect to.</param>
+            <param name="port">The Portnumber to connect to.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="address"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if <paramref name="port"/> is less than 
+            <see cref="F:System.Net.IPEndPoint.MinPort"/>. -or- <paramref name="port"/> is greater than
+            <see cref="F:System.Net.IPEndPoint.MaxPort"/>. -or- <paramref name="address"/> is less than 0 or greater than 0x00000000FFFFFFFF.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="T:Mobile.Networking.TelnetClient"/>
+            has been disposed or is currently disposing.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if no IP-Address has been set.
+             -or- A connection is already open (<see cref="P:Mobile.Networking.TelnetClient.IsAlive"/> == true).</exception>
+            <exception cref="T:Mobile.Networking.Common.ConnectionProblemException">Thrown if it is unable to connect to Telnet-Server.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.SendText(System.String,System.String)">
+            <summary>
+            Sends a <paramref name="text"/> to the Telnet-Server.
+            </summary>
+            <param name="text">The text that is going to be send to the Telnet-Server.</param>
+            <param name="log">The text to write to the log file. Can be used to hide messages in the log file.
+            The default value is <see langword="null"/> which will log <paramref name="text"/>.</param>
+            <exception cref="T:Mobile.Networking.Common.ConnectionProblemException">Thrown if a problem concerning
+            the NetworkStream occurred.</exception>
+            <exception cref="T:System.Text.EncoderFallbackException">See <see cref="M:System.Text.Encoding.GetBytes(System.String)"/>.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if the <see cref="T:Mobile.Networking.TelnetClient"/>
+            has been disposed or is currently disposing.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the object by closing the connection and terminating the receiving <see cref="T:System.Threading.Thread"/>.
+            </summary>
+            <param name="isDisposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data
+            needed to serialize the target object.</summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.ToString">
+            <summary>
+            Overridden from <see cref="T:System.Object"/>.
+            </summary>
+            <returns>A string representation of the object.</returns>
+        </member>
+        <member name="E:Mobile.Networking.TelnetClient.ConnectionLost">
+            <summary>
+            Occurs if the connection gets lost.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.RaiseConnectionLost(System.Object)">
+            <summary>
+            Invokes <see cref="E:Mobile.Networking.TelnetClient.ConnectionLost"/>.
+            </summary>
+            <param name="obj">The argument of the event.</param>
+        </member>
+        <member name="E:Mobile.Networking.TelnetClient.ConnectionEstablished">
+            <summary>
+            Occurs if a connection is established.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetClient.RaiseConnectionEstablished(System.Object)">
+            <summary>
+            Invokes <see cref="E:Mobile.Networking.TelnetClient.ConnectionEstablished"/>.
+            </summary>
+            <param name="obj">The argument of the event.</param>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.Address">
+            <summary>
+            Gets or sets the IP-Address of the Telnet-Server.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown if value is <see langword="null"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if a new
+            Address is about to be set while <see cref="T:Mobile.Networking.TelnetClient"/> is connected.</exception>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.Port">
+            <summary>
+            Gets or sets the Port of the Telnet-Server.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if a new
+            Port is about to be set while <see cref="T:Mobile.Networking.TelnetClient"/> is connected.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="value"/> that was specified for a set operation is less than
+            <see cref="F:System.Net.IPEndPoint.MinPort"/> or greater than <see cref="F:System.Net.IPEndPoint.MaxPort"/>.</exception>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.DoPingOnConnect">
+            <summary>
+            Gets or sets whether to ping remote server before trying to establish a connection.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.Connected">
+            <summary>
+            Gets whether the client is connected to the Telnet-server.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.IsAlive">
+            <summary>
+            Gets the status of the <see cref="T:Mobile.Networking.TelnetClient"/> (connected? AND receiving?).
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.AutoReConnect">
+            <summary>
+            Determines whether the client tries to reconnect to the server once the conection is lost.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.LineAvailable">
+            <summary>
+            Gets a value that indicates whether new lines are available in <see cref="P:Mobile.Networking.TelnetClient.ReceivedLines"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetClient.ReceivedLines">
+            <summary>
+            Gets a <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1"/> of lines received from the telnet-server.
+            </summary>
+        </member>
+        <member name="T:Mobile.Networking.TelnetServer">
+            <summary>
+            A class to open a TcpServer that receives data
+            from multiple TcpClients.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.ServerConnectionData.#ctor(System.String,System.Net.Sockets.TcpClient,Mobile.Logger.TextFileLogger,System.Threading.Thread)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="name">The name of this connection.</param>
+            <param name="client">The <see cref="T:System.Net.Sockets.TcpClient"/> that holds the connection.</param>
+            <param name="logger">The <see cref="T:Mobile.Logger.TextFileLogger"/> to log information for this connection.</param>
+            <param name="thread">The <see cref="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread"/> responses are received in.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="client"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if <paramref name="client"/> is not connected.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.ServerConnectionData.Dispose(System.Boolean)">
+            <summary>
+            Disposes the object.
+            </summary>
+            <param name="isDisposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.ServerConnectionData.ThreadException">
+            <summary>
+            The Exception thrown by the receiving <see cref="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread"/>.
+            -or- <see langword="null"/> if the <see cref="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread"/> terminated silently.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread">
+            <summary>
+            The <see cref="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread"/> responses are received in.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.ServerConnectionData.SyncThread">
+            <summary>
+            Gets the <see cref="T:System.Object"/> to sync with the receiving <see cref="P:Mobile.Networking.TelnetServer.ServerConnectionData.Thread"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.IO.DirectoryInfo)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the folder the logfiles for each are created in.
+            </summary>
+            <param name="directory">The directory to create all logfiles in.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the folder to create the logfiles for each connection in
+            and the base name of those logfiles.
+            </summary>
+            <param name="directory">The directory to create all logfiles in.</param>
+            <param name="baseName">The name of the logfiles generated per accepted connection
+            (<paramref name="baseName"/>1.txt, <paramref name="baseName"/>2.txt, ...).</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class.
+            </summary>
+            <param name="name">The name of the server.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the base name of the logfiles for each connection.
+            </summary>
+            <param name="name">The name of the server.</param>
+            <param name="baseName">The base name of the logfiles for each connection
+            (<paramref name="baseName"/>1.txt, <paramref name="baseName"/>2.txt, ...).</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.String,System.IO.DirectoryInfo)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the folder the logfiles for each are created in.
+            </summary>
+            <param name="name">The name of the server.</param>
+            <param name="directory">The directory to create all logfiles in.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.String,System.IO.DirectoryInfo,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the folder to create the logfiles for each connection in
+            and the base name of those logfiles.
+            </summary>
+            <param name="name">The name of the server.</param>
+            <param name="directory">The directory to create all logfiles in.</param>
+            <param name="baseName">The name of the logfiles generated per accepted connection
+            (<paramref name="baseName"/>1.txt, <paramref name="baseName"/>2.txt, ...).</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Networking.TelnetServer"/> class
+            specifying the folder to create the logfiles for each connection in
+            and the base name of those logfiles.
+            </summary>
+            <param name="name">The name of the server.</param>
+            <param name="folder">The folder to create all logfiles in.</param>
+            <param name="baseName">The name of the logfiles generated per accepted connection
+            (<paramref name="baseName"/>1.txt, <paramref name="baseName"/>2.txt, ...).</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Networking.TelnetServer"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to serialize or deserialize an object.</param>
+            <param name="context">Describes the source and destination of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.ReceivingMethod">
+            <summary>
+            Checks if there are pending connection requests.
+            Receives incoming messages on each connection.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.CheckListners">
+            <summary>
+            Checks for pending connection requests.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.CheckConnections">
+            <summary>
+            Checks the connection of all clients.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Receive(System.Object)">
+            <summary>
+            Receives data from all connected clients.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Start(System.Int32)">
+            <summary>
+            Starts listening for incoming connection requests on a specified port on all local ip-addresses.
+            </summary>
+            <param name="port">The port to listen to.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the server is already running.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if object is already disposed
+            or is in the process of disposing right now.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="port"/> is not between
+            <see cref="F:System.Net.IPEndPoint.MinPort"/> and <see cref="F:System.Net.IPEndPoint.MaxPort"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Start(System.Collections.Generic.IList{System.Net.IPAddress},System.Int32)">
+            <summary>
+            Starts listening for incoming connection requests on a specified local ip-address and port number.
+            </summary>
+            <param name="addresses">The local <see cref="T:System.Net.IPAddress"/>es to listen to.</param>
+            <param name="port">The port to listen to.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if the server is already running.</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown if object is already disposed
+            or is in the process of disposing right now.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if <paramref name="addresses"/> is null
+            or does not contain any elements.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="port"/> is not between
+            <see cref="F:System.Net.IPEndPoint.MinPort"/> and <see cref="F:System.Net.IPEndPoint.MaxPort"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Stop">
+            <summary>
+            Stops the server.
+            Stops listening for incoming connections, closes all connections.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Broadcast(System.String,System.String)">
+            <summary>
+            Sends <paramref name="text"/> to all connected clients.
+            </summary>
+            <param name="text">The message to broadcast.</param>
+            <param name="log">The text to write to the log file. Can be used to hide messages in the log file.
+            The default value is <see langword="null"/> which will log <paramref name="text"/>.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if no client is connected to the server.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.SendText(System.String,Mobile.Networking.Common.IPConnection,System.String)">
+            <summary>
+            Sends <paramref name="text"/> out over <paramref name="connection"/>.
+            </summary>
+            <param name="text">The message to send.</param>
+            <param name="connection">The connection to send <paramref name="text"/> to.</param>
+            <param name="log">The text to write to the log file. Can be used to hide messages in the log file.
+            The default value is <see langword="null"/> which will log <paramref name="text"/>.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if no client is connected to the server.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if no connected client matches the <paramref name="connection"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.SendText(System.String,System.Net.EndPoint,System.Net.EndPoint,System.String)">
+            <summary>
+            Sends a <paramref name="text"/> from <paramref name="local"/> to <paramref name="remote"/>.
+            If <paramref name="local"/> or <paramref name="remote"/> don't matter use <see langword="null"/>.
+            This means <paramref name="local"/> = null and <paramref name="remote"/> = null equals a broadcast.
+            </summary>
+            <param name="text">The message to send.</param>
+            <param name="local">The local <see cref="T:System.Net.EndPoint"/>.</param>
+            <param name="remote">The remote <see cref="T:System.Net.EndPoint"/>.</param>
+            <param name="log">The text to write to the log file. Can be used to hide messages in the log file.
+            The default value is <see langword="null"/> which will log <paramref name="text"/>.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if no client is connected to the server.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if no connected client matches the connection
+            specified by <paramref name="local"/> and <paramref name="remote"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.GetReceivedLines(System.Net.IPEndPoint,System.Net.IPEndPoint)">
+            <summary>
+            Gets the received lines for the specified connection.
+            </summary>
+            <param name="remote">The remote <see cref="T:System.Net.EndPoint"/>.</param>
+            <param name="local">The local <see cref="T:System.Net.EndPoint"/>.</param>
+            <returns>All lines received over this connection.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if either <paramref name="local"/> or <paramref name="remote"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.Dispose(System.Boolean)">
+            <summary>
+            Disposes the object by closing all connections and terminating all receiving <see cref="T:System.Threading.Thread"/>s.
+            </summary>
+            <param name="isDisposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data
+            needed to serialize the target object.</summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.ToString">
+            <summary>
+            Overridden from <see cref="T:System.Object"/>.
+            </summary>
+            <returns>A string representation of the object.</returns>
+        </member>
+        <member name="E:Mobile.Networking.TelnetServer.ConnectionLost">
+            <summary>
+            An event fired if a connection to a client has been lost.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.OnConnectionLost(Mobile.Networking.Common.ConnectionEventArgs)">
+            <summary>
+            Raises <see cref="E:Mobile.Networking.TelnetServer.ConnectionLost"/>.
+            </summary>
+            <param name="args">The argument of the event.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.RaiseConnectionLost(System.Object)">
+            <summary>
+            Invokes <see cref="E:Mobile.Networking.TelnetServer.ConnectionLost"/>.
+            </summary>
+            <param name="obj">The argument of the event.</param>
+        </member>
+        <member name="E:Mobile.Networking.TelnetServer.ConnectionAccepted">
+            <summary>
+            An event fired if a connection request of a client has been accepted.
+            </summary>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.OnConnectionAccepted(Mobile.Networking.Common.ConnectionEventArgs)">
+            <summary>
+            Raises <see cref="E:Mobile.Networking.TelnetServer.ConnectionAccepted"/>.
+            </summary>
+            <param name="args">The argument of the event.</param>
+        </member>
+        <member name="M:Mobile.Networking.TelnetServer.RaiseConnectionAccepted(System.Object)">
+            <summary>
+            Invokes <see cref="E:Mobile.Networking.TelnetServer.ConnectionAccepted"/>.
+            </summary>
+            <param name="obj">The argument of the event.</param>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.IsAlive">
+            <summary>
+            Determines whether the server is running/active.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.LogDirectory">
+            <summary>
+            Gets or sets the folder the logfiles for each connection
+            are created in.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.LogFileBaseName">
+            <summary>
+            Gets or sets the base name of the logfiles for each connection.
+            ('LogFileBaseName1.txt', 'LogFileBaseName2.txt', ...)
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.MaxConnections">
+            <summary>
+            Gets or sets the max number of simultaneous connections accepted by this <see cref="T:Mobile.Networking.TelnetServer"/>.
+            A value less than or equal to 0 means no limitations.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.ConnectedClients">
+            <summary>
+            Gets the number of clients connected to this server.
+            </summary>
+        </member>
+        <member name="P:Mobile.Networking.TelnetServer.ReceivedLines">
+            <summary>
+            Gets all lines received from all clients so far.
+            </summary>
+        </member>
+    </members>
+</doc>

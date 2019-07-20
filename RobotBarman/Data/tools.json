@@ -1,0 +1,46 @@
+{
+  "default": {
+    "name": "default",
+    "point": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "rotation": {
+      "roll": 0.0,
+      "pitch": 0.0,
+      "yaw": 0.0
+    },
+    "shape": []
+  },
+  "SpillDrinkTool": {
+    "name": "SpillDrinkTool",
+    "point": {
+      "x": 0.095,
+      "y": 0.0,
+      "z": 0.265
+    },
+    "rotation": {
+      "roll": 0.0,
+      "pitch": 0.0,
+      "yaw": 0.0
+    },
+    "radius": 0.0,
+    "shape": []
+  },
+  "SpillThirdDrinkTool": {
+    "name": "spillBigThirdDrinkTool",
+    "point": {
+      "x": 0.07,
+      "y": 0.0,
+      "z": 0.275
+    },
+    "rotation": {
+      "roll": 0.0,
+      "pitch": 0.0,
+      "yaw": 0.0
+    },
+    "radius": 0.0,
+    "shape": []
+  }
+}

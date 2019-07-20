@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RobotBarman.SettingsPage"
+             BackgroundColor="#FAB4C6"
+             Title="НАСТРОЙКА РОБОТА">
+    <ContentPage.Content>
+        <ScrollView>
+            <TableView HasUnevenRows="True">
+                <TableView.Root>
+                    <TableRoot>                        
+                        <TableSection Title="ПРОВЕРКА ПОДКЛЮЧЕНИЯ">
+                            <EntryCell Label="IP робота:" Text="{Binding Ip, Mode=TwoWay}" Keyboard="Default"
+                                   Placeholder="ххх.ххх.ххх.ххх" />
+                            <ViewCell Height="50">
+                                <StackLayout Spacing="20" Margin="20,2,20,2" Orientation="Horizontal">
+                                    <Button Text="Проверка подключения" Command="{Binding CheckConnection}" FontSize="18"
+                                        BorderWidth="1" TextColor="#1D97C1" BackgroundColor="#FFFFE1" CornerRadius="20"
+                                        HorizontalOptions="Center" VerticalOptions="Center" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                        </TableSection>                        
+
+                        <TableSection Title="СОСТОЯНИЕ РОБОТА">                           
+                            <SwitchCell Text="СОСТОЯНИЕ:        RELAX (Freeze=Off)" On="{Binding IsRobotInRelax}"
+                                    IsEnabled="{Binding IsRobotReady}" />
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                        </TableSection>
+
+                        <TableSection Title="СЕРВИСНЫЕ ФУНКЦИИ">
+                            <ViewCell Height="50">
+                                <StackLayout Spacing="20" Margin="20,2,20,2" Orientation="Horizontal">
+                                    <Button Text="Recover" Command="{Binding Recover}" FontSize="17" BorderWidth="1"
+                                        TextColor="#1D97C1" BackgroundColor="#FFFFE1"
+                                        CornerRadius="20"
+                                        HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                        IsEnabled="{Binding IsRobotReady}" />
+                                    <Button Text="Открыть/закрыть захват" Command="{Binding Gripper}" FontSize="17"
+                                        BorderWidth="1" TextColor="#1D97C1"
+                                        BackgroundColor="#FFFFE1" CornerRadius="20"
+                                        HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                        IsEnabled="{Binding IsRobotReady}" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Spacing="20" Margin="20,2,20,2" Orientation="Horizontal">
+                                    <Button Text="Паркинг" Command="{Binding Parking}" FontSize="17" BorderWidth="1"
+                                        TextColor="#1D97C1" BackgroundColor="#FFFFE1"
+                                        CornerRadius="20"
+                                        HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                        IsEnabled="{Binding IsRobotReady}" />
+
+                                    <Button Text="Распарковка" Command="{Binding Unparking}" FontSize="17" BorderWidth="1"
+                                        TextColor="#1D97C1" BackgroundColor="#FFFFE1"
+                                        CornerRadius="20"
+                                        HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                        IsEnabled="{Binding IsRobotReady}" />
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+                        </TableSection>
+
+                        <TableSection Title="НАСТРОЙКА СКОРОСТИ">
+                            <ViewCell Height="50">
+                                <StackLayout Spacing="20" Margin="20,2,20,2" Orientation="Horizontal">
+                                    <Label x:Name="header" Text="Скорость робота" FontSize="17" />
+                                    <Slider Minimum="0" Maximum="100" Value="{Binding Speed, Mode=TwoWay}"
+                                        WidthRequest="610" />
+                                </StackLayout>
+                            </ViewCell>
+                            <EntryCell Label="СКОРОСТЬ (1..100):    " Keyboard="Numeric" Text="{Binding Speed}" />
+                            <ViewCell Height="50">
+                                <StackLayout />
+                            </ViewCell>
+
+                            <ViewCell Height="50">
+                                <StackLayout Spacing="20" Margin="20,2,20,2" Orientation="Horizontal">
+                                    <Button Text="СБРОС ДЕЙСТВИЯ" FontSize="17" BorderWidth="1" TextColor="#1D97C1"
+                                        BackgroundColor="#FFFFE1" CornerRadius="20"
+                                        HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                        Command="{Binding Reset}"
+                                        IsEnabled="{Binding IsRobotConnected}" />
+
+                                    <Button Text="Начальная позиция" FontSize="17" BorderWidth="1" TextColor="#1D97C1"
+                                        BackgroundColor="#FFFFE1" CornerRadius="20"
+                                        HorizontalOptions="EndAndExpand" VerticalOptions="Center"
+                                        Command="{Binding BasePosition}"
+                                        IsEnabled="{Binding IsRobotReady}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+
+                    </TableRoot>
+                </TableView.Root>
+            </TableView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

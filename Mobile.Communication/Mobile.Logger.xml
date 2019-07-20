@@ -1,0 +1,763 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mobile.Logger</name>
+    </assembly>
+    <members>
+        <member name="T:Mobile.Logger.CsvLogger">
+            <summary>
+            A class representing a csv logger.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.#ctor(System.String,System.Char)">
+            <summary>
+            Initializes a new instance of <see cref="T:Mobile.Logger.CsvLogger"/>.
+            </summary>
+            <param name="file">The file to log to.</param>
+            <param name="delimeter">The delimeter of the columns.</param>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Logger.CsvLogger"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to deserialize the <see cref="T:Mobile.Logger.CsvLogger"/>.</param>
+            <param name="context">Describes the source of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.Flush">
+            <summary>
+            Flushes the file.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.Log(System.String,System.String)">
+            <summary>
+            Logs a <paramref name="value"/> in the correct <paramref name="column"/>.
+            </summary>
+            <param name="column">The column.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data needed to serialize the <see cref="T:Mobile.Logger.CsvLogger"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="M:Mobile.Logger.CsvLogger.ReadString(System.String,System.Char,System.String,System.Int32)">
+            <summary>
+            Reads a string value in the given column and line.
+            </summary>
+            <param name="file">The filename.</param>
+            <param name="delimeter">The delimeter.</param>
+            <param name="column">The column to get the value.</param>
+            <param name="line">The line of the value.</param>
+            <returns>The value read in the given <paramref name="line"/> and <paramref name="column"/>.</returns>
+        </member>
+        <member name="T:Mobile.Logger.Level">
+            <summary>
+            The level of detail to log.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Level.Disabled">
+            <summary>
+            Logging mechanism is disabled.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Level.Terse">
+            <summary>
+            Only log most valuable messages.
+            Mostly <see cref="T:System.Exception"/>s.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Level.Normal">
+            <summary>
+            Normal logging.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Level.Verbose">
+            <summary>
+            Log as much as possible.
+            This will produce a lot of data.
+            Make sure to clean the log folder from time to time.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.ErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.ErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.ErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.ErrorMessages.ColumnNotPartOfThisFile">
+            <summary>
+              Looks up a localized string similar to Column &apos;{0}&apos; is not part of this file..
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.ErrorMessages.DefaultFormattingReadOnly">
+            <summary>
+              Looks up a localized string similar to Default formatting is read-only!.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.ErrorMessages.NotAllRequiredValues">
+            <summary>
+              Looks up a localized string similar to Some values have not been set so far..
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.Formatting">
+            <summary>
+            Class used to save settings used to format strings before logging.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Formatting._defaultSentSeperator">
+            <summary>
+            The default seperator used when a command is sent to a mobile server.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Formatting._defaultReceivedSeperator">
+            <summary>
+            The default seperator used when a command is received from a mobile server.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Formatting._defaultInfoSeperator">
+            <summary>
+            The default seperator used when a info is displayed.
+            </summary>
+        </member>
+        <member name="F:Mobile.Logger.Formatting._defaultComment">
+            <summary>
+            The default representation of a comment.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.#ctor(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            A Constructor setting all Properties as given in <paramref name="values"/>.
+            Key values have to specify the name of the Property (
+            "SentSeparator",
+            "ReceivedSeparator",
+            "InfoSeparator",
+            "Comment",
+            "TimeSpanTraceFormat",
+            "TimeStampTraceFormat" or
+            "TimeStampFileFormat") which will be set to their corresponding values.
+            </summary>
+            <param name="values">A <c>Collection</c> of <c>KeyValuePairs</c> in which
+            Key values have to specify the name of the Property (
+            "SentSeparator",
+            "ReceivedSeparator",
+            "InfoSeparator",
+            "Comment",
+            "TimeSpanTraceFormat",
+            "TimeStampTraceFormat" or
+            "TimeStampFileFormat") which will be set to their corresponding values.</param>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Logger.Formatting"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to deserialize the <see cref="T:Mobile.Logger.Formatting"/>.</param>
+            <param name="context">Describes the source of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.CreateTimeTraceInformation(System.TimeSpan)">
+            <summary>
+            Creates a <see cref="T:System.String"/> representation of <paramref name="time"/> used for tracing output ("[<paramref name="time"/>]").
+            Uses <see cref="P:Mobile.Logger.Formatting.TimeSpanTraceFormat"/> to format <paramref name="time"/>.
+            </summary>
+            <param name="time">The time to format.</param>
+            <returns>The string representation of <paramref name="time"/>.</returns>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.CreateTimeTraceInformation(System.DateTime)">
+            <summary>
+            Creates a <see cref="T:System.String"/> representation of <paramref name="time"/> used for tracing output ("[<paramref name="time"/>]").
+            Uses <see cref="P:Mobile.Logger.Formatting.TimeStampTraceFormat"/> to format <paramref name="time"/>.
+            </summary>
+            <param name="time">The time to format.</param>
+            <returns>The string representation of <paramref name="time"/>.</returns>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.CreateTimeFileNameInformation(System.DateTime)">
+            <summary>
+            Creates a <see cref="T:System.String"/> representation of <paramref name="time"/>
+            that can be used as a filename.
+            Uses <see cref="P:Mobile.Logger.Formatting.TimeStampFileFormat"/> to format <paramref name="time"/>.
+            </summary>
+            <param name="time">The time to format.</param>
+            <returns>The string representation of <paramref name="time"/>.</returns>
+        </member>
+        <member name="M:Mobile.Logger.Formatting.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data needed to serialize the <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.SentSeparator">
+            <summary>
+            The seperator to indicate that a message was sent.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.ReceivedSeparator">
+            <summary>
+            The seperator to indicate that a message was received.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.InfoSeparator">
+            <summary>
+            The string to seperate informations.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.Comment">
+            <summary>
+            Indicates that this line is a comment.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.TimeSpanTraceFormat">
+            <summary>
+            The string to format <see cref="T:System.TimeSpan"/> values used as timespans in the logfile.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.TimeStampTraceFormat">
+            <summary>
+            The string to format <see cref="T:System.DateTime"/> values used as timestamps in the logfile.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.TimeStampFileFormat">
+            <summary>
+            The string to format <see cref="T:System.DateTime"/> values used as timestamps in the name of the logfile.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown if setter is called on <see cref="P:Mobile.Logger.Formatting.Default"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.Formatting.Default">
+            <summary>
+            Default <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.LoggerSettings">
+            <summary>
+            A class containing settings to initialize a <see cref="N:Mobile.Logger"/> with.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time
+            while logging by using default <see cref="T:Mobile.Logger.Formatting"/> and <see cref="F:Mobile.Logger.Level.Normal"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime},Mobile.Logger.Level)">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time while logging by using default <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="level">The level of messages to log.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime},Mobile.Logger.Level,Mobile.Logger.Formatting)">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time while logging
+            by formatting the messages as specified in <paramref name="format"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="level">The level of messages to log.</param>
+            <param name="format">The format specifying output settings.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime},System.Int64,System.Byte)">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time
+            while logging by using default <see cref="T:Mobile.Logger.Formatting"/> and <see cref="F:Mobile.Logger.Level.Normal"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime},System.Int64,System.Byte,Mobile.Logger.Level)">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time while logging by using default <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+            <param name="level">The level of messages to log.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.String,System.String,System.Nullable{System.DateTime},System.Int64,System.Byte,Mobile.Logger.Level,Mobile.Logger.Formatting)">
+            <summary>
+            A Constructor setting the folder in which the logfile is going to be created,
+            the name of the file and the time to refer to as a starting time while logging
+            by formatting the messages as specified in <paramref name="format"/>.
+            </summary>
+            <param name="path">The path of the folder to create the logfile in.</param>
+            <param name="fileName">The name of the logfile that is going to be created.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+            <param name="level">The level of messages to log.</param>
+            <param name="format">The format specifying output settings.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime})">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time 
+            while logging by using default <see cref="T:Mobile.Logger.Formatting"/> and <see cref="F:Mobile.Logger.Level.Normal"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime},Mobile.Logger.Level)">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time while logging by using default <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for actual date and time.</param>
+            <param name="level">The level of messages to log.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime},Mobile.Logger.Level,Mobile.Logger.Formatting)">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time while logging
+            by formatting the messages as specified in <paramref name="format"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="level">The level of messages to log.</param>
+            <param name="format">The format specifying output settings.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="format"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime},System.Int64,System.Byte)">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time 
+            while logging by using default <see cref="T:Mobile.Logger.Formatting"/> and <see cref="F:Mobile.Logger.Level.Normal"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime},System.Int64,System.Byte,Mobile.Logger.Level)">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time while logging by using default <see cref="T:Mobile.Logger.Formatting"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+            <param name="level">The level of messages to log.</param>
+        </member>
+        <member name="M:Mobile.Logger.LoggerSettings.#ctor(System.IO.FileInfo,System.Nullable{System.DateTime},System.Int64,System.Byte,Mobile.Logger.Level,Mobile.Logger.Formatting)">
+            <summary>
+            A Constructor setting information about the logfile that is going to be created
+            and the time to refer to as a starting time while logging
+            by formatting the messages as specified in <paramref name="format"/>.
+            </summary>
+            <param name="file">Information about the file to log into.</param>
+            <param name="startTime">The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <c>DateTime.Now</c> - <paramref name="startTime"/>.
+            Use <see langword="null"/> for current date and time.</param>
+            <param name="maxSize">The maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.</param>
+            <param name="maxFileNumber">The maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.</param>
+            <param name="level">The level of messages to log.</param>
+            <param name="format">The format specifying output settings.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="format"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.File">
+            <summary>
+            Information about the file to log into.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.Directory">
+            <summary>
+            The path of the folder to create the logfile in.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.FileName">
+            <summary>
+            The name of the logfile the messages are going to be saved in.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.Format">
+            <summary>
+            The format specifying output settings.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.StartTime">
+            <summary>
+            The <see cref="T:System.DateTime"/> to refer to while logging.
+            Timestamps will be calculated as <see cref="P:System.DateTime.Now"/> - <see cref="P:Mobile.Logger.LoggerSettings.StartTime"/>
+            if <see cref="P:Mobile.Logger.LoggerSettings.StartTime"/> has a value (is not <see langword="null"/>);
+            otherwise, timestamps will be absolute time.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.Level">
+            <summary>
+            Gets the level for messages to log.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.MaxSize">
+            <summary>
+            Gets or sets the maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LoggerSettings.MaxFileNumber">
+            <summary>
+            Gets or sets the maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.LogTime">
+            <summary>
+            A singleton class that provides the time of the first use of <see cref="P:Mobile.Logger.LogTime.Time"/>.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.LogTime.Time">
+            <summary>
+            The reference time at which the first logging started.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.NamespaceDoc">
+            <summary>
+            The <see cref="N:Mobile.Logger"/> namespace contains objects to log data used throughout the Mobile projects.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.TextFileLogger">
+            <summary>
+            A class to log messages to a File.
+            </summary>
+        </member>
+        <member name="T:Mobile.Logger.TextFileLogger.LogLineDelegate">
+            <summary>
+            A delegate to log a line.
+            </summary>
+            <param name="line">The line to log.</param>
+            <param name="level">The level of the line.</param>
+        </member>
+        <member name="T:Mobile.Logger.TextFileLogger.LogHeaderLineDelegate">
+            <summary>
+            A delegate to log a line with a header.
+            </summary>
+            <param name="header">The header of the line.</param>
+            <param name="line">The line to log.</param>
+            <param name="level">The level of the line.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.ExchangeLogger(Mobile.Logger.TextFileLogger@,Mobile.Logger.TextFileLogger,System.String,Mobile.Logger.Level)">
+            <summary>
+            Replaces <paramref name="oldLogger"/> by <paramref name="newLogger"/>.
+            Logs an information-line to <paramref name="oldLogger"/> if the location of the log file changes
+            or that logging has been stopped if <paramref name="newLogger"/> is <see langword="null"/>.
+            </summary>
+            <param name="oldLogger">A reference to the old <see cref="T:Mobile.Logger.TextFileLogger"/>.</param>
+            <param name="newLogger">The nes <see cref="T:Mobile.Logger.TextFileLogger"/>.</param>
+            <param name="header">The header of the exchange-message.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of the exchange-message.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.ExchangeLogger(Mobile.Logger.TextFileLogger@,Mobile.Logger.TextFileLogger,System.String,Mobile.Logger.Level,System.Object)">
+            <summary>
+            Replaces <paramref name="oldLogger"/> by <paramref name="newLogger"/> locking <paramref name="sync"/> while performing the operation.
+            Also logs an information-line to <paramref name="oldLogger"/> if the location of the log file changes
+            or that logging has been stopped if <paramref name="newLogger"/> is <see langword="null"/>.
+            </summary>
+            <param name="oldLogger">A reference to the old <see cref="T:Mobile.Logger.TextFileLogger"/>.</param>
+            <param name="newLogger">The nes <see cref="T:Mobile.Logger.TextFileLogger"/>.</param>
+            <param name="header">The header of the exchange-message.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of the exchange-message.</param>
+            <param name="sync">The object to lock or <see langword="null"/> if no locking is required.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.#ctor(Mobile.Logger.LoggerSettings)">
+            <summary>
+            The Constructor initializing the Logger with the specified <see cref="T:Mobile.Logger.LoggerSettings"/>.
+            </summary>
+            <param name="setting">The settings to initialize the logger with.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="setting"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mobile.Logger.TextFileLogger"/> class.
+            </summary>
+            <param name="info">Holds all the data needed to deserialize the <see cref="T:Mobile.Logger.TextFileLogger"/>.</param>
+            <param name="context">Describes the source of the serialized stream.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Finalize">
+            <summary>
+            Destructor.
+            Frees memory used for the <see cref="T:Mobile.Logger.TextFileLogger"/>.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.CreateTimeInformation(System.TimeSpan)">
+            <summary>
+            Creates a string representation of <paramref name="time"/>.
+            We assume that the time span will be relative to the origin of the DateTime.
+            </summary>
+            <param name="time">The time to format.</param>
+            <returns>The string representation of <paramref name="time"/>.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.CreateTimeInformation(System.DateTime)">
+            <summary>
+            Creates a string representation of <paramref name="time"/>.
+            </summary>
+            <param name="time">The time to format.</param>
+            <returns>The string representation of <paramref name="time"/>.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.CreateTimeInformation">
+            <summary>
+            Creates the time information based on the current time,
+            with absolute time formatting -or- relative time formatting.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.InsertBlankLine(Mobile.Logger.Level)">
+            <summary>
+            Inserts a blank line.
+            </summary>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of the blank line.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.LogCommentLine(System.String,Mobile.Logger.Level,System.Nullable{System.DateTime})">
+            <summary>
+            Logs a comment.
+            Adds a line terminator to the end of the <paramref name="comment"/>.
+            </summary>
+            <param name="comment">The comment to log.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="comment"/>.</param>
+            <param name="timeStamp">The timestamp to add to the line
+             -or- <see langword="null"/> to use automatic timestamp of this logger.
+            Default value is <see langword="null"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.LogInformationLine(System.String,System.String,Mobile.Logger.Level,System.Nullable{System.DateTime})">
+            <summary>
+            Logs information about an object.
+            Adds a line terminator to the end of the <paramref name="information"/>.
+            </summary>
+            <param name="header">The header.</param>
+            <param name="information">The information to log.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="information"/>.</param>
+            <param name="timeStamp">The timestamp to add to the line
+             -or- <see langword="null"/> to use automatic timestamp of this logger.
+            Default value is <see langword="null"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.LogSentLine(System.String,System.String,Mobile.Logger.Level,System.Nullable{System.DateTime})">
+            <summary>
+            Logs a line that has been sent to the server.
+            Adds a line terminator to the end of the <paramref name="line"/>.
+            </summary>
+            <param name="sender">The sender of the line.</param>
+            <param name="line">The line to log.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="line"/>.</param>
+            <param name="timeStamp">The timestamp to add to the line
+             -or- <see langword="null"/> to use automatic timestamp of this logger.
+            Default value is <see langword="null"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.LogReceivedLine(System.String,System.String,Mobile.Logger.Level,System.Nullable{System.DateTime})">
+            <summary>
+            Logs a line that has been received from the server.
+            Adds a line terminator to the end of the <paramref name="line"/>.
+            </summary>
+            <param name="receiver">The receiver of the line.</param>
+            <param name="line">The line to log.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="line"/>.</param>
+            <param name="timeStamp">The timestamp to add to the line.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.LogSentText(System.String,System.String,Mobile.Logger.Level,System.Nullable{System.DateTime})">
+            <summary>
+            Logs text that has been sent to the server.
+            </summary>
+            <param name="sender">The sender of the <paramref name="text"/>.</param>
+            <param name="text">The text to log.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="text"/>.</param>
+            <param name="timeStamp">The timestamp to add to the line
+             -or- <see langword="null"/> to use automatic timestamp of this logger.
+            Default value is <see langword="null"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Write(System.String,Mobile.Logger.Level)">
+            <summary>
+            Writes a string to the underlying textFile.
+            </summary>
+            <param name="message">The string to write.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="message"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.WriteLine(System.String,Mobile.Logger.Level)">
+            <summary>
+            Writes a line to the underlying textFile.
+            </summary>
+            <param name="line">The line to write.</param>
+            <param name="level">The <see cref="P:Mobile.Logger.TextFileLogger.Level"/> of <paramref name="line"/>.</param>
+            <returns>The text that has been added to the log file.</returns>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with the data needed to serialize the <see cref="T:Mobile.Logger.TextFileLogger"/>.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> to populate with data.</param>
+            <param name="context">The destination for this serialization.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Close">
+            <summary>
+            Closes the <see cref="T:Mobile.Logger.TextFileLogger"/>.
+            Flushes all messages in the queue and removes the logger from global logging mechanism.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Dispose(System.Boolean)">
+            <summary>
+            Disposes the <see cref="T:Mobile.Logger.TextFileLogger"/>.
+            Flushes all messages in the queue and removes the logger from global logging mechanism.
+            </summary>
+            <param name="disposing"><see langword="true"/> if the object is disposed; <see langword="false"/> if it is garbage-collected.</param>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.IsBeingDisposed">
+            <summary>
+            Gets whether the object is in the process of being disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.IsDisposed">
+            <summary>
+            Gets whether the object is disposed.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.StartTime">
+            <summary>
+            Gets the time the <see cref="T:Mobile.Logger.TextFileLogger"/> refers to 
+            -or- <see langword="null"/> if absolute time will be logged.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.FormatSettings">
+            <summary>
+            Gets the format settings.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.FileFullName">
+            <summary>
+            Gets the full name of the file we are logging to.
+            </summary>
+            <value>
+            The full name of the file we are logging to.
+            </value>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.Level">
+            <summary>
+            The level for logging messages.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.MaxSize">
+            <summary>
+            Gets or sets the maximum size of the log file in kilo-bytes.
+            A value &lt;= 0 means no max size.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.MaxFiles">
+            <summary>
+            Gets or sets the maximum number of log files to keep.
+            This is an archive of old log files for this log file name.
+            A value of 0 means no max number of files.
+            </summary>
+        </member>
+        <member name="P:Mobile.Logger.TextFileLogger.LogPeriod">
+            <summary>
+            Gets or sets the cycle-time (in ms) to write messages into the log-file.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.SignalNextRun(System.Object)">
+            <summary>
+            Sets <see cref="F:Mobile.Logger.TextFileLogger.run"/> to start next logging cycle.
+            </summary>
+            <param name="obj">Unused.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.StopLogging">
+            <summary>
+            Stops the global logging mechanism.
+            </summary>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Loggers.CheckMaxSize(System.String,System.Int64)">
+            <summary>
+            Checks whether the maximum size of the file has been reached and archives it.
+            </summary>
+            <param name="filename">The name of the log file.</param>
+            <param name="maxSize">The maximum size (in bytes) of the log file.</param>
+        </member>
+        <member name="M:Mobile.Logger.TextFileLogger.Loggers.CheckMaxFileNumber(System.String,System.Byte)">
+            <summary>
+            Checks whether the maximum number archived files has been reached.
+            </summary>
+            <param name="filename">The name of the log file.</param>
+            <param name="maxFiles">The maximum number of archived files.</param>
+        </member>
+    </members>
+</doc>

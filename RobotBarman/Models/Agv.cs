@@ -6,8 +6,8 @@ namespace RobotBarman
 {
     public class Agv
     {
-        public string Ip { get; set; }
-        public int Port { get; set; }
-        public string Password { get; set; }
+        public string Ip { get; set; } = "127.0.0.1";
+        public int Port { get; set; } = 7171;
+        public string Password { get; set; } = "Omron4you";
     }
 }

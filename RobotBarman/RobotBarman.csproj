@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -35,6 +35,7 @@
     <None Remove="Images\teos\classic_teos.png" />
     <None Remove="Images\teos\kinoa_teos.png" />
     <None Remove="Images\teos\mango_teos.png" />
+    <None Remove="Images\water\water.png" />
     <None Remove="poses1.json" />
     <None Remove="positions1.json" />
     <None Remove="Sounds\AfterSpill\after.mp3" />
@@ -91,6 +92,7 @@
     <EmbeddedResource Include="Images\teos\classic_teos.png" />
     <EmbeddedResource Include="Images\teos\kinoa_teos.png" />
     <EmbeddedResource Include="Images\teos\mango_teos.png" />
+    <EmbeddedResource Include="Images\water\water.png" />
     <EmbeddedResource Include="Sounds\AfterSpill\after.mp3">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

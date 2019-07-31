@@ -107,7 +107,7 @@ namespace RobotBarman
                     {
                         if (!string.IsNullOrEmpty(Ip))
                         {
-                            _robotService.ConnectToRobot(Ip);
+                            await _robotService.ConnectToRobotAsync(Ip);
                             RaisePropertyChanged(nameof(IsRobotConnected));
                             RaisePropertyChanged(nameof(IsRobotReady));
                             await CoreMethods.DisplayAlert("", $"CheckConnection state: {_robotService.IsRobotConnected}",

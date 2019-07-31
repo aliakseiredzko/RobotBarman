@@ -15,7 +15,7 @@ namespace RobotBarman.Services
         string LastActionResult { get; }
         bool IsRobotBusy { get; }
         bool IsRobotInRelax { get; set; }
-        void ConnectToRobot(string ip);        
+        Task<bool> ConnectToRobotAsync(string ip);        
         Task SetToolAsync(string toolName);
         Task RecoverAsync();
         Task FreezeAsync();

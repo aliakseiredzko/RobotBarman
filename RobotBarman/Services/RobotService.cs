@@ -61,11 +61,16 @@ namespace RobotBarman.Services
 
         public GripperState GripperState { get; set; }
 
-        public void ConnectToRobot(string ip)
+        public async Task<bool> ConnectToRobotAsync(string ip)
         {
             Robot = new RealRobot(ip, 8081);
+
+            var connectionResult = await Robot.InitConnectionAsync();
+
             IsRobotConnected = Robot.IsConnected;
             _databaseService.SaveRobotData(Robot);
+
+            return connectionResult;
         }      
 
         public async Task FreezeAsync()

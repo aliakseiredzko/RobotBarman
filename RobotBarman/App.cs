@@ -21,7 +21,7 @@ namespace RobotBarman
 
             var masterDetailNav = new MasterDetailNavigation();
             masterDetailNav.Initialize("Menu", "hamburger.png");
-            masterDetailNav.AddPageWithIcon<FirstPageModel>("ГЛАВНАЯ", "star.png");
+            //masterDetailNav.AddPageWithIcon<FirstPageModel>("ГЛАВНАЯ", "star.png");
             masterDetailNav.AddPageWithIcon<DrinksPageModel>("БАРМЕН", "cup.png");
             masterDetailNav.AddPageWithIcon<BarPageModel>("НАСТРОЙКА БАРА", "tree_cup.png");
             masterDetailNav.AddPageWithIcon<SettingsPageModel>("НАСТРОЙКА РОБОТА", "robot_industrial.png");

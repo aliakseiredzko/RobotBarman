@@ -96,6 +96,14 @@
     "SpillsLeft": 0
   },
   {
+    "Title": "Питьевой йогурт \"Савушкин\" Вишня-черешня",
+    "SubTitle": "",
+    "IconSource": "RobotBarman.Images.sav.cherry_sav.png",
+    "DrinkPosition": 3,
+    "DrinkType": 1,
+    "SpillsLeft": 0
+  },
+  {
     "Title": "Питьевой йогурт \"Teos\" Классический",
     "SubTitle": "",
     "IconSource": "RobotBarman.Images.teos.classic_teos.png",

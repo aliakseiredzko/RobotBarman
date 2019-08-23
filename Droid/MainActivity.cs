@@ -17,7 +17,8 @@ namespace RobotBarman.Android
 		{
 			base.OnCreate (bundle);
 
-			global::Xamarin.Forms.Forms.Init (this, bundle);
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Xamarin.Forms.Forms.Init (this, bundle);
 
             LoadApplication (new App ());
         }

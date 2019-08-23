@@ -110,6 +110,9 @@
             <e p="kinoa_teos.png" t="Include" />
             <e p="mango_teos.png" t="Include" />
           </e>
+          <e p="water" t="Include">
+            <e p="water.png" t="Include" />
+          </e>
         </e>
         <e p="Models" t="Include">
           <e p="Agv.cs" t="Include" />

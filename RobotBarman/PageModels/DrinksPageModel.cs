@@ -78,8 +78,8 @@ namespace RobotBarman
             }
         }
 
-        public bool IsRobotAvailable => _robotService.IsRobotConnected
-                                        && !_barmanService.IsSpillRunning;
+        public bool IsRobotAvailable => true; //_robotService.IsRobotConnected
+        //                                && !_barmanService.IsSpillRunning;
 
         public ObservableCollection<DrinksPageItem> AvailableDrinks { get; set; }
 

@@ -29,6 +29,7 @@
     <None Remove="Images\opt\strawberryMalina_opt.png" />
     <None Remove="Images\sav\ananas_sav.png" />
     <None Remove="Images\sav\berries_sav.png" />
+    <None Remove="Images\sav\cherry_sav.png" />
     <None Remove="Images\sav\strawberry_sav.png" />
     <None Remove="Images\teos\blueberry_teos.png" />
     <None Remove="Images\teos\cherryGranat_teos.png" />
@@ -69,6 +70,7 @@
     <EmbeddedResource Include="Data\poses.json" />
     <EmbeddedResource Include="Data\positions.json" />
     <EmbeddedResource Include="Data\tools.json" />
+    <EmbeddedResource Include="Images\sav\cherry_sav.png" />
     <EmbeddedResource Include="Images\teos\blueberry_teos.png" />
   </ItemGroup>
 

@@ -7,42 +7,111 @@
              BackgroundColor="#FFEA95"
              Title="НАСТРОЙКА БАРА">
     <ContentPage.Resources>
-        <Style x:Key="imgStyle" TargetType="Image">
-            <Setter Property="WidthRequest" Value="250" />
-            <Setter Property="HeightRequest" Value="400" />
+        <Style x:Key="imgStyle" TargetType="Image">            
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        </Style>
+        <Style x:Key="LargeLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#1D97C1"/>
+        </Style>
+        <Style x:Key="SmallLabelStyle" TargetType="Label">          
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="TextColor" Value="#0772A1"/>
+        </Style>
+        <Style x:Key="PickerTextStyle" TargetType="Picker">          
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#0772A1"/>
         </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Padding="20,20" Spacing="20">
-            <Label Text="Здесь необходимо выбрать напитки, которые будут находиться в роботизированной установке."
-                   Margin="20" FontSize="28" FontAttributes="Bold" TextColor="#0772A1"
-                   VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" />
+        <Grid Padding="20">
+              <Grid.RowDefinitions>
+                  <RowDefinition Height="0.15*"/>
+                  <RowDefinition Height="0.5*"/>
+                  <RowDefinition Height="0.35*"/>
+              </Grid.RowDefinitions>
+            <Label Text="Здесь необходимо выбрать напитки, которые будут находиться в роботизированной установке"
+                   Grid.Row="0"
+                   Margin="5" 
+                   FontSize="Medium" 
+                   FontAttributes="Bold" 
+                   TextColor="#0772A1"                   
+                   HorizontalOptions="CenterAndExpand" />
+            
+            
+            <StackLayout Grid.Row="1">
+                <Label x:Name="FirstDrink" 
+                       Text="Первый напиток: " 
+                       Style="{StaticResource LargeLabelStyle}"/>
+                <Picker Title="{Binding FirstSelectedDrink.Title}" 
+                        Style="{StaticResource PickerTextStyle}"
+                        ItemsSource="{Binding Drinks}"
+                        SelectedItem="{Binding FirstSelectedDrink, Mode=TwoWay}" />
 
-            <Label Text=" " HeightRequest="80" />
-            <Label x:Name="FirstDrink" Text="Первый напиток: " FontSize="24" FontAttributes="Bold" TextColor="#1D97C1" />
-            <Picker Title="{Binding FirstSelectedDrink.Title}" TextColor="#0772A1" FontAttributes="Bold" FontSize="20"
-                    ItemsSource="{Binding Drinks}"
-                    SelectedItem="{Binding FirstSelectedDrink, Mode=TwoWay}" />
+                <Label x:Name="SecondDrink" 
+                       Text="Второй напиток: " 
+                       Style="{StaticResource LargeLabelStyle}"/>
+                <Picker Title="{Binding SecondSelectedDrink.Title}" 
+                        Style="{StaticResource PickerTextStyle}"
+                        ItemsSource="{Binding Drinks}"
+                        SelectedItem="{Binding SecondSelectedDrink, Mode=TwoWay}" />
 
-            <Label x:Name="SecondDrink" Text="Второй напиток: " FontSize="24" FontAttributes="Bold" TextColor="#1D97C1" />
-            <Picker Title="{Binding SecondSelectedDrink.Title}" TextColor="#0772A1" FontAttributes="Bold" FontSize="20"
-                    ItemsSource="{Binding Drinks}"
-                    SelectedItem="{Binding SecondSelectedDrink, Mode=TwoWay}" />
-
-            <Label x:Name="ThirdDrink" Text="Третий напиток: " FontSize="24" FontAttributes="Bold" TextColor="#1D97C1" />
-            <Picker Title="{Binding ThirdSelectedDrink.Title}" TextColor="#0772A1" FontAttributes="Bold" FontSize="20"
-                    ItemsSource="{Binding Drinks}"
-                    SelectedItem="{Binding ThirdSelectedDrink, Mode=TwoWay}" />
-
-            <Label Text=" " HeightRequest="80" />
-            <Label Text="   Первый напиток            Второй напиток           Третий напиток  " FontSize="24"
-                   FontAttributes="Bold" TextColor="#0772A1" />
-            <FlexLayout Direction="Row" JustifyContent="SpaceAround">
-                <Image Source="{Binding FirstSelectedDrink.ImageSource, Mode=TwoWay}" Style="{StaticResource Key=imgStyle}" />
-                <Image Source="{Binding SecondSelectedDrink.ImageSource, Mode=TwoWay}" Style="{StaticResource Key=imgStyle}" />
-                <Image Source="{Binding ThirdSelectedDrink.ImageSource, Mode=TwoWay}" Style="{StaticResource Key=imgStyle}" />
-            </FlexLayout>
-        </StackLayout>
+                <Label x:Name="ThirdDrink" 
+                       Text="Третий напиток: " 
+                       Style="{StaticResource LargeLabelStyle}"/>
+                <Picker Title="{Binding ThirdSelectedDrink.Title}" 
+                        Style="{StaticResource PickerTextStyle}"
+                        ItemsSource="{Binding Drinks}"
+                        SelectedItem="{Binding ThirdSelectedDrink, Mode=TwoWay}" />
+                    
+            </StackLayout>
+            
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.33*"/>
+                    <ColumnDefinition Width="0.33*"/>
+                    <ColumnDefinition Width="0.33*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.85*"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource SmallLabelStyle}"
+                       Text="Первый"/>
+                <Label Grid.Row="0"
+                       Grid.Column="1" 
+                       Style="{StaticResource SmallLabelStyle}"
+                       Text="Второй"/>
+                <Label Grid.Row="0"
+                       Grid.Column="2" 
+                       Style="{StaticResource SmallLabelStyle}"
+                       Text="Третий"/>
+                
+                <Image Grid.Row="1"
+                       Grid.Column="0"                       
+                       Source="{Binding FirstSelectedDrink.ImageSource, Mode=TwoWay}" 
+                       Style="{StaticResource Key=imgStyle}" />
+                <Image Grid.Row="1"
+                       Grid.Column="1"
+                       Source="{Binding SecondSelectedDrink.ImageSource, Mode=TwoWay}" 
+                       Style="{StaticResource Key=imgStyle}" />
+                <Image Grid.Row="1"
+                       Grid.Column="2"
+                       Source="{Binding ThirdSelectedDrink.ImageSource, Mode=TwoWay}" 
+                       Style="{StaticResource Key=imgStyle}" />
+                
+            </Grid>
+                        
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

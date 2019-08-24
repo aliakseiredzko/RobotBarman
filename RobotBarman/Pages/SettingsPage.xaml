@@ -100,15 +100,15 @@
                             Style="{StaticResource ButtonStyle}"                            
                             IsEnabled="{Binding IsRobotReady}" />
                     
-                    <Button Text="Сброс действия" 
-                            Style="{StaticResource ButtonStyle}"                                       
-                            Command="{Binding Reset}"
-                            IsEnabled="{Binding IsRobotConnected}" />
-
                     <Button Text="Начальная позиция" 
                             Style="{StaticResource ButtonStyle}"                            
                             Command="{Binding BasePosition}"
                             IsEnabled="{Binding IsRobotReady}" />
+                    
+                    <Button Text="Сброс действия" 
+                            Style="{StaticResource ButtonStyle}"                                       
+                            Command="{Binding Reset}"
+                            IsEnabled="{Binding IsRobotConnected}" />                    
                     
                 </StackLayout>    
                 

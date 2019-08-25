@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using FreshMvvm;
 using RobotBarman.Services;
 using RobotBarman.Services.Interfaces;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RobotBarman
@@ -78,8 +80,8 @@ namespace RobotBarman
             }
         }
 
-        public bool IsRobotAvailable => true; //_robotService.IsRobotConnected
-        //                                && !_barmanService.IsSpillRunning;
+        public bool IsRobotAvailable => _robotService.IsRobotConnected
+                                        && !_barmanService.IsSpillRunning;
 
         public ObservableCollection<DrinksPageItem> AvailableDrinks { get; set; }
 
@@ -99,6 +101,10 @@ namespace RobotBarman
             RaisePropertyChanged(nameof(AvailableDrinks));
             RaisePropertyChanged(nameof(IsRobotAvailable));
             base.ViewIsAppearing(sender, e);
+
+             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            Debug.WriteLine(mainDisplayInfo.Density);
+
         }
 
         public override void Init(object initData)

@@ -29,7 +29,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid Padding="20">
+        <ScrollView>
+            <Grid Padding="20">
               <Grid.RowDefinitions>
                   <RowDefinition Height="0.15*"/>
                   <RowDefinition Height="0.5*"/>
@@ -109,9 +110,8 @@
                        Source="{Binding ThirdSelectedDrink.ImageSource, Mode=TwoWay}" 
                        Style="{StaticResource Key=imgStyle}" />
                 
-            </Grid>
-                        
-            
+            </Grid>             
         </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -7,12 +7,27 @@
              x:Class="RobotBarman.DrinksPage"
              Title="Бармен с йогуртиками"
              BackgroundColor="#87E0FF">
+    
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">                    
+            <Setter Property="FontSize" Value="Default" />
+            <Setter Property="BorderWidth" Value="1" />
+            <!--<Setter Property="TextColor" Value="#1D97C1" />-->
+            <Setter Property="BackgroundColor" Value="#53c7f0" />
+            <Setter Property="CornerRadius" Value="16" />            
+        </Style>        
+        <Style x:Key="LabelStyle" TargetType="Label">                    
+            <Setter Property="TextColor" Value="#ff3385" />                  
+        </Style>        
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <Grid IsEnabled="{Binding IsRobotAvailable}">
+        <Grid IsEnabled="{Binding IsRobotAvailable}"
+              Margin="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.7*"/>
-                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.25*"/>
             </Grid.RowDefinitions>
             <Label Text="Выберите приятный напиток:" 
                    TextColor="#1D97C1" 
@@ -20,15 +35,17 @@
                    FontSize="Title" 
                    Margin="8" 
                    Grid.Row="0"/>
-            <CollectionView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
+            
+            <ListView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
                       SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"      
                       SelectionMode="Single"
-                      BackgroundColor="#53c7f0"                      
-                      Margin="8,0"
-                      Grid.Row="1">
-                <CollectionView.ItemTemplate>
+                      BackgroundColor="#53c7f0"                                           
+                      Grid.Row="1"
+                      HasUnevenRows="True">               
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <ViewCell>
+                            <Grid>                            
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.6*"/>
                                 <ColumnDefinition Width="0.4*"/>
@@ -42,49 +59,63 @@
                                    VerticalOptions="Center" 
                                    Grid.Column="0"/>
 
-                            <Image Source="{Binding ImageSource}" 
+                            <Image Source="{Binding ImageSource}"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"                                                                         
-                                   Grid.Column="1"/>
-                        </Grid>                       
+                                   Grid.Column="1">
+                                <Image.Scale>
+                                    <OnIdiom x:TypeArguments="x:Double">
+                                        <OnIdiom.Phone>1</OnIdiom.Phone>
+                                        <OnIdiom.Tablet>2</OnIdiom.Tablet>
+                                    </OnIdiom>
+                                </Image.Scale>
+                            </Image>
+                        </Grid>     
+                        </ViewCell>                  
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                </ListView.ItemTemplate>
+            </ListView>
             
-            <Grid Margin="10"
-                  Grid.Row="2">                
+            <Grid Grid.Row="2">
+                <!--<Grid.Scale>
+                    <OnIdiom x:TypeArguments="x:Double">
+                        <OnIdiom.Phone>0.8</OnIdiom.Phone>
+                        <OnIdiom.Tablet>1</OnIdiom.Tablet>
+                     </OnIdiom>
+                </Grid.Scale>-->
                 <Grid.RowDefinitions>                    
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.6*"/>
                 </Grid.RowDefinitions>
                 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"/>
-                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="0.5*"/>                    
                 </Grid.ColumnDefinitions>                
 
-                <Label Text="Количество:"
-                       TextColor="#1D97C1"                                               
-                       FontSize="Large"                        
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"/>
+                <StackLayout Orientation="Horizontal"
+                             Grid.ColumnSpan="2">
+                    <Label Text="Количество:"                           
+                           TextColor="#1D97C1"                                               
+                           FontSize="Large"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"/>
 
-                <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                                              
-                       Grid.Row="1"
-                       Grid.Column="0"
-                       FontSize="Large"
-                       VerticalOptions="End"/>
+                    <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                          
+                           FontSize="Medium"
+                           HorizontalOptions="StartAndExpand"/>
+                </StackLayout>
 
                 <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
                          Minimum="1" 
-                         Maximum="10" 
+                         Maximum="9" 
                          Increment="1"                                                                    
                          x:Name="NumberOfCups"                                                      
                          Grid.Row="1"
-                         Grid.Column="1"                         
-                         HorizontalOptions="CenterAndExpand"     
-                         VerticalOptions="CenterAndExpand"                
+                         Grid.ColumnSpan="2"                         
+                         HorizontalOptions="FillAndExpand"     
+                         VerticalOptions="FillAndExpand"                
                          Visual="Material"/>                
                 <Button IsEnabled="{Binding IsRobotAvailable}" 
                         Command="{Binding SpillDrink}"                         

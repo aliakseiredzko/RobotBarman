@@ -3,6 +3,7 @@ using RobotBarman.Services;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
+using System.Diagnostics;
 
 namespace RobotBarman
 {
@@ -18,7 +19,7 @@ namespace RobotBarman
             _robotService = FreshIOC.Container.Resolve<IRobotService>();            
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
             _agvService = FreshIOC.Container.Resolve<IAgvService>();
-            _isRobotInRelax = true;
+            _isRobotInRelax = true;           
         }
 
         public Command BasePosition

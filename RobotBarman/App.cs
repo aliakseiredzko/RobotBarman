@@ -2,6 +2,8 @@
 using RobotBarman.Models;
 using RobotBarman.Services;
 using RobotBarman.Services.Interfaces;
+using System.Diagnostics;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +19,7 @@ namespace RobotBarman
             FreshIOC.Container.Register<IJsonDatabaseService, JsonDatabaseService>();
             FreshIOC.Container.Register<ISoundService, SoundService>();
             FreshIOC.Container.Register<IRobotService, RobotService>();
-            FreshIOC.Container.Register<IBarmanService, BarmanService>();            
+            FreshIOC.Container.Register<IBarmanService, BarmanService>();                        
 
             var masterDetailNav = new MasterDetailNavigation();
             masterDetailNav.Initialize("Menu", "hamburger.png");
@@ -26,7 +28,7 @@ namespace RobotBarman
             masterDetailNav.AddPageWithIcon<BarPageModel>("НАСТРОЙКА БАРА", "tree_cup.png");
             masterDetailNav.AddPageWithIcon<SettingsPageModel>("НАСТРОЙКА РОБОТА", "robot_industrial.png");
             masterDetailNav.AddPageWithIcon<AgvPageModel>("НАСТРОЙКА ТЕЛЕЖКИ", "tractor.png");
-
+                       
             MainPage = masterDetailNav;
         }
 

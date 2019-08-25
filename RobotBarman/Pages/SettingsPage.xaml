@@ -62,12 +62,12 @@
                     
                     <StackLayout Orientation="Horizontal">                        
                         <Label Text="Скорость робота (1-100)"
-                               HorizontalOptions="Start"
+                               HorizontalOptions="StartAndExpand"
                                VerticalOptions="Center"/>
                         
                         <Entry Text="{Binding Speed}"
-                               MinimumWidthRequest="50"
-                               HorizontalOptions="EndAndExpand"/>                                                
+                               MinimumWidthRequest="100"
+                               HorizontalOptions="FillAndExpand"/>                                                
                     </StackLayout>
                     
                     <Slider Minimum="0" 

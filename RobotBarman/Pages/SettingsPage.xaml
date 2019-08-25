@@ -12,7 +12,7 @@
             <Setter Property="BorderWidth" Value="1" />
             <Setter Property="TextColor" Value="#1D97C1" />
             <Setter Property="BackgroundColor" Value="#FFFFE1" />
-            <Setter Property="CornerRadius" Value="20" />            
+            <Setter Property="CornerRadius" Value="16" />            
         </Style>        
         <Style x:Key="LabelStyle" TargetType="Label">                    
             <Setter Property="TextColor" Value="#ff3385" />                  
@@ -21,7 +21,7 @@
     
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Margin="20">
+            <StackLayout Margin="16">
                 <StackLayout>
                     <Label Text="ПРОВЕРКА ПОДКЛЮЧЕНИЯ"
                            Style="{StaticResource LabelStyle}"/>
@@ -42,10 +42,12 @@
                 <StackLayout>
                     <Label Text="СОСТОЯНИЕ РОБОТА"
                            Style="{StaticResource LabelStyle}"/>
+                    
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Relax (Freeze off)"
                                VerticalOptions="Center"
                                HorizontalOptions="StartAndExpand"/>
+                        
                         <Switch IsToggled="{Binding IsRobotInRelax}"
                                 IsEnabled="{Binding IsRobotReady}"
                                 HorizontalOptions="EndAndExpand"/> 

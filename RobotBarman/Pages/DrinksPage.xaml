@@ -18,13 +18,13 @@
                    TextColor="#1D97C1" 
                    HorizontalOptions="CenterAndExpand"
                    FontSize="Title" 
-                   Margin="10,15,10,0" 
+                   Margin="8" 
                    Grid.Row="0"/>
             <CollectionView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
                       SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"      
                       SelectionMode="Single"
                       BackgroundColor="#53c7f0"                      
-                      Margin="10,0"
+                      Margin="8,0"
                       Grid.Row="1">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -37,15 +37,14 @@
                                    TextColor="#FFFFE1" 
                                    FontSize="Title"    
                                    FontAttributes="Bold"
-                                   Margin="10"
+                                   Margin="8"
                                    HorizontalOptions="Center" 
                                    VerticalOptions="Center" 
                                    Grid.Column="0"/>
 
                             <Image Source="{Binding ImageSource}" 
                                    HorizontalOptions="Center"
-                                   VerticalOptions="Center"                                      
-                                   
+                                   VerticalOptions="Center"                                                                         
                                    Grid.Column="1"/>
                         </Grid>                       
                     </DataTemplate>
@@ -66,27 +65,26 @@
                 </Grid.ColumnDefinitions>                
 
                 <Label Text="Количество:"
-                       TextColor="#1D97C1"                        
-                       VerticalOptions="Center"
-                       FontSize="Title"                        
+                       TextColor="#1D97C1"                                               
+                       FontSize="Large"                        
                        Grid.Row="0"
                        Grid.ColumnSpan="2"/>
 
                 <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                                              
                        Grid.Row="1"
                        Grid.Column="0"
-                       FontSize="Title"
+                       FontSize="Large"
                        VerticalOptions="End"/>
 
                 <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
                          Minimum="1" 
-                         Maximum="100" 
+                         Maximum="10" 
                          Increment="1"                                                                    
                          x:Name="NumberOfCups"                                                      
                          Grid.Row="1"
                          Grid.Column="1"                         
-                         HorizontalOptions="FillAndExpand"     
-                         VerticalOptions="FillAndExpand"                
+                         HorizontalOptions="CenterAndExpand"     
+                         VerticalOptions="CenterAndExpand"                
                          Visual="Material"/>                
                 <Button IsEnabled="{Binding IsRobotAvailable}" 
                         Command="{Binding SpillDrink}"                         

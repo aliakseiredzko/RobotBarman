@@ -100,7 +100,7 @@ namespace RobotBarman
                             resultToShow = "Неверный пароль";
                             break;
                         case ConnectionDetails.ConnectionError:
-                            resultToShow = "Проблема к подключению к тележке";
+                            resultToShow = "Проблема с подключением к тележке";
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

@@ -12,17 +12,92 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("e".Contains("e"));
-            var client = new HttpClient();            
-            //Tts();
-            //TestBarman().Wait();
+            string startIP = "192.168.1.";
+            string endIP = "192.168.1.254";
+            //Console.WriteLine(Regex.Match(startIP, "\\d{1,3}$").Value);
+            //Console.WriteLine(Regex.Matches(startIP, "\\d{1,3}")[1]);
+
+            Console.WriteLine("Start devices scan");
+            var ping = new Ping();
+            var tcpClient = new TcpClient();
+            tcpClient.SendTimeout = 100;
+            tcpClient.ReceiveTimeout = 100;
+                
+            for (int i = 1; i < 255; i++)
+            {
+                
+                try
+                {  
+                    var reply = ping.Send(IPAddress.Parse(startIP+i), 500);
+
+                    if(reply.Status == IPStatus.Success)
+                    {
+                        await tcpClient.ConnectAsync(IPAddress.Parse(startIP + i), 8081);
+                        if (tcpClient.Connected)
+                        {
+                            Console.WriteLine($"{startIP + i} connected");
+                        }
+                        //await client.GetAsync("http://192.168.1.1/get/status");  
+                    }
+
+                    else Console.WriteLine($"{startIP+i} isn't connected");
+                    
+                }
+                catch
+                {
+                    Console.WriteLine($"{startIP+i} isn't connected");
+                    tcpClient.Close();
+                }
+            }
+            Console.WriteLine("End devices scan");
+      
+            try
+            {
+                
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("Operation was cancelled");
+            }
+
+            DisplayDnsAddresses();
+           
+            
+
+            Console.ReadKey();
+        }
+
+        public static void DisplayDnsAddresses()
+        {
+            NetworkInterface[] adapters  = NetworkInterface.GetAllNetworkInterfaces();
+            
+            foreach (NetworkInterface adapter in adapters)
+            {
+        
+                IPInterfaceProperties adapterProperties = adapter.GetIPProperties();
+                IPAddressCollection dnsServers = adapterProperties.DnsAddresses;
+                if (dnsServers.Count > 0)
+                {
+                    Console.WriteLine(adapter.Description);
+                    foreach (IPAddress dns in dnsServers)
+                    {
+                        Console.WriteLine("  DNS Servers ............................. : {0}", 
+                            dns.ToString());
+                    }
+                    Console.WriteLine();
+                }
+            }
         }
 
         static async Task Tts()

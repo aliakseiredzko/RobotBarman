@@ -21,9 +21,10 @@
         </Style>        
     </ContentPage.Resources>
     
-    <ContentPage.Content>
+    <ContentPage.Content>        
         <Grid IsEnabled="{Binding IsRobotAvailable}"
-              Margin="8">
+              Margin="8">            
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>

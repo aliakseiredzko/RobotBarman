@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading;
 
 namespace RobotBarman
 {
@@ -12,13 +13,17 @@ namespace RobotBarman
         private readonly IRobotService _robotService;
         private readonly IBarmanService _barmanService;
         private readonly IAgvService _agvService;
+        private readonly IRobotFinder _robotFinder;
         private bool _isRobotInRelax;
+        private bool _isIpSearching;
+        private CancellationTokenSource _tokenSource;
 
         public SettingsPageModel()
         {
             _robotService = FreshIOC.Container.Resolve<IRobotService>();            
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
             _agvService = FreshIOC.Container.Resolve<IAgvService>();
+            _robotFinder = FreshIOC.Container.Resolve<IRobotFinder>();
             _isRobotInRelax = true;           
         }
 
@@ -121,6 +126,52 @@ namespace RobotBarman
             }
         }
 
+        public Command FindRobot
+        {
+            get
+            {
+                return new Command(async () =>
+                {                    
+                    var profiles = Connectivity.ConnectionProfiles;
+                    if (profiles.Contains(ConnectionProfile.WiFi))
+                    {          
+                        _tokenSource = new CancellationTokenSource();
+
+                        CanFindIp = false;
+                        ButtonFindText = "ПОИСК";                        
+                        var ip = await _robotFinder.FindRobotIpAsync(_tokenSource);                                                
+                        CanFindIp = true;
+                        ButtonFindText = "НАЙТИ";
+
+                        _tokenSource = null;                       
+
+                        if(ip != null)
+                        {
+                            Ip = ip;
+                            await CoreMethods.DisplayAlert("Успех", $"Робот найден с IP {Ip}", "Ура!");
+                        }
+                        else
+                        {
+                            await CoreMethods.DisplayAlert("SOS", $"Робот не найден :(", "Понятно");
+                        }
+                    }
+                    else await CoreMethods.DisplayAlert("SOS", "Похоже, вы не подключены к Wi-Fi!", "Понятно");
+                    
+                });
+            }
+        }
+
+        public Command CancelFindRobot
+        {
+            get
+            {
+                return new Command(async () =>
+                {                   
+                    _tokenSource?.Cancel();                                        
+                });
+            }
+        }
+
         public string Ip
         {
             get => _robotService.Ip;
@@ -132,7 +183,32 @@ namespace RobotBarman
                     RaisePropertyChanged(nameof(Ip));
                 }
             }
-        }       
+        }    
+        
+        public string StartIpRange
+        {
+            get => _robotFinder.StartIpRange;
+            set
+            {
+                if (_robotFinder.StartIpRange != value)
+                {
+                     _robotFinder.StartIpRange = value;
+                    RaisePropertyChanged(nameof(StartIpRange));
+                }
+            }
+        }    
+        
+        public bool CanFindIp
+        {
+            get => _isIpSearching;
+            set
+            {
+                if (_isIpSearching == value) return;
+                _isIpSearching = value;
+
+                RaisePropertyChanged(nameof(CanFindIp));
+            }
+        }
 
         public bool IsRobotConnected => _robotService.IsRobotConnected;
 
@@ -168,5 +244,20 @@ namespace RobotBarman
                 }
             }
         }
+
+        private string _buttonSearchText = "НАЙТИ";
+
+        public string ButtonFindText
+        {
+            get { return _buttonSearchText; }
+            set 
+            { 
+                if (_buttonSearchText == value) return;
+
+                _buttonSearchText = value;
+                RaisePropertyChanged(nameof(ButtonFindText));
+            }
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace RobotBarman
     {
         public App()
         {
+            FreshIOC.Container.Register<IRobotFinder, RobotFinder>();
             FreshIOC.Container.Register<IAgvService, AgvService>();
             FreshIOC.Container.Register<IJsonDatabaseService, JsonDatabaseService>();
             FreshIOC.Container.Register<ISoundService, SoundService>();

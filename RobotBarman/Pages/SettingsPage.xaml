@@ -115,7 +115,32 @@
                 </StackLayout>    
                 
                 <StackLayout HeightRequest="32"/>
-                                               
+                      
+                <StackLayout>
+                    <Label Text="ПОИСК РОБОТА В ЛОКАЛЬНОЙ СЕТИ"
+                           Style="{StaticResource LabelStyle}"/>
+                    
+                    <Label Text="Начальный диапазон сканирования"
+                           Style="{StaticResource LabelStyle}"/>
+                    
+                    <Entry Text="{Binding StartIpRange, Mode=TwoWay}"
+                           Keyboard="Default"
+                           Placeholder="192.168.1.1"/>
+                    
+                    <StackLayout>                       
+                        <Button Text="{Binding ButtonFindText, Mode=TwoWay}" 
+                                Style="{StaticResource ButtonStyle}" 
+                                IsEnabled="{Binding CanFindIp, Mode=TwoWay}"
+                                Command="{Binding FindRobot}"/>                    
+                        
+                        <Button Text="ОТМЕНА" 
+                                Style="{StaticResource ButtonStyle}"                                  
+                                Command="{Binding CancelFindRobot}"/>                    
+                        
+                    </StackLayout>
+                </StackLayout>
+                
+                <StackLayout HeightRequest="32"/>                
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

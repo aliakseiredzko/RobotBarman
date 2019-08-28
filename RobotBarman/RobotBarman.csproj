@@ -151,10 +151,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\RozumPlugin\RozumConnectionLib\RozumConnectionLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Pages\FirstPage.xaml.cs">
       <DependentUpon>FirstPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +197,10 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RozumConnectionLib\RozumConnectionLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

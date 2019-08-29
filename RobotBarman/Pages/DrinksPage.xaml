@@ -12,7 +12,6 @@
         <Style x:Key="ButtonStyle" TargetType="Button">                    
             <Setter Property="FontSize" Value="Default" />
             <Setter Property="BorderWidth" Value="1" />
-            <!--<Setter Property="TextColor" Value="#1D97C1" />-->
             <Setter Property="BackgroundColor" Value="#53c7f0" />
             <Setter Property="CornerRadius" Value="16" />            
         </Style>        
@@ -21,226 +20,152 @@
         </Style>        
     </ContentPage.Resources>
 
-    <OnIdiom>
-        <OnIdiom.Tablet>
-            <ContentPage.Content>
-                <Grid IsEnabled="{Binding IsRobotAvailable}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.05*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="0.15*"/>
-                    </Grid.RowDefinitions>
-                    <Label Text="Выберите приятный напиток:" 
-                           TextColor="#1D97C1" 
-                           HorizontalOptions="CenterAndExpand"
-                           FontSize="32" 
-                           Margin="10,15,10,0" 
-                           Grid.Row="0"/>
-                    <ListView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
-                              SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"                      
-                              HasUnevenRows="True" 
-                              BackgroundColor="#53c7f0" 
-                              SeparatorColor="#FFFFE3"
-                              Margin="10,0"
-                              Grid.Row="1">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Title}" 
-                                                   TextColor="#FFFFE1" 
-                                                   FontSize="40"
-                                                   FontAttributes="Bold" 
-                                                   Margin="30,5,5,5"
-                                                   HorizontalOptions="CenterAndExpand" 
-                                                   VerticalOptions="Center" />
-
-                                            <StackLayout Orientation="Vertical" 
-                                                         Padding="20,10,0,0" 
-                                                         Spacing="30"/>
-
-                                            <Image Source="{Binding ImageSource}" 
-                                                   HeightRequest="310" 
-                                                   WidthRequest="300"
-                                                   HorizontalOptions="EndAndExpand" 
-                                                   Margin="10,5,30,5" />
-                                        </StackLayout>
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-
-                    <Grid Margin="10"
-                          Grid.Row="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.4*"/>
-                            <RowDefinition Height="0.6*"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Text="Количество стаканов:"
-                               TextColor="#1D97C1"                        
-                               VerticalOptions="Center"
-                               FontSize="28"                        
-                               Grid.Row="0"
-                               Grid.ColumnSpan="2"/>
-
-                        <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                                              
-                               Grid.Row="1"
-                               Grid.Column="0"
-                               FontSize="30"
-                               VerticalOptions="End"/>
-
-                        <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
-                                 Minimum="1" 
-                                 Maximum="100" 
-                                 Increment="1"                                                                    
-                                 x:Name="NumberOfCups"                                                      
-                                 Grid.Row="1"
-                                 Grid.Column="1" 
-                                 HeightRequest="200"
-                                 WidthRequest="200"
-                                 MinimumWidthRequest="200"
-                                 HorizontalOptions="CenterAndExpand"                         
-                                 Visual="Material"/>
-
-                        <Button IsEnabled="{Binding IsRobotAvailable}" 
-                                Command="{Binding SpillDrink}"                         
-                                Text="ХОЧУ"                     
-                                FontSize="40"
-                                HeightRequest="150"
-                                WidthRequest="300"
-                                BorderWidth="30" 
-                                CornerRadius="20" 
-                                TextColor="#1D97C1" 
-                                BackgroundColor="#FFFFE3"                        
-                                HorizontalOptions="EndAndExpand"     
-                                VerticalOptions="Center"
-                                Grid.RowSpan="2"
-                                Grid.Column="2" 
-                                Visual="Material"/>
-
-                    </Grid>
-                </Grid>
-            </ContentPage.Content>
-        </OnIdiom.Tablet>
-        <OnIdiom.Phone>
-            <ContentPage.Content>
-                <Grid IsEnabled="{Binding IsRobotAvailable}"
+    <ContentPage.Content>
+        <Grid IsEnabled="{Binding IsRobotAvailable}"
               Margin="8">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.25*"/>
-                    </Grid.RowDefinitions>
-                    <Label Text="Выберите приятный напиток:" 
-                           TextColor="#1D97C1" 
-                           HorizontalOptions="CenterAndExpand"
-                           FontSize="Title" 
-                           Margin="8" 
-                           Grid.Row="0"/>
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Phone="0.08*" Tablet="0.05*"/>
+                    </RowDefinition.Height>
+                </RowDefinition>
+                
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Phone="0.72*" Tablet="0.8*"/>
+                    </RowDefinition.Height>
+                </RowDefinition>
+                
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnIdiom x:TypeArguments="GridLength" Phone="0.2*" Tablet="0.15*"/>
+                    </RowDefinition.Height>
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Text="Выберите приятный напиток:" 
+                   TextColor="#1D97C1" 
+                   HorizontalOptions="CenterAndExpand"                   
+                   Margin="8"
+                   Grid.Row="0">
+                <Label.FontSize>
+                    <OnIdiom x:TypeArguments="x:Double" Tablet="32" Phone="16"/>
+                </Label.FontSize>
+            </Label>
 
-                    <ListView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
-                               SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"      
-                               SelectionMode="Single"
-                               BackgroundColor="#53c7f0"                                           
-                               Grid.Row="1"
-                               HasUnevenRows="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="0.6*"/>
-                                            <ColumnDefinition Width="0.4*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding Title}" 
-                                               TextColor="#FFFFE1" 
-                                               FontSize="Title"    
-                                               FontAttributes="Bold"
-                                               Margin="8"
-                                               HorizontalOptions="Center" 
-                                               VerticalOptions="Center" 
-                                               Grid.Column="0"/>
+            <CollectionView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"      
+                      SelectionMode="Single"
+                      BackgroundColor="#53c7f0"                                           
+                      Grid.Row="1"
+                      VerticalScrollBarVisibility="Never">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Title}" 
+                                       TextColor="#FFFFE1" 
+                                       FontAttributes="Bold" 
+                                       Margin="30,5,5,5"
+                                       HorizontalOptions="StartAndExpand" 
+                                       VerticalOptions="CenterAndExpand">
+                                <Label.FontSize>
+                                    <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="40"/>
+                                </Label.FontSize>
+                            </Label>
 
-                                        <Image Source="{Binding ImageSource}"
-                                               HorizontalOptions="Center"
-                                               VerticalOptions="Center"                                                                         
-                                               Grid.Column="1"/>
+                            <!--<StackLayout Orientation="Vertical" 
+                                             Padding="20,10,0,0" 
+                                             Spacing="30">
+                                <StackLayout.Spacing>
+                                    <OnIdiom x:TypeArguments="x:Double" Phone="50" Tablet="30"/>
+                                </StackLayout.Spacing>
+                            </StackLayout>-->
 
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                            <Image Source="{Binding ImageSource}"                                        
+                                        HorizontalOptions="EndAndExpand">
+                                <Image.Margin>
+                                    <OnIdiom x:TypeArguments="Thickness" Phone="10" Tablet="10,5,30,5"/>
+                                </Image.Margin>
+                                <Image.HeightRequest>
+                                    <OnIdiom x:TypeArguments="x:Double" Phone="150" Tablet="300"/>
+                                </Image.HeightRequest>
+                                <Image.WidthRequest>
+                                    <OnIdiom x:TypeArguments="x:Double" Phone="150" Tablet="300"/>
+                                </Image.WidthRequest>
 
-                    <Grid Grid.Row="2">
-                        <!--<Grid.Scale>
-                    <OnIdiom x:TypeArguments="x:Double">
-                        <OnIdiom.Phone>0.8</OnIdiom.Phone>
-                        <OnIdiom.Tablet>1</OnIdiom.Tablet>
-                     </OnIdiom>
-                </Grid.Scale>-->
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.4*"/>
-                            <RowDefinition Height="0.6*"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*"/>
-                            <ColumnDefinition Width="0.2*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackLayout Orientation="Horizontal"
-                                     Grid.ColumnSpan="2">
-                            <Label Text="Количество:"                           
-                                   TextColor="#1D97C1"                                               
-                                   FontSize="Large"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="StartAndExpand"/>
-
-                            <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                          
-                                   FontSize="Medium"
-                                   HorizontalOptions="StartAndExpand"/>
+                            </Image>
                         </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                        <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
-                                 Minimum="1" 
-                                 Maximum="9" 
-                                 Increment="1"                                                                    
-                                 x:Name="NumberOfCups"                                                      
-                                 Grid.Row="1"
-                                 Grid.ColumnSpan="2"                         
-                                 HorizontalOptions="FillAndExpand"     
-                                 VerticalOptions="FillAndExpand"                
-                                 Visual="Material"/>
-                        <Button IsEnabled="{Binding IsRobotAvailable}" 
-                                Command="{Binding SpillDrink}"                         
-                                Text="ХОЧУ"                     
-                                FontSize="Large"                        
-                                BorderWidth="30" 
-                                CornerRadius="20" 
-                                TextColor="#1D97C1" 
-                                BackgroundColor="#FFFFE3"                        
-                                HorizontalOptions="FillAndExpand"     
-                                VerticalOptions="FillAndExpand"
-                                Grid.RowSpan="2"
-                                Grid.Column="2" 
-                                Visual="Material"/>
+            <Grid Margin="10"
+                          Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.4*"/>
+                    <RowDefinition Height="0.6*"/>
+                </Grid.RowDefinitions>
 
-                    </Grid>
-                </Grid>
-            </ContentPage.Content>
-        </OnIdiom.Phone>
-    </OnIdiom>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Количество стаканов:"
+                       TextColor="#1D97C1"                        
+                       VerticalOptions="Center"                                    
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2">
+                    <Label.FontSize>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="28"/>
+                    </Label.FontSize>
+                </Label>
+
+                <Entry Text="{Binding NumberOfCups, Mode=TwoWay}"                                              
+                       Grid.Row="1"
+                       Grid.Column="0"                      
+                       VerticalOptions="End">
+                    <Entry.FontSize>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="30"/>
+                    </Entry.FontSize>
+                </Entry>
+
+                <Stepper Value="{Binding NumberOfCups, Mode=TwoWay}"
+                         Minimum="1" 
+                         Maximum="100" 
+                         Increment="1"                                                                    
+                         x:Name="NumberOfCups"                                                      
+                         Grid.Row="1"
+                         Grid.Column="1" 
+                         HeightRequest="200"
+                         WidthRequest="200"
+                         MinimumWidthRequest="200"
+                         HorizontalOptions="CenterAndExpand"                         
+                         Visual="Material"/>
+
+                <Button IsEnabled="{Binding IsRobotAvailable}" 
+                        Command="{Binding SpillDrink}"                         
+                        Text="ХОЧУ"                                             
+                        HeightRequest="150"
+                        WidthRequest="300"
+                        BorderWidth="30" 
+                        CornerRadius="20" 
+                        TextColor="#1D97C1" 
+                        BackgroundColor="#FFFFE3"                        
+                        HorizontalOptions="EndAndExpand"     
+                        VerticalOptions="Center"
+                        Grid.RowSpan="2"
+                        Grid.Column="2" 
+                        Visual="Material">
+                    <Button.FontSize>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="40"/>
+                    </Button.FontSize>
+                </Button>
+
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
 
 </ContentPage>

@@ -9,7 +9,7 @@
     <ContentPage.Resources>
         <Style x:Key="imgStyle" TargetType="Image">            
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
         </Style>
         <Style x:Key="LargeLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="Medium"/>
@@ -30,12 +30,12 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <Grid Padding="20">
-              <Grid.RowDefinitions>
+            <StackLayout Padding="20">
+              <!--<Grid.RowDefinitions>
                   <RowDefinition Height="0.15*"/>
                   <RowDefinition Height="0.5*"/>
                   <RowDefinition Height="0.35*"/>
-              </Grid.RowDefinitions>
+              </Grid.RowDefinitions>-->
             <Label Text="Здесь необходимо выбрать напитки, которые будут находиться в роботизированной установке"
                    Grid.Row="0"
                    Margin="5" 
@@ -80,8 +80,8 @@
                 </Grid.ColumnDefinitions>
                 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.15*"/>
-                    <RowDefinition Height="0.85*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.89*"/>
                 </Grid.RowDefinitions>
                 
                 <Label Grid.Row="0"
@@ -111,7 +111,7 @@
                        Style="{StaticResource Key=imgStyle}" />
                 
             </Grid>             
-        </Grid>
+        </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

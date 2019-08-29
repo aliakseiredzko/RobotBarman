@@ -244,6 +244,13 @@ namespace RobotBarman.Services
                 Debug.WriteLine(e.Message);
             }
 
+            _isActionInterrupted = false;
+            _isActionFailed = false;
+            _isGoalReached = false;
+            _failedAction = "";
+            _interruptedAction = "";
+            _reachedGoal = "";
+
             if (!string.IsNullOrEmpty(IntermediatePutCupsGoal))
             {
                 if (!await GoToGoalAsync(IntermediatePutCupsGoal, false))

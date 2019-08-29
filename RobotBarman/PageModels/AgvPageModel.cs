@@ -132,9 +132,7 @@ namespace RobotBarman
                 return new Command(async () =>
                 {
                     IsAgvReady = false;
-                    if (!await _agvService.GoToGoalAsync(PutCupsGoal, false)) 
-                        await CoreMethods.DisplayAlert("Сообщение", "Тележка не приедет", "ОК");
-                    else await CoreMethods.DisplayAlert("Сообщение", "Приехали", "ОК");
+                    await _agvService.GoToGoalAsync(PutCupsGoal, false);
                     IsAgvReady = true;
                 });
             }
@@ -147,9 +145,7 @@ namespace RobotBarman
                 return new Command(async () =>
                 {
                     IsAgvReady = false;
-                    if (!await _agvService.GoToGoalAsync(IntermediatePutCupsGoal, false)) 
-                        await CoreMethods.DisplayAlert("Сообщение", "Тележка не приедет", "ОК");
-                    else await CoreMethods.DisplayAlert("Сообщение", "Приехали", "ОК");
+                    await _agvService.GoToGoalAsync(IntermediatePutCupsGoal, false);
                     IsAgvReady = true;
                 });
             }
@@ -162,9 +158,7 @@ namespace RobotBarman
                 return new Command(async () =>
                 {
                     IsAgvReady = false;
-                    if (!await _agvService.GoToGoalAsync(CustomGoal, false)) 
-                        await CoreMethods.DisplayAlert("Сообщение", "Тележка не приедет", "ОК");
-                    else await CoreMethods.DisplayAlert("Сообщение", "Приехали", "ОК");
+                    await _agvService.GoToGoalAsync(CustomGoal, false)
                     IsAgvReady = true;
                 });
             }

@@ -158,7 +158,7 @@ namespace RobotBarman
                 return new Command(async () =>
                 {
                     IsAgvReady = false;
-                    await _agvService.GoToGoalAsync(CustomGoal, false)
+                    await _agvService.GoToGoalAsync(CustomGoal, false);
                     IsAgvReady = true;
                 });
             }

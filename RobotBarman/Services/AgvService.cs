@@ -163,6 +163,14 @@ namespace RobotBarman.Services
 
         private bool GoToGoal(string goal, bool checkInterruptAction)
         {
+
+            _isActionInterrupted = false;
+            _isActionFailed = false;
+            _isGoalReached = false;
+            _failedAction = "";
+            _interruptedAction = "";
+            _reachedGoal = "";
+
             _robot.GoToGoal(goal, out var lastActionResult);
             LastActionResult = lastActionResult;
 

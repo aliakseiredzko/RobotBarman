@@ -162,7 +162,7 @@ namespace ConsoleApp
             agv.Port = 7171;
             agv.Password = "Omron4you";
             await agv.ConnectAsync();
-            await agv.GoToGoalAsync("BarmanGoal");
+            await agv.GoToGoalAsync("BarmanGoal", false);
             Console.WriteLine("Done");
 
             //barman.PutCupsToAgv().Wait();

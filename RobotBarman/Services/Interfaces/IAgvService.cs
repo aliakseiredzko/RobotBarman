@@ -17,10 +17,12 @@ namespace RobotBarman.Services
         string IntermediatePutCupsGoal { get; set; }
         string RouteToPatrol { get; set; }
         bool PatrolRouteForever { get; set; }
+        bool IsAgvBusy { get; set; }
+
         Task<ConnectionDetails> ConnectAsync();
         Task<bool> RefreshGoalsAsync();
         Task<bool> RefreshRoutesAsync();
-        Task<bool> GoToGoalAsync(string goal);
+        Task<bool> GoToGoalAsync(string goal, bool checkInterruptAction);
         Task<bool> PatrolRouteAsync(string route, bool forever);
         Task<bool> SayAsync(string speech);
         Task<bool> PutCupsToAgv();

@@ -10,6 +10,8 @@ namespace RobotBarman.Services
         bool IsSpillRunning { get; set; }
         bool IsCanceledByTimer { get; set; }
         Position BaseCupPosition { get; set; }
+        bool IsAgvBusy { get; set; }
+
         void ResetSpill();
         void ResetPutCupsToAgv();
         Task SpillAsync();

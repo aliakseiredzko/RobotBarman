@@ -3,6 +3,7 @@ using Mobile.Communication.Client;
 using Mobile.Communication.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,7 +47,9 @@ namespace RobotBarman.Services
         }
         
         public bool IsConnected => _robot.Connected;
-        
+
+        public bool IsAgvBusy { get; set; }
+
         public string LastActionResult { get; protected set; }
         
         public IEnumerable<string> Goals { get; protected set; }
@@ -148,36 +151,40 @@ namespace RobotBarman.Services
             });
         }
 
-        public async Task<bool> GoToGoalAsync(string goal)
+        public async Task<bool> GoToGoalAsync(string goal, bool checkInterruptAction)
         {
             if (string.IsNullOrEmpty(goal)) return false;
 
             return await Task.Run(() =>
             {
-                return GoToGoal(goal);
+                return GoToGoal(goal, checkInterruptAction);
             });
         }
 
-        private bool GoToGoal(string goal)
+        private bool GoToGoal(string goal, bool checkInterruptAction)
         {
             _robot.GoToGoal(goal, out var lastActionResult);
             LastActionResult = lastActionResult;
 
             WaitGoalAction();
 
-            if (_isActionInterrupted && _interruptedAction != goal)
-            {
-                _interruptedAction = "";
-                _isActionInterrupted = false;
-                return false;
-            }
+            //if (_isActionInterrupted && _interruptedAction != goal && checkInterruptAction)
+            //{
+            //    _isActionInterrupted = false;
+            //    return false;
+            //}
 
             if (_isGoalReached && _reachedGoal == goal)
             {
-                _reachedGoal = "";
                 _isGoalReached = false;
+                _reachedGoal = "";
                 return true;
             }
+
+            _isActionInterrupted = false;
+            _isGoalReached = false;
+            _interruptedAction = "";
+            _reachedGoal = "";
 
             _isActionFailed = false;
             return false;
@@ -226,12 +233,31 @@ namespace RobotBarman.Services
 
         public async Task<bool> PutCupsToAgv()
         {
-            if (!string.IsNullOrEmpty(IntermediatePutCupsGoal))
+            IsAgvBusy = true;
+
+            try
             {
-                if (!await GoToGoalAsync(IntermediatePutCupsGoal)) return false;
+                _robot.Stop();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
 
-            if (!await GoToGoalAsync(PutCupsGoal)) return false;
+            if (!string.IsNullOrEmpty(IntermediatePutCupsGoal))
+            {
+                if (!await GoToGoalAsync(IntermediatePutCupsGoal, false))
+                {
+                    IsAgvBusy = false;
+                    return false;
+                }
+            }
+
+            if (!await GoToGoalAsync(PutCupsGoal, true))
+            {
+                IsAgvBusy = false;
+                return false;
+            }
 
             await _barmanService.PutCupsToAgv();
 
@@ -239,6 +265,9 @@ namespace RobotBarman.Services
             {
                 await PatrolRouteAsync(RouteToPatrol, PatrolRouteForever);
             }
+
+            IsAgvBusy = false;
+
             return true;
         }
     }

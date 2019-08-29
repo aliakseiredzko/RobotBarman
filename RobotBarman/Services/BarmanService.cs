@@ -32,6 +32,7 @@ namespace RobotBarman.Services
             BaseCupPosition = _databaseService.GetBaseCupPosition();
         }
 
+        public bool IsAgvBusy { get; set; }
         public int Speed { get; set; }
         public DrinksPageItem SelectedBottle { get; set; }
         public bool IsSpillRunning { get; set; }
@@ -138,6 +139,8 @@ namespace RobotBarman.Services
                 var preUpPosition = _databaseService.GetPosition("Base2PreUpPosition").Clone();
                 var upPosition = _databaseService.GetPosition("Base2UpPosition").Clone();
                 var downPosition = BaseCupPosition.Clone();
+
+                upPosition.Point.Y = downPosition.Point.Y;
 
                 preUpPosition.Point.Y -= i * yOffset;
                 upPosition.Point.Y -= i * yOffset;

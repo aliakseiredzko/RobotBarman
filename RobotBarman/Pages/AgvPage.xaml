@@ -48,12 +48,11 @@
                             Style="{StaticResource ButtonStyle}"/>
                             
                     <Button Text="ПОСТАВИТЬ НАПИТКИ НА ТЕЛЕЖКУ"
-                            IsEnabled="{Binding IsRobotReady}"
+                            IsEnabled="{Binding IsAgvReady}"
                             Command="{Binding PutCups}" 
                             Style="{StaticResource ButtonStyle}"/>
                     
                     <Button Text="ОТМЕНИТЬ"
-                            IsEnabled="{Binding IsRobotReady}"
                             Command="{Binding CancelSpill}" 
                             Style="{StaticResource ButtonStyle}"/>
                                                 

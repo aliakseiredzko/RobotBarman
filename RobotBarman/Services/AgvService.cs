@@ -190,11 +190,12 @@ namespace RobotBarman.Services
             }
 
             _isActionInterrupted = false;
+            _isActionFailed = false;
             _isGoalReached = false;
+            _failedAction = "";
             _interruptedAction = "";
             _reachedGoal = "";
 
-            _isActionFailed = false;
             return false;
         }
 

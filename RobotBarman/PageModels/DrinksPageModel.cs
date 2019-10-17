@@ -101,10 +101,6 @@ namespace RobotBarman
             RaisePropertyChanged(nameof(AvailableDrinks));
             RaisePropertyChanged(nameof(IsRobotAvailable));
             base.ViewIsAppearing(sender, e);
-
-             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
-            Debug.WriteLine(mainDisplayInfo.Density);
-
         }
 
         public override void Init(object initData)

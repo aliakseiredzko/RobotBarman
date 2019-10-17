@@ -21,7 +21,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid IsEnabled="{Binding IsRobotAvailable}"
+        <Grid IsEnabled="{Binding IsRobotAvailable, Mode=TwoWay}"
               Margin="8">
 
             <Grid.RowDefinitions>
@@ -144,7 +144,7 @@
                          HorizontalOptions="CenterAndExpand"                         
                          Visual="Material"/>
 
-                <Button IsEnabled="{Binding IsRobotAvailable}" 
+                <Button IsEnabled="{Binding IsRobotAvailable, Mode=TwoWay}" 
                         Command="{Binding SpillDrink}"                         
                         Text="ХОЧУ"                                             
                         HeightRequest="150"

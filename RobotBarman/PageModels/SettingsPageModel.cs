@@ -33,7 +33,9 @@ namespace RobotBarman
             {
                 return new Command(async () =>
                 {
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await _robotService.RunPosesAsync(false, "Base1Position");
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await CoreMethods.DisplayAlert("", $"State: {_robotService.LastActionResult}", "OK");
                 });
             }
@@ -84,7 +86,9 @@ namespace RobotBarman
             {
                 return new Command(async () =>
                 {
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await _robotService.ParkAsync();
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await CoreMethods.DisplayAlert("", $"Parking state: {_robotService.LastActionResult}", "OK");
                 });
             }
@@ -96,7 +100,9 @@ namespace RobotBarman
             {
                 return new Command(async () =>
                 {
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await _robotService.UnparkAsync();
+                    RaisePropertyChanged(nameof(IsRobotReady));
                     await CoreMethods.DisplayAlert("", $"BasePosition state: {_robotService.LastActionResult}", "OK");
                 });
             }

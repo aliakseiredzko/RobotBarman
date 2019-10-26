@@ -16,17 +16,19 @@ namespace RobotBarman.Services
         public int PingTimeout { get; set; }
         public int RequestTimeout { get; set; }
         public string StartIpRange { get; set; }
+        public string LocalDeviceAddress { get; set; }
 
         public RobotFinder()
         {
-            PingTimeout = 200;
-            RequestTimeout = 200;
-            StartIpRange = GetLocalAddress();
+            PingTimeout = 400;
+            RequestTimeout = 400;
+            LocalDeviceAddress = GetLocalAddress();
+            StartIpRange = GetStartRange() + "1";
         }
 
         public async Task<string> FindRobotIpAsync(CancellationTokenSource tokenSource = null)
         {
-            var startRange = Regex.Match(StartIpRange, "^\\d{1,3}.\\d{1,3}.\\d{1,3}.").Value;
+            string startRange = GetStartRange();
             var ip = "";
             var startValue = int.Parse(Regex.Match(StartIpRange, "\\d{1,3}$").Value);
 
@@ -61,12 +63,16 @@ namespace RobotBarman.Services
             return null;
         }
 
+        private string GetStartRange()
+        {
+            return Regex.Match(LocalDeviceAddress, "^\\d{1,3}.\\d{1,3}.\\d{1,3}.").Value;
+        }
 
         private string GetLocalAddress()
         {
             var IpAddress = Dns.GetHostAddresses(Dns.GetHostName()).FirstOrDefault();
             if(IpAddress == null)
-                return "192.168.1.1";
+                return "127.0.0.1";
 
             return IpAddress.ToString();
         }

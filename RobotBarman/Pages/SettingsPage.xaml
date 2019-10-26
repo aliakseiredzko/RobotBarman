@@ -70,10 +70,11 @@
                                HorizontalOptions="FillAndExpand"/>                                                
                     </StackLayout>
                     
-                    <Slider Minimum="0" 
-                            Maximum="100" 
+                    <Slider Maximum="100"
+                            Minimum="1" 
                             Value="{Binding Speed, Mode=TwoWay}"
                             HorizontalOptions="FillAndExpand"/>
+                    
                 </StackLayout>
                 
                 <StackLayout HeightRequest="32"/>
@@ -119,7 +120,11 @@
                 <StackLayout>
                     <Label Text="ПОИСК РОБОТА В ЛОКАЛЬНОЙ СЕТИ"
                            Style="{StaticResource LabelStyle}"/>
-                    
+
+                    <Label Text="{Binding LocalDeviceAddress,
+                           StringFormat='IP адрес клиента: {0}'}"
+                           Style="{StaticResource LabelStyle}"/>
+
                     <Label Text="Начальный диапазон сканирования"
                            Style="{StaticResource LabelStyle}"/>
                     

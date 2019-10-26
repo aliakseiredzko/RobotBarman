@@ -8,6 +8,7 @@ namespace RobotBarman.Services
         int PingTimeout { get; set; }
         int RequestTimeout { get; set; }
         string StartIpRange { get; set; }
+        string LocalDeviceAddress { get; set; }
 
         Task<string> FindRobotIpAsync(CancellationTokenSource tokenSource = null);
     }

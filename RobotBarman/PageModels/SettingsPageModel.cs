@@ -196,8 +196,21 @@ namespace RobotBarman
                     RaisePropertyChanged(nameof(StartIpRange));
                 }
             }
-        }    
-        
+        }
+
+        public string LocalDeviceAddress
+        {
+            get => _robotFinder.LocalDeviceAddress;
+            set
+            {
+                if (_robotFinder.LocalDeviceAddress != value)
+                {
+                    _robotFinder.LocalDeviceAddress = value;
+                    RaisePropertyChanged(nameof(LocalDeviceAddress));
+                }
+            }
+        }
+
         public bool CanFindIp
         {
             get => _isIpSearching;

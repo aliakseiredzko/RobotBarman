@@ -17,7 +17,7 @@ namespace RobotBarman.Services
             _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();           
             Robot = _databaseService.GetRobotData();          
 
-            Speed = 50;
+            Speed = 1;
             IsRobotInRelax = true;
             IsRobotBusy = false;
             IsRobotConnected = false;

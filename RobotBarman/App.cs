@@ -15,27 +15,26 @@ namespace RobotBarman
     {
         public App()
         {
+            
+        }
+
+        protected override void OnStart()
+        {
             FreshIOC.Container.Register<IRobotFinder, RobotFinder>();
             FreshIOC.Container.Register<IAgvService, AgvService>();
             FreshIOC.Container.Register<IJsonDatabaseService, JsonDatabaseService>();
             FreshIOC.Container.Register<ISoundService, SoundService>();
             FreshIOC.Container.Register<IRobotService, RobotService>();
-            FreshIOC.Container.Register<IBarmanService, BarmanService>();                        
+            FreshIOC.Container.Register<IBarmanService, BarmanService>();
 
             var masterDetailNav = new MasterDetailNavigation();
             masterDetailNav.Initialize("Menu", "hamburger.png");
-            //masterDetailNav.AddPageWithIcon<FirstPageModel>("ГЛАВНАЯ", "star.png");
             masterDetailNav.AddPageWithIcon<DrinksPageModel>("БАРМЕН", "cup.png");
             masterDetailNav.AddPageWithIcon<BarPageModel>("НАСТРОЙКА БАРА", "tree_cup.png");
             masterDetailNav.AddPageWithIcon<SettingsPageModel>("НАСТРОЙКА РОБОТА", "robot_industrial.png");
             masterDetailNav.AddPageWithIcon<AgvPageModel>("НАСТРОЙКА ТЕЛЕЖКИ", "tractor.png");
-                       
-            MainPage = masterDetailNav;
-        }
 
-        protected override void OnStart()
-        {
-            // Handle when your app starts
+            MainPage = masterDetailNav;
         }
 
         protected override void OnSleep()

@@ -19,7 +19,7 @@ namespace RobotBarman.Services
         public BarmanService()
         {
             _robotService = FreshIOC.Container.Resolve<IRobotService>();
-            _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();                      
+            _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
             _bottleTokenSource = new CancellationTokenSource();
             _agvTokenSource = new CancellationTokenSource();
 
@@ -28,8 +28,11 @@ namespace RobotBarman.Services
             {
                 DrinkPosition = DrinkPosition.First
             };
+        }
 
-            BaseCupPosition = _databaseService.GetBaseCupPosition();
+        public async Task InitDataAsync()
+        {
+            BaseCupPosition = await _databaseService.GetBaseCupPositionAsync();
         }
 
         public bool IsAgvBusy { get; set; }
@@ -45,7 +48,7 @@ namespace RobotBarman.Services
                 if (_baseCupPosition != value)
                 {
                     _baseCupPosition = value;
-                    _databaseService.SaveBaseCupPosition(value);
+                    _databaseService.SaveBaseCupPositionAsync(value);
                 }
             }
         }
@@ -136,8 +139,8 @@ namespace RobotBarman.Services
             
             for (int i = 0; i < 2; i++)
             {
-                var preUpPosition = _databaseService.GetPosition("Base2PreUpPosition").Clone();
-                var upPosition = _databaseService.GetPosition("Base2UpPosition").Clone();
+                var preUpPosition = (await _databaseService.GetPositionAsync("Base2PreUpPosition")).Clone();
+                var upPosition = (await _databaseService.GetPositionAsync("Base2UpPosition")).Clone();
                 var downPosition = BaseCupPosition.Clone();
 
                 upPosition.Point.Y = downPosition.Point.Y;

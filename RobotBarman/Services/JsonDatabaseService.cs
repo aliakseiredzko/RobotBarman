@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RobotBarman.Models;
 using RozumConnectionLib;
@@ -14,63 +15,82 @@ namespace RobotBarman.Services
     {
         public JsonDatabaseService()
         {
-            Positions =
-                JsonConvert.DeserializeObject<Dictionary<string, Position>>(
-                    LocalDataHandler.GetTextFromAssembly("Data.positions.json"));
-            Poses = JsonConvert.DeserializeObject<Dictionary<string, Pose>>(
-                LocalDataHandler.GetTextFromAssembly("Data.poses.json"));
-            Tools = JsonConvert.DeserializeObject<Dictionary<string, Gripper>>(
-                LocalDataHandler.GetTextFromAssembly("Data.tools.json"));
 
-            Drinks = JsonConvert.DeserializeObject<List<DrinksPageItem>>(
-                LocalDataHandler.GetTextFromAssembly("Data.drinks.json"));
-
-            var availableDrinks = "";
-            if ((availableDrinks = LocalDataHandler.GetTextData("availableDrinks.json")) == "")
-                availableDrinks = LocalDataHandler.GetTextFromAssembly("Data.availableDrinks.json");
-            AvailableDrinks = JsonConvert.DeserializeObject<List<DrinksPageItem>>(availableDrinks);                                
         }
 
-        private List<DrinksPageItem> Drinks { get; }
-        private List<DrinksPageItem> AvailableDrinks { get; }
-        private Dictionary<string, Position> Positions { get; }
-        private Dictionary<string, Pose> Poses { get; }
-        private Dictionary<string, Gripper> Tools { get; }
-
-        public void SaveRobotData(RealRobot data)
+        public async Task InitDataAsync()
         {
-            LocalDataHandler.SaveTextData("robot.json", JsonConvert.SerializeObject(data, Formatting.Indented));
+            if (Positions == null)
+                Positions = await Deserialize<Dictionary<string, Position>>("Data.positions.json");
+
+            if (Poses == null)
+                Poses = await Deserialize<Dictionary<string, Pose>>("Data.poses.json");
+
+            if (Tools == null)
+                Tools = await Deserialize<Dictionary<string, Gripper>>("Data.tools.json");
+
+            if (Drinks == null)
+                Drinks = await Deserialize<List<DrinksPageItem>>("Data.drinks.json");
+
+            var availableDrinks = await LocalDataHandler.GetTextDataAsync("availableDrinks.json");
+            if (availableDrinks == "")
+                AvailableDrinks = await Deserialize<List<DrinksPageItem>>("Data.availableDrinks.json");
         }
 
-        public Agv GetAgvData()
+        private async Task<T> Deserialize<T>(string path)
         {
-            var textData = LocalDataHandler.GetTextData("agv.json");
+            var text = await LocalDataHandler.GetTextFromAssemblyAsync(path);
+            return await Task.FromResult(JsonConvert.DeserializeObject<T>(text));
+        }
+
+        private List<DrinksPageItem> Drinks { get; set; }
+        private List<DrinksPageItem> AvailableDrinks { get; set; }
+        private Dictionary<string, Position> Positions { get; set; }
+        private Dictionary<string, Pose> Poses { get; set; }
+        private Dictionary<string, Gripper> Tools { get; set; }
+
+        public async Task SaveRobotDataAsync(RealRobot data)
+        {
+            await LocalDataHandler.SaveTextDataAsync("robot.json",
+                JsonConvert.SerializeObject(data, Formatting.Indented));
+        }
+
+        public async Task<Agv> GetAgvDataAsync()
+        {
+            var textData = await LocalDataHandler.GetTextDataAsync("agv.json");
             return string.IsNullOrEmpty(textData)
                 ? new Agv()
                 : JsonConvert.DeserializeObject<Agv>(textData);
-        }    
-
-        public void SaveSoundInfo(List<Sound> sounds)
-        {
-            LocalDataHandler.SaveTextData("sounds.json", JsonConvert.SerializeObject(sounds, Formatting.Indented));
         }
 
-        public void SaveBaseCupPosition(Position position)
+        public async Task SaveSoundInfoAsync(List<Sound> sounds)
         {
-            LocalDataHandler.SaveTextData("baseCupPosition.json", JsonConvert.SerializeObject(position, Formatting.Indented));
+            await Serialize(sounds, "sounds.json");
         }
 
-        public Position GetBaseCupPosition()
+        public async Task SaveBaseCupPositionAsync(Position position)
         {
-            var textData = LocalDataHandler.GetTextData("baseCupPosition.json");
+            await Serialize(position, "baseCupPosition.json");
+        }
+
+        private static async Task Serialize(object data, string fileName)
+        {
+            await LocalDataHandler.SaveTextDataAsync(fileName,
+                  JsonConvert.SerializeObject(data, Formatting.Indented));
+        }
+
+        public async Task<Position> GetBaseCupPositionAsync()
+        {
+            var textData = await LocalDataHandler.GetTextDataAsync("baseCupPosition.json");
+
             return string.IsNullOrEmpty(textData)
                 ? Positions["Base2Position"]
                 : JsonConvert.DeserializeObject<Position>(textData);
         }
 
-        public List<Sound> GetSoundInfo()
+        public async Task<List<Sound>> GetSoundInfoAsync()
         {
-            var textData = LocalDataHandler.GetTextData("sounds.json");
+            var textData = await LocalDataHandler.GetTextDataAsync("sounds.json");
             if (string.IsNullOrEmpty(textData))
             {
                 var sounds = GetSounds();
@@ -88,69 +108,70 @@ namespace RobotBarman.Services
             var soundsList = assembly.GetManifestResourceNames().Where(x => x.Contains("Sounds")).ToList();
 
             foreach (var soundPath in soundsList)
-            {               
+            {
                 sounds.Add(new Sound
                 {
-                    Path = soundPath                  
+                    Path = soundPath
                 });
             }
             return sounds;
         }
 
-        public RealRobot GetRobotData()
+        public async Task<RealRobot> GetRobotDataAsync()
         {
-            var textData = LocalDataHandler.GetTextData("robot.json");
+            var textData = await LocalDataHandler.GetTextDataAsync("robot.json");
             return string.IsNullOrEmpty(textData)
                 ? new RealRobot()
                 : JsonConvert.DeserializeObject<RealRobot>(textData);
         }
 
-        public void SaveAgvData(Agv agv)
+        public async Task SaveAgvDataAsync(Agv agv)
         {
-            LocalDataHandler.SaveTextData("agv.json", JsonConvert.SerializeObject(agv, Formatting.Indented));
+            await LocalDataHandler.SaveTextDataAsync("agv.json",
+                JsonConvert.SerializeObject(agv, Formatting.Indented));
         }
 
-        public List<DrinksPageItem> GetDrinks()
+        public async Task<List<DrinksPageItem>> GetDrinksAsync()
         {
-            return Drinks;
+            return await Task.FromResult(Drinks);
         }
 
-        public Position GetPosition(string name)
+        public async Task<Position> GetPositionAsync(string name)
         {
-            return Positions[name];
+            return await Task.FromResult(Positions[name]);
         }
 
-        public Pose GetPose(string name)
+        public async Task<Pose> GetPoseAsync(string name)
         {
-            return Poses[name];
+            return await Task.FromResult(Poses[name]);
         }
 
-        public Gripper GetGripper(string name)
+        public async Task<Gripper> GetGripperAsync(string name)
         {
-            return Tools[name];
+            return await Task.FromResult(Tools[name]);
         }
 
-        public DrinksPageItem GetDrink(string name)
+        public async Task<DrinksPageItem> GetDrinkAsync(string name)
         {
-            return Drinks.Find(x => x.Title == name);
+            return await Task.FromResult(Drinks.Find(x => x.Title == name));
         }
 
-        public void SetAvailableDrink(DrinksPageItem drinkToAdd, DrinkPosition position)
+        public async Task SetAvailableDrinkAsync(DrinksPageItem drinkToAdd, DrinkPosition position)
         {
             if (drinkToAdd.Clone() is DrinksPageItem newDrink)
             {
-                newDrink.DrinkPosition = position;                
+                newDrink.DrinkPosition = position;
                 AvailableDrinks.RemoveAt((int)position);
-                AvailableDrinks.Insert((int) newDrink.DrinkPosition, newDrink);
+                AvailableDrinks.Insert((int)newDrink.DrinkPosition, newDrink);
             }
 
-            LocalDataHandler.SaveTextData("availableDrinks.json",
+            await LocalDataHandler.SaveTextDataAsync("availableDrinks.json",
                 JsonConvert.SerializeObject(AvailableDrinks, Formatting.Indented));
         }
 
-        public List<DrinksPageItem> GetAvailableDrinks()
+        public async Task<List<DrinksPageItem>> GetAvailableDrinksAsync()
         {
-            return AvailableDrinks;
+            return await Task.FromResult(AvailableDrinks);
         }
     }
 

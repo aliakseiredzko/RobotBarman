@@ -20,11 +20,12 @@ namespace RobotBarman.Services
         {
             _jsonDatabaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
-            _agv = _jsonDatabaseService.GetAgvData();
+        }
 
-            var robotData = _jsonDatabaseService.GetAgvData();
-
-            _robot = new RobotClient("Miron", IPAddress.Parse(robotData.Ip), robotData.Port);
+        public async Task InitDataAsync()
+        {
+            _agv = await _jsonDatabaseService.GetAgvDataAsync();
+            _robot = new RobotClient("Miron", IPAddress.Parse(_agv.Ip), _agv.Port);
         }
 
         private Agv _agv;
@@ -97,7 +98,7 @@ namespace RobotBarman.Services
         public async Task<ConnectionDetails> ConnectAsync()
         {            
             _agv = new Agv { Ip = Ip, Port = Port, Password = Password};
-            _jsonDatabaseService.SaveAgvData(_agv);
+            await _jsonDatabaseService.SaveAgvDataAsync(_agv);
 
             return await Task.Run(() =>
             {
@@ -116,11 +117,11 @@ namespace RobotBarman.Services
 
                     return ConnectionDetails.Ok;
                 }
-                catch (InvalidOperationException e)
+                catch (InvalidOperationException)
                 {
                     return ConnectionDetails.WrongPassword;
                 }
-                catch (MobileException e)
+                catch (MobileException)
                 {
                     return ConnectionDetails.ConnectionError;
                 }

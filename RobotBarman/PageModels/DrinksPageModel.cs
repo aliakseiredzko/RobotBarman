@@ -95,21 +95,27 @@ namespace RobotBarman
             }
         }
        
-        protected override void ViewIsAppearing(object sender, EventArgs e)
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
-            AvailableDrinks = new ObservableCollection<DrinksPageItem>(_databaseService.GetAvailableDrinks());
+            AvailableDrinks = 
+                new ObservableCollection<DrinksPageItem>(await _databaseService.GetAvailableDrinksAsync());
             RaisePropertyChanged(nameof(AvailableDrinks));
             RaisePropertyChanged(nameof(IsRobotAvailable));
             base.ViewIsAppearing(sender, e);
         }
 
-        public override void Init(object initData)
+        public async override void Init(object initData)
         {
+            _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
             _soundService = FreshIOC.Container.Resolve<ISoundService>();
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
             _robotService = FreshIOC.Container.Resolve<IRobotService>();
-            _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
-            
+
+            await _databaseService.InitDataAsync();
+            await _soundService.InitDataAsync();
+            await _barmanService.InitDataAsync();
+            await _robotService.InitDataAsync();
+
             AvailableDrinks = new ObservableCollection<DrinksPageItem>();
         }
     }

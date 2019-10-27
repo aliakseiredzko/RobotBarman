@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using FreshMvvm;
 using Plugin.SimpleAudioPlayer;
 using RobotBarman.Models;
@@ -13,11 +14,11 @@ namespace RobotBarman.Services
 {
     public class SoundService: ISoundService
     {
-        private readonly List<Sound> _sounds;
-        private readonly List<Sound> _openingSounds;
-        private readonly List<Sound> _beforeSpillSounds;
-        private readonly List<Sound> _afterSpillSounds;
-        private readonly List<Sound> _changeBottleSounds;
+        private List<Sound> _sounds;
+        private List<Sound> _openingSounds;
+        private List<Sound> _beforeSpillSounds;
+        private List<Sound> _afterSpillSounds;
+        private List<Sound> _changeBottleSounds;
         private readonly IJsonDatabaseService _databaseService;
         private static readonly Random _random;
 
@@ -30,12 +31,23 @@ namespace RobotBarman.Services
         {
             _sounds = new List<Sound>();
             _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
+        }
 
-            _sounds = _databaseService.GetSoundInfo();
-            _openingSounds = _sounds.Where(x => x.Path.Contains("Opening")).ToList();
-            _beforeSpillSounds = _sounds.Where(x => x.Path.Contains("BeforeSpill")).ToList();
-            _afterSpillSounds = _sounds.Where(x => x.Path.Contains("AfterSpill")).ToList();
-            _changeBottleSounds = _sounds.Where(x => x.Path.Contains("ChangeBottle")).ToList();
+        public async Task InitDataAsync()
+        {
+            if (_sounds == null)
+            {
+                _sounds = await _databaseService.GetSoundInfoAsync();
+                _openingSounds = await GetAsListAsync("Opening");
+                _beforeSpillSounds = await GetAsListAsync("BeforeSpill");
+                _afterSpillSounds = await GetAsListAsync("BeforeSpill");
+                _changeBottleSounds = await GetAsListAsync("ChangeBottle");
+            }
+        }
+
+        private async Task<List<Sound>> GetAsListAsync(string data)
+        {
+            return await Task.FromResult(_sounds.Where(x => x.Path.Contains(data)).ToList());
         }
 
         private void PlayAudio(Sound sound)

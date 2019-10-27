@@ -22,7 +22,7 @@ namespace RobotBarman
                 if (_firstSelectedDrink.Title != value.Title)
                 {
                     _firstSelectedDrink = value;
-                    _databaseService.SetAvailableDrink(_firstSelectedDrink, DrinkPosition.First);
+                    _databaseService.SetAvailableDrinkAsync(_firstSelectedDrink, DrinkPosition.First);
                     RaisePropertyChanged(nameof(FirstSelectedDrink));
                 }
             }
@@ -36,7 +36,7 @@ namespace RobotBarman
                 if (_secondSelectedDrink.Title != value.Title)
                 {
                     _secondSelectedDrink = value;
-                    _databaseService.SetAvailableDrink(_secondSelectedDrink, DrinkPosition.Second);
+                    _databaseService.SetAvailableDrinkAsync(_secondSelectedDrink, DrinkPosition.Second);
                     RaisePropertyChanged(nameof(SecondSelectedDrink));
                 }
             }
@@ -50,7 +50,7 @@ namespace RobotBarman
                 if (_thirdSelectedDrink.Title != value.Title)
                 {
                     _thirdSelectedDrink = value;
-                    _databaseService.SetAvailableDrink(_thirdSelectedDrink, DrinkPosition.Third);
+                    _databaseService.SetAvailableDrinkAsync(_thirdSelectedDrink, DrinkPosition.Third);
                     RaisePropertyChanged(nameof(ThirdSelectedDrink));
                 }
             }
@@ -61,14 +61,15 @@ namespace RobotBarman
             base.ViewIsAppearing(sender, e);
         }
 
-        public override void Init(object initData)
+        public override async void Init(object initData)
         {
             _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
-            Drinks = new ObservableCollection<DrinksPageItem>(_databaseService.GetDrinks());
+            await _databaseService.InitDataAsync();
+            Drinks = new ObservableCollection<DrinksPageItem>(await _databaseService.GetDrinksAsync());
 
-            _firstSelectedDrink = _databaseService.GetAvailableDrinks()[0];
-            _secondSelectedDrink = _databaseService.GetAvailableDrinks()[1];
-            _thirdSelectedDrink = _databaseService.GetAvailableDrinks()[2];
+            _firstSelectedDrink = (await _databaseService.GetAvailableDrinksAsync())[0];
+            _secondSelectedDrink = (await _databaseService.GetAvailableDrinksAsync())[1];
+            _thirdSelectedDrink = (await _databaseService.GetAvailableDrinksAsync())[2];
 
             base.Init(initData);
         }

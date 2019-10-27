@@ -10,5 +10,6 @@ namespace RobotBarman.Services.Interfaces
         void PlayBeforeSpillSound();
         void PlayAfterSpillSound();
         void PlayChangeBottleSound(DrinkPosition position);
+        System.Threading.Tasks.Task InitDataAsync();
     }
 }

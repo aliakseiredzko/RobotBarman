@@ -10,21 +10,29 @@ namespace RobotBarman
 {
     internal class SettingsPageModel : FreshBasePageModel
     {        
-        private readonly IRobotService _robotService;
-        private readonly IBarmanService _barmanService;
-        private readonly IAgvService _agvService;
-        private readonly IRobotFinder _robotFinder;
+        private IRobotService _robotService;
+        private IBarmanService _barmanService;
+        private IRobotFinder _robotFinder;
         private bool _isRobotInRelax;
         private bool _isIpSearching;
         private CancellationTokenSource _tokenSource;
 
         public SettingsPageModel()
         {
-            _robotService = FreshIOC.Container.Resolve<IRobotService>();            
+                 
+        }
+
+        public async override void Init(object initData)
+        {
+            _robotService = FreshIOC.Container.Resolve<IRobotService>();
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
-            _agvService = FreshIOC.Container.Resolve<IAgvService>();
             _robotFinder = FreshIOC.Container.Resolve<IRobotFinder>();
-            _isRobotInRelax = true;           
+            _isRobotInRelax = true;
+
+            await _barmanService.InitDataAsync();
+            await _robotService.InitDataAsync();
+
+            base.Init(initData);
         }
 
         public Command BasePosition
@@ -171,7 +179,7 @@ namespace RobotBarman
         {
             get
             {
-                return new Command(async () =>
+                return new Command(() =>
                 {                   
                     _tokenSource?.Cancel();                                        
                 });

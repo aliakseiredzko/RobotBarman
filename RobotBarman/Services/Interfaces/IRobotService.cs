@@ -34,6 +34,7 @@ namespace RobotBarman.Services
         Task GoToBasePosition();
         Task ParkAsync();
         Task UnparkAsync();
+        Task InitDataAsync();
     }
 
     public enum GripperState

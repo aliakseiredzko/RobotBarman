@@ -15,16 +15,23 @@ namespace RobotBarman.Services
         public RobotService()
         {
             _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();           
-            Robot = _databaseService.GetRobotData();          
+        }
 
-            Speed = 1;
-            IsRobotInRelax = true;
-            IsRobotBusy = false;
-            IsRobotConnected = false;
+        public async Task InitDataAsync()
+        {
+            if (Robot == null)
+            {
+                Robot = await _databaseService.GetRobotDataAsync();
 
-            GripperState = GripperState.Closed;
-            CurrentPosition = new Position();
-            CurrentPose = new Pose();
+                Speed = 1;
+                IsRobotInRelax = true;
+                IsRobotBusy = false;
+                IsRobotConnected = false;
+
+                GripperState = GripperState.Closed;
+                CurrentPosition = new Position();
+                CurrentPose = new Pose();
+            }
         }
 
         public bool IsRobotBusy { get; protected set; }
@@ -68,7 +75,7 @@ namespace RobotBarman.Services
             var connectionResult = await Robot.InitConnectionAsync();
 
             IsRobotConnected = Robot.IsConnected;
-            _databaseService.SaveRobotData(Robot);
+            await _databaseService.SaveRobotDataAsync(Robot);
 
             return connectionResult;
         }      
@@ -108,7 +115,7 @@ namespace RobotBarman.Services
             IsRobotBusy = true;
 
             LastActionResult = await Robot.SetPositionAsync(
-                _databaseService.GetPosition(positionName), speed, MotionType.LINEAR, maxSpeed);
+                await _databaseService.GetPositionAsync(positionName), speed, MotionType.LINEAR, maxSpeed);
 
             await Robot.WaitMotionAsync(_askingPeriod);
             IsRobotBusy = false;
@@ -128,7 +135,7 @@ namespace RobotBarman.Services
         public async Task RunPositionsAsync(bool makePath, int speed, params string[] positionsName)
         {
             var positions = new List<Position>();
-            foreach (var item in positionsName) positions.Add(_databaseService.GetPosition(item));
+            foreach (var item in positionsName) positions.Add(await _databaseService.GetPositionAsync(item));
 
             IsRobotInRelax = false;
             IsRobotBusy = true;
@@ -180,7 +187,7 @@ namespace RobotBarman.Services
         public async Task RunPositionsAsync(bool makePath, params string[] positionsName)
         {
             var positions = new List<Position>();
-            foreach (var item in positionsName) positions.Add(_databaseService.GetPosition(item));
+            foreach (var item in positionsName) positions.Add(await _databaseService.GetPositionAsync(item));
 
             IsRobotInRelax = false;
             IsRobotBusy = true;
@@ -208,7 +215,7 @@ namespace RobotBarman.Services
         public async Task RunPosesAsync(bool makePath, params string[] posesName)
         {
             var poses = new List<Pose>();
-            foreach (var item in posesName) poses.Add(_databaseService.GetPose(item));
+            foreach (var item in posesName) poses.Add(await _databaseService.GetPoseAsync(item));
 
             IsRobotInRelax = false;
             IsRobotBusy = true;
@@ -246,7 +253,7 @@ namespace RobotBarman.Services
 
         public async Task SetToolAsync(string toolName)
         {
-            LastActionResult = await Robot.SetToolAsync(_databaseService.GetGripper(toolName));
+            LastActionResult = await Robot.SetToolAsync(await _databaseService.GetGripperAsync(toolName));
             await Robot.GetPositionAsync();
         }
 

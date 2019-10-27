@@ -17,5 +17,6 @@ namespace RobotBarman.Services
         Task SpillAsync();
         Task PutCupAsync();
         Task PutCupsToAgv();
+        Task InitDataAsync();
     }
 }

@@ -13,15 +13,12 @@ namespace RobotBarman
         private readonly IRobotService _robotService;
         private readonly IBarmanService _barmanService;
         private readonly IAgvService _agvService;
-        
-        private bool _isRobotInRelax;
 
         public AgvPageModel()
         {
             _robotService = FreshIOC.Container.Resolve<IRobotService>();            
             _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
             _agvService = FreshIOC.Container.Resolve<IAgvService>();
-            _isRobotInRelax = true;
         }
         
         public string AgvIp
@@ -357,7 +354,7 @@ namespace RobotBarman
             base.ViewIsAppearing(sender, e);
         }
 
-        public override async void Init(object initData)
+        public override void Init(object initData)
         {
             _baseCupPosition = _barmanService.BaseCupPosition;
             RaisePropertyChanged(nameof(IsAgvReady));

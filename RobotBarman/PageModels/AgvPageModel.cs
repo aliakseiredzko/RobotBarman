@@ -10,15 +10,13 @@ namespace RobotBarman
 {
     internal class AgvPageModel : FreshBasePageModel
     {        
-        private readonly IRobotService _robotService;
-        private readonly IBarmanService _barmanService;
-        private readonly IAgvService _agvService;
+        private IRobotService _robotService;
+        private IBarmanService _barmanService;
+        private IAgvService _agvService;
 
         public AgvPageModel()
         {
-            _robotService = FreshIOC.Container.Resolve<IRobotService>();            
-            _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
-            _agvService = FreshIOC.Container.Resolve<IAgvService>();
+            
         }
         
         public string AgvIp
@@ -354,10 +352,15 @@ namespace RobotBarman
             base.ViewIsAppearing(sender, e);
         }
 
-        public override void Init(object initData)
+        public override async void Init(object initData)
         {
-            _baseCupPosition = _barmanService.BaseCupPosition;
-            RaisePropertyChanged(nameof(IsAgvReady));
+            _robotService = FreshIOC.Container.Resolve<IRobotService>();
+            _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
+            _agvService = FreshIOC.Container.Resolve<IAgvService>();
+
+            await _agvService.InitDataAsync();
+
+            _baseCupPosition = new Position();
 
             base.Init(initData);
         }

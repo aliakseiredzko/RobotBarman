@@ -58,9 +58,10 @@ namespace RobotBarman.Services
         public async Task<Agv> GetAgvDataAsync()
         {
             var textData = await LocalDataHandler.GetTextDataAsync("agv.json");
-            return string.IsNullOrEmpty(textData)
+            return await Task.FromResult(
+                string.IsNullOrEmpty(textData)
                 ? new Agv()
-                : JsonConvert.DeserializeObject<Agv>(textData);
+                : JsonConvert.DeserializeObject<Agv>(textData));
         }
 
         public async Task SaveSoundInfoAsync(List<Sound> sounds)

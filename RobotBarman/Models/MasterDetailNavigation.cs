@@ -18,20 +18,12 @@ namespace RobotBarman.Models
 
         public void AddPageWithIcon<T>(string title, string icon = "", object data = null) where T : FreshBasePageModel
         {
-            try
+            base.AddPage<T>(title, data);
+            pageIcons.Add(new MenuItem
             {
-                base.AddPage<T>(title, data);
-                pageIcons.Add(new MenuItem
-                {
-                    Title = title,
-                    IconSource = icon
-                });
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                Title = title,
+                IconSource = icon
+            });
         }
 
         protected override void CreateMenuPage(string menuPageTitle, string menuIcon = null)

@@ -27,5 +27,6 @@ namespace RobotBarman.Services
         Task<bool> SayAsync(string speech);
         Task<bool> PutCupsToAgv();
         Task<bool> ResetAsync();
+        Task InitDataAsync();
     }
 }

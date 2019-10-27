@@ -32,7 +32,10 @@ namespace RobotBarman.Services
 
         public async Task InitDataAsync()
         {
-            BaseCupPosition = await _databaseService.GetBaseCupPositionAsync();
+            if (BaseCupPosition == null)
+            {
+                BaseCupPosition = await _databaseService.GetBaseCupPositionAsync();
+            }
         }
 
         public bool IsAgvBusy { get; set; }

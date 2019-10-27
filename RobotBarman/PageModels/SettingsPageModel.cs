@@ -29,8 +29,8 @@ namespace RobotBarman
             _robotFinder = FreshIOC.Container.Resolve<IRobotFinder>();
             _isRobotInRelax = true;
 
-            await _barmanService.InitDataAsync();
             await _robotService.InitDataAsync();
+            await _barmanService.InitDataAsync();
 
             base.Init(initData);
         }

@@ -24,8 +24,9 @@ namespace RobotBarman.Services
 
         public async Task InitDataAsync()
         {
-            _agv = await _jsonDatabaseService.GetAgvDataAsync();
-            _robot = new RobotClient("Miron", IPAddress.Parse(_agv.Ip), _agv.Port);
+            if (_agv == null) 
+                _agv = await _jsonDatabaseService.GetAgvDataAsync();
+            _robot = await Task.FromResult(new RobotClient("Miron", IPAddress.Parse(_agv.Ip), _agv.Port));
         }
 
         private Agv _agv;

@@ -54,7 +54,8 @@
             </Label>
 
             <CollectionView ItemsSource="{Binding AvailableDrinks, Mode=TwoWay}"
-                      SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"      
+                      SelectedItem="{Binding SelectedDrink, Mode=TwoWay}"     
+                      IsEnabled="{Binding IsRobotAvailable, Mode=TwoWay}" 
                       SelectionMode="Single"
                       BackgroundColor="#53c7f0"                                           
                       Grid.Row="1"

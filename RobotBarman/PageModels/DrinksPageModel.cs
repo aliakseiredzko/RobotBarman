@@ -54,24 +54,27 @@ namespace RobotBarman
                         _barmanService.SelectedBottle = SelectedDrink;
                         _soundService.PlayBeforeSpillSound();
 
+                        _barmanService.IsSpillRunning = true;
                         RaisePropertyChanged(nameof(IsRobotAvailable));
 
                         while (NumberOfCups >= 1)
                         {
                             await _barmanService.SpillAsync();
+
                             if (_barmanService.IsCanceledByTimer)
                             {
                                 await CoreMethods.DisplayAlert("",
-                                    $"Похоже, что йогурт закончился. Пожалуйста, замените бутылку № {(int)SelectedDrink.DrinkPosition+1}!",
+                                    $"Похоже, что напиток закончился. Пожалуйста, замените бутылку № {(int)SelectedDrink.DrinkPosition+1}!",
                                     "Будет!");
                             }
 
                             NumberOfCups -= 1;
                         }
 
-                        NumberOfCups = 1;
-
+                        _barmanService.IsSpillRunning = false;
                         RaisePropertyChanged(nameof(IsRobotAvailable));
+
+                        NumberOfCups = 1;
 
                         _soundService.PlayAfterSpillSound();                        
                         SelectedDrink = null;

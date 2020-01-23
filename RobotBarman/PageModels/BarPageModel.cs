@@ -10,12 +10,27 @@ namespace RobotBarman
 {
     public class BarPageModel : FreshBasePageModel
     {
+        private IRobotService _robotService;
+        private IBarmanService _barmanService;
         private IJsonDatabaseService _databaseService;
         private DrinksPageItem _firstSelectedDrink;
         private DrinksPageItem _secondSelectedDrink;
         private DrinksPageItem _thirdSelectedDrink;
         private Position _takeCupPosition;
         public ObservableCollection<DrinksPageItem> Drinks { get; set; }
+
+        private bool _canTest = true;
+
+        public bool CanTest
+        {
+            get => _canTest;
+            set
+            {
+                _canTest = value;
+                RaisePropertyChanged("CanTest");
+            }
+        }
+
 
         public DrinksPageItem FirstSelectedDrink
         {
@@ -86,6 +101,23 @@ namespace RobotBarman
             }
         }
 
+        public Command TestTakeCup
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    CanTest = false;
+                    await _barmanService.PutCupAsync();
+                    await _robotService
+                        .RunPositionsAsync(false, _robotService.Speed, "UpDropCupPosition");
+                    await _robotService.GoToBasePosition();
+                    await CoreMethods.DisplayAlert("", $"Готово", "OK");
+                    CanTest = true;
+                });
+            }
+        }
+
         public Command SetTakeCupPosition
         {
             get
@@ -126,7 +158,9 @@ namespace RobotBarman
 
         public override void Init(object initData)
         {
+            _robotService = FreshIOC.Container.Resolve<IRobotService>();
             _databaseService = FreshIOC.Container.Resolve<IJsonDatabaseService>();
+            _barmanService = FreshIOC.Container.Resolve<IBarmanService>();
             Drinks = new ObservableCollection<DrinksPageItem>(_databaseService.GetDrinks());
 
             _firstSelectedDrink = _databaseService.GetAvailableDrinks()[0];

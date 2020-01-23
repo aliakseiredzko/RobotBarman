@@ -144,12 +144,15 @@
                             </StackLayout>
                         </StackLayout>
 
-                        <StackLayout>
+                        <StackLayout IsEnabled="{Binding CanTest}">
                             <Button Text="Установить"
                                     Command="{Binding SetTakeCupPosition}" 
                                     Style="{StaticResource ButtonStyle}"/>
                             <Button Text="Загрузить по умолчанию"
                                     Command="{Binding ResetTakeCupPosition}" 
+                                    Style="{StaticResource ButtonStyle}"/>
+                            <Button Text="Протестировать"
+                                    Command="{Binding TestTakeCup}" 
                                     Style="{StaticResource ButtonStyle}"/>
                         </StackLayout>
                         

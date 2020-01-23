@@ -23,7 +23,7 @@ namespace RobotBarman
 
         public bool CanTest
         {
-            get => _canTest;
+            get => _canTest && _robotService.IsRobotConnected;
             set
             {
                 _canTest = value;

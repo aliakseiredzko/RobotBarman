@@ -14,11 +14,11 @@ namespace RobotBarman.Services
     {
         public JsonDatabaseService()
         {
-            Positions =
-                JsonConvert.DeserializeObject<Dictionary<string, Position>>(
-                    LocalDataHandler.GetTextFromAssembly("Data.positions.json"));
+            Positions = GetPositions();
+            
             Poses = JsonConvert.DeserializeObject<Dictionary<string, Pose>>(
                 LocalDataHandler.GetTextFromAssembly("Data.poses.json"));
+
             Tools = JsonConvert.DeserializeObject<Dictionary<string, Gripper>>(
                 LocalDataHandler.GetTextFromAssembly("Data.tools.json"));
 
@@ -33,7 +33,7 @@ namespace RobotBarman.Services
 
         private List<DrinksPageItem> Drinks { get; }
         private List<DrinksPageItem> AvailableDrinks { get; }
-        private Dictionary<string, Position> Positions { get; }
+        private Dictionary<string, Position> Positions { get; }        
         private Dictionary<string, Pose> Poses { get; }
         private Dictionary<string, Gripper> Tools { get; }
 
@@ -60,12 +60,50 @@ namespace RobotBarman.Services
             LocalDataHandler.SaveTextData("baseCupPosition.json", JsonConvert.SerializeObject(position, Formatting.Indented));
         }
 
+        public Dictionary<string, Position> GetPositions()
+        {
+            var textData = LocalDataHandler.GetTextData("positions.json");
+            if (string.IsNullOrEmpty(textData))
+            {
+                textData = LocalDataHandler.GetTextFromAssembly("Data.positions.json");
+            }                  
+
+            return JsonConvert.DeserializeObject<Dictionary<string, Position>>(textData);
+        }
+
         public Position GetBaseCupPosition()
         {
             var textData = LocalDataHandler.GetTextData("baseCupPosition.json");
             return string.IsNullOrEmpty(textData)
                 ? Positions["Base2Position"]
                 : JsonConvert.DeserializeObject<Position>(textData);
+        }
+
+
+        public void ResetTakeCupPosition()
+        {
+            Positions["CupPosition"] = Positions["DefaultCupPosition"].Clone();
+            Positions["DownCupPosition"] = Positions["DefaultDownCupPosition"].Clone();
+            SavePositions();
+        }
+
+        public Position GetTakeCupPosition()
+        {
+            return Positions["CupPosition"];
+        }
+        
+        public void SaveTakeCupPosition(Position position)
+        {
+            var cloned = position.Clone();
+            Positions["CupPosition"] = cloned;
+            Positions["DownCupPosition"].Point.X = cloned.Point.X;
+            Positions["DownCupPosition"].Point.Y = cloned.Point.Y;
+            SavePositions();
+        }
+
+        private void SavePositions()
+        {
+            LocalDataHandler.SaveTextData("positions.json", JsonConvert.SerializeObject(Positions, Formatting.Indented));
         }
 
         public List<Sound> GetSoundInfo()

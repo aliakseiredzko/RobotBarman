@@ -50,5 +50,15 @@ namespace RobotBarman.Services
 
             return text;
         }
+
+        public static void SaveTextToAssembly(string fileName, string data)
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"RobotBarman.{fileName}");            
+            using (var writer = new StreamWriter(stream))
+            {                
+                writer.Write(data);
+            }          
+        }
     }
 }

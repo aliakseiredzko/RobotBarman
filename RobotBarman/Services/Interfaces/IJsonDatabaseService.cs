@@ -21,5 +21,8 @@ namespace RobotBarman.Services
         DrinksPageItem GetDrink(string name);
         void SetAvailableDrink(DrinksPageItem drinkToAdd, DrinkPosition position);
         List<DrinksPageItem> GetAvailableDrinks();
+        Position GetTakeCupPosition();
+        void SaveTakeCupPosition(Position position);
+        void ResetTakeCupPosition();
     }
 }

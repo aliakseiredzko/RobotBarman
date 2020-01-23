@@ -26,92 +26,136 @@
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="TextColor" Value="#0772A1"/>
         </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="Default" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="TextColor" Value="#1D97C1" />
+            <Setter Property="BackgroundColor" Value="#FFFFE1" />
+            <Setter Property="CornerRadius" Value="16" />
+        </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20">
-              <!--<Grid.RowDefinitions>
-                  <RowDefinition Height="0.15*"/>
-                  <RowDefinition Height="0.5*"/>
-                  <RowDefinition Height="0.35*"/>
-              </Grid.RowDefinitions>-->
-            <Label Text="Здесь необходимо выбрать напитки, которые будут находиться в роботизированной установке"
-                   Grid.Row="0"
-                   Margin="5" 
-                   FontSize="Medium" 
-                   FontAttributes="Bold" 
-                   TextColor="#0772A1"                   
-                   HorizontalOptions="CenterAndExpand" />
-            
-            
-            <StackLayout Grid.Row="1">
-                <Label x:Name="FirstDrink" 
-                       Text="Первый напиток: " 
-                       Style="{StaticResource LargeLabelStyle}"/>
-                <Picker Title="{Binding FirstSelectedDrink.Title}" 
-                        Style="{StaticResource PickerTextStyle}"
-                        ItemsSource="{Binding Drinks}"
-                        SelectedItem="{Binding FirstSelectedDrink, Mode=TwoWay}" />
-
-                <Label x:Name="SecondDrink" 
-                       Text="Второй напиток: " 
-                       Style="{StaticResource LargeLabelStyle}"/>
-                <Picker Title="{Binding SecondSelectedDrink.Title}" 
-                        Style="{StaticResource PickerTextStyle}"
-                        ItemsSource="{Binding Drinks}"
-                        SelectedItem="{Binding SecondSelectedDrink, Mode=TwoWay}" />
-
-                <Label x:Name="ThirdDrink" 
-                       Text="Третий напиток: " 
-                       Style="{StaticResource LargeLabelStyle}"/>
-                <Picker Title="{Binding ThirdSelectedDrink.Title}" 
-                        Style="{StaticResource PickerTextStyle}"
-                        ItemsSource="{Binding Drinks}"
-                        SelectedItem="{Binding ThirdSelectedDrink, Mode=TwoWay}" />
+            <StackLayout>
+                <StackLayout Padding="20">
                     
+                    <Label Text="Здесь необходимо выбрать напитки, которые будут находиться в роботизированной установке"
+                        Grid.Row="0"                       
+                        Style="{StaticResource LargeLabelStyle}"                   
+                        HorizontalOptions="CenterAndExpand" />
+
+
+                    <StackLayout Grid.Row="1">
+                        <Label x:Name="FirstDrink" 
+                            Text="Первый напиток: " 
+                            Style="{StaticResource LargeLabelStyle}"/>
+                        <Picker Title="{Binding FirstSelectedDrink.Title}" 
+                            Style="{StaticResource PickerTextStyle}"
+                            ItemsSource="{Binding Drinks}"
+                            SelectedItem="{Binding FirstSelectedDrink, Mode=TwoWay}" />
+
+                        <Label x:Name="SecondDrink" 
+                            Text="Второй напиток: " 
+                            Style="{StaticResource LargeLabelStyle}"/>
+                        <Picker Title="{Binding SecondSelectedDrink.Title}" 
+                            Style="{StaticResource PickerTextStyle}"
+                            ItemsSource="{Binding Drinks}"
+                            SelectedItem="{Binding SecondSelectedDrink, Mode=TwoWay}" />
+
+                        <Label x:Name="ThirdDrink" 
+                            Text="Третий напиток: " 
+                            Style="{StaticResource LargeLabelStyle}"/>
+                        <Picker Title="{Binding ThirdSelectedDrink.Title}" 
+                            Style="{StaticResource PickerTextStyle}"
+                            ItemsSource="{Binding Drinks}"
+                            SelectedItem="{Binding ThirdSelectedDrink, Mode=TwoWay}" />
+
+                    </StackLayout>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.33*"/>
+                            <ColumnDefinition Width="0.33*"/>
+                            <ColumnDefinition Width="0.33*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.89*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource SmallLabelStyle}"
+                            Text="Первый"/>
+                             <Label Grid.Row="0"
+                            Grid.Column="1" 
+                            Style="{StaticResource SmallLabelStyle}"
+                            Text="Второй"/>
+                             <Label Grid.Row="0"
+                            Grid.Column="2" 
+                            Style="{StaticResource SmallLabelStyle}"
+                            Text="Третий"/>
+
+                        <Image Grid.Row="1"
+                            Grid.Column="0"                       
+                            Source="{Binding FirstSelectedDrink.ImageSource, Mode=TwoWay}" 
+                            Style="{StaticResource Key=imgStyle}" />
+                        <Image Grid.Row="1"
+                            Grid.Column="1"
+                            Source="{Binding SecondSelectedDrink.ImageSource, Mode=TwoWay}" 
+                            Style="{StaticResource Key=imgStyle}" />
+                        <Image Grid.Row="1"
+                            Grid.Column="2"
+                            Source="{Binding ThirdSelectedDrink.ImageSource, Mode=TwoWay}" 
+                            Style="{StaticResource Key=imgStyle}" />
+
+                    </Grid>
+                </StackLayout>
+                <StackLayout Padding="20">
+                    <Label Text="Здесь необходимо откалибровать позицию для взятия стаканов"
+                        Grid.Row="0"                        
+                        Style="{StaticResource LargeLabelStyle}"/>
+
+                    <Image Source="Axes.png"                         
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Margin="16"/>
+                    
+                    <StackLayout>
+                        <Label Text="Позиция для взятия стаканов"
+                            Style="{StaticResource LargeLabelStyle}"/>
+
+                        <StackLayout >
+                            <StackLayout>
+                                <Label  Text="X (mm)"/>
+                                <Entry Text="{Binding CupX}"/>
+                            </StackLayout>
+
+                            <StackLayout>
+                                <Label Text="Y (mm)"/>
+                                <Entry Text="{Binding CupY}"/>
+                            </StackLayout>
+
+                            <StackLayout>
+                                <Label Text="Z (mm)"/>
+                                <Entry Text="{Binding CupZ}"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Button Text="Установить"
+                                    Command="{Binding SetTakeCupPosition}" 
+                                    Style="{StaticResource ButtonStyle}"/>
+                            <Button Text="Загрузить по умолчанию"
+                                    Command="{Binding ResetTakeCupPosition}" 
+                                    Style="{StaticResource ButtonStyle}"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-            
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.33*"/>
-                    <ColumnDefinition Width="0.33*"/>
-                    <ColumnDefinition Width="0.33*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.1*"/>
-                    <RowDefinition Height="0.89*"/>
-                </Grid.RowDefinitions>
-                
-                <Label Grid.Row="0"
-                       Grid.Column="0"
-                       Style="{StaticResource SmallLabelStyle}"
-                       Text="Первый"/>
-                <Label Grid.Row="0"
-                       Grid.Column="1" 
-                       Style="{StaticResource SmallLabelStyle}"
-                       Text="Второй"/>
-                <Label Grid.Row="0"
-                       Grid.Column="2" 
-                       Style="{StaticResource SmallLabelStyle}"
-                       Text="Третий"/>
-                
-                <Image Grid.Row="1"
-                       Grid.Column="0"                       
-                       Source="{Binding FirstSelectedDrink.ImageSource, Mode=TwoWay}" 
-                       Style="{StaticResource Key=imgStyle}" />
-                <Image Grid.Row="1"
-                       Grid.Column="1"
-                       Source="{Binding SecondSelectedDrink.ImageSource, Mode=TwoWay}" 
-                       Style="{StaticResource Key=imgStyle}" />
-                <Image Grid.Row="1"
-                       Grid.Column="2"
-                       Source="{Binding ThirdSelectedDrink.ImageSource, Mode=TwoWay}" 
-                       Style="{StaticResource Key=imgStyle}" />
-                
-            </Grid>             
-        </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

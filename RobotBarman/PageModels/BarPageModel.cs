@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using FreshMvvm;
 using RobotBarman.Services;
+using RozumConnectionLib;
+using Xamarin.Forms;
 
 namespace RobotBarman
 {
@@ -12,6 +14,7 @@ namespace RobotBarman
         private DrinksPageItem _firstSelectedDrink;
         private DrinksPageItem _secondSelectedDrink;
         private DrinksPageItem _thirdSelectedDrink;
+        private Position _takeCupPosition;
         public ObservableCollection<DrinksPageItem> Drinks { get; set; }
 
         public DrinksPageItem FirstSelectedDrink
@@ -56,6 +59,66 @@ namespace RobotBarman
             }
         }
 
+        public double CupX
+        {
+            get => _takeCupPosition.Point.X * 1000;
+            set
+            {
+                _takeCupPosition.Point.X = value / 1000;
+            }
+        }
+
+        public double CupY
+        {
+            get => _takeCupPosition.Point.Y * 1000;
+            set
+            {
+                _takeCupPosition.Point.Y = value / 1000;
+            }
+        }
+
+        public double CupZ
+        {
+            get => _takeCupPosition.Point.Z * 1000;
+            set
+            {
+                _takeCupPosition.Point.Z = value / 1000;
+            }
+        }
+
+        public Command SetTakeCupPosition
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    _databaseService.SaveTakeCupPosition(_takeCupPosition);
+                    _takeCupPosition = _databaseService.GetTakeCupPosition().Clone();
+                    RaisePropertyChanged("CupX");
+                    RaisePropertyChanged("CupY");
+                    RaisePropertyChanged("CupZ");
+
+                    await CoreMethods.DisplayAlert("", $"Установлено", "OK");
+                });
+            }
+        }
+
+        public Command ResetTakeCupPosition
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    _databaseService.ResetTakeCupPosition();
+                    _takeCupPosition = _databaseService.GetTakeCupPosition().Clone();
+                    RaisePropertyChanged("CupX");
+                    RaisePropertyChanged("CupY");
+                    RaisePropertyChanged("CupZ");
+                    await CoreMethods.DisplayAlert("", $"Сброшено по умолчанию", "OK");
+                });
+            }
+        }
+
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
@@ -69,7 +132,7 @@ namespace RobotBarman
             _firstSelectedDrink = _databaseService.GetAvailableDrinks()[0];
             _secondSelectedDrink = _databaseService.GetAvailableDrinks()[1];
             _thirdSelectedDrink = _databaseService.GetAvailableDrinks()[2];
-
+            _takeCupPosition = _databaseService.GetTakeCupPosition().Clone();
             base.Init(initData);
         }
     }

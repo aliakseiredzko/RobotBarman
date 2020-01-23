@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using RozumConnectionLib;
 
 namespace ConsoleApp
 {
@@ -23,59 +24,40 @@ namespace ConsoleApp
     {
         static async Task Main(string[] args)
         {
-            string startIP = "192.168.1.";
-            string endIP = "192.168.1.254";
-            //Console.WriteLine(Regex.Match(startIP, "\\d{1,3}$").Value);
-            //Console.WriteLine(Regex.Matches(startIP, "\\d{1,3}")[1]);
+            FreshIOC.Container.Register<IAgvService, AgvService>();
+            FreshIOC.Container.Register<IJsonDatabaseService, JsonDatabaseService>();
+            FreshIOC.Container.Register<ISoundService, SoundService>();
+            FreshIOC.Container.Register<IRobotService, RobotService>();
+            FreshIOC.Container.Register<IBarmanService, BarmanService>();
+            var robotService = FreshIOC.Container.Resolve<IRobotService>();
+            var database = FreshIOC.Container.Resolve<IJsonDatabaseService>();
+            await robotService.ConnectToRobotAsync("10.162.0.181");
 
-            Console.WriteLine("Start devices scan");
-            var ping = new Ping();
-            var tcpClient = new TcpClient();
-            tcpClient.SendTimeout = 100;
-            tcpClient.ReceiveTimeout = 100;
-                
-            for (int i = 1; i < 255; i++)
+
+            var robot = new RealRobot("10.162.0.181");
+            await robot.InitConnectionAsync();
+            if (robot.IsConnected)
             {
-                
-                try
-                {  
-                    var reply = ping.Send(IPAddress.Parse(startIP+i), 500);
+                Console.WriteLine("Robot connected");
+                var result = await robot.SetBasePositionAsync(new[] { 0, 0, 0, 0, 0, 1.57 });
+                Console.WriteLine(result);
 
-                    if(reply.Status == IPStatus.Success)
-                    {
-                        await tcpClient.ConnectAsync(IPAddress.Parse(startIP + i), 8081);
-                        if (tcpClient.Connected)
-                        {
-                            Console.WriteLine($"{startIP + i} connected");
-                        }
-                        //await client.GetAsync("http://192.168.1.1/get/status");  
-                    }
+                result = await robot.GetBasePositionAsync();
+                Console.WriteLine(result);
+                Console.WriteLine(robot.BasePosition);
 
-                    else Console.WriteLine($"{startIP+i} isn't connected");
-                    
-                }
-                catch
-                {
-                    Console.WriteLine($"{startIP+i} isn't connected");
-                    tcpClient.Close();
-                }
-            }
-            Console.WriteLine("End devices scan");
-      
-            try
-            {
-                
-            }
-            catch (OperationCanceledException)
-            {
-                Console.WriteLine("Operation was cancelled");
-            }
+                await robot.GetPositionAsync();
+                var pos = robot.Position.Clone();
 
-            DisplayDnsAddresses();
-           
-            
+                Console.WriteLine(pos);
+
+                await robotService.RunPositionAsync(false, 2, 1, "Base1UpPosition");
+                Console.WriteLine(robotService.LastActionResult);
+            }
 
             Console.ReadKey();
+
+            await robotService.FreezeAsync();
         }
 
         public static void DisplayDnsAddresses()

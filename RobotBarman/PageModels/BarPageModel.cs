@@ -23,7 +23,7 @@ namespace RobotBarman
 
         public bool CanTest
         {
-            get => _canTest && _robotService.IsRobotConnected;
+            get => _canTest;
             set
             {
                 _canTest = value;
@@ -154,6 +154,7 @@ namespace RobotBarman
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
+            RaisePropertyChanged(nameof(CanTest));
         }
 
         public override void Init(object initData)

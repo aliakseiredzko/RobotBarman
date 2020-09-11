@@ -24,9 +24,9 @@
     "SpillsLeft": 0
   },
   {
-    "Title": "Питьевой йогурт \"Оптималь\" Персик-абрикос",
+    "Title": "Питьевой йогурт \"Оптималь\" Манго-ананас",
     "SubTitle": "",
-    "IconSource": "RobotBarman.Images.opt.persic_opt.png",
+    "IconSource": "RobotBarman.Images.opt.mangoAnanas_opt.png",
     "DrinkPosition": 3,
     "DrinkType": 0,
     "SpillsLeft": 0
@@ -35,14 +35,6 @@
     "Title": "Питьевой йогурт \"Оптималь\" Клубника-малина",
     "SubTitle": "",
     "IconSource": "RobotBarman.Images.opt.strawberryMalina_opt.png",
-    "DrinkPosition": 3,
-    "DrinkType": 0,
-    "SpillsLeft": 0
-  },
-  {
-    "Title": "Питьевой йогурт \"Оптималь\" Клубника-грейпфрут",
-    "SubTitle": "",
-    "IconSource": "RobotBarman.Images.opt.strawberryGrape_opt.png",
     "DrinkPosition": 3,
     "DrinkType": 0,
     "SpillsLeft": 0
@@ -64,7 +56,7 @@
     "SpillsLeft": 0
   },
   {
-    "Title": "Питьевой йогурт \"Оптималь\" Инжир-злаки-лен",
+    "Title": "Питьевой йогурт \"Оптималь\" Инжир-злаки",
     "SubTitle": "",
     "IconSource": "RobotBarman.Images.opt.figsCerealsFlax_opt.png",
     "DrinkPosition": 3,

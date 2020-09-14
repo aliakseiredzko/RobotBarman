@@ -142,8 +142,7 @@
                          HeightRequest="200"
                          WidthRequest="200"
                          MinimumWidthRequest="200"
-                         HorizontalOptions="CenterAndExpand"                         
-                         Visual="Material"/>
+                         HorizontalOptions="CenterAndExpand"/>
 
                 <Button IsEnabled="{Binding IsRobotAvailable, Mode=TwoWay}" 
                         Command="{Binding SpillDrink}"                         
